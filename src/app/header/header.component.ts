@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   color: ThemePalette = 'warn';
   isDark: any
   isCheked: any
+  panelOpenState = false;
 
   constructor(private router: Router) {}
 

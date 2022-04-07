@@ -187,4 +187,10 @@ body {
     stroke: #EA3E2A;
     stroke-width: 2% !important;
   }
+
+  .mat-expansion-panel-body {
+    p {
+      background-color: red !important;
+    }
+  }
 }

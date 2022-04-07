@@ -138,6 +138,7 @@ export class AccauntsPageComponent implements OnInit {
           location.reload()
         }, error => {
           localStorage.clear()
+          location.reload()
         })
       }
     })
@@ -237,6 +238,7 @@ export class AccauntsPageComponent implements OnInit {
               location.reload()
             }, error => {
               localStorage.clear()
+              location.reload()
             })
           }
         })
@@ -258,6 +260,7 @@ export class AccauntsPageComponent implements OnInit {
               location.reload()
             }, error => {
               localStorage.clear()
+              location.reload()
             })
           }
         })
@@ -277,6 +280,7 @@ export class AccauntsPageComponent implements OnInit {
               location.reload()
             }, error => {
               localStorage.clear()
+              location.reload()
             })
           }
         })
