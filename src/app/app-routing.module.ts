@@ -18,12 +18,12 @@ const routes: Routes = [
   { path: 'transaction-history/:id', component: TransactionHistoryPageComponent, canActivate: [AuthGuard] },
   { path: 'tarifs', component: TarifsPageComponent, canActivate: [AuthGuard] },
   { path: 'reports', component: ReportPageComponent, canActivate: [AuthGuard] },
+  { path: 'payments', component: ReportPageComponent,canActivate: [AuthGuard] },
   { path: 'transactions', component: TransactionsPageComponent, canActivate: [AuthGuard] },
   { path: 'services', component: ServicesPageComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersPageComponent, canActivate: [AuthGuard] },
   { path: 'devices', component: DevicesPageComponent, canActivate: [AuthGuard] },
   { path: 'firewall', component: FirewallPageComponent, canActivate: [AuthGuard] },
-  { path: 'payments', component: ReportPageComponent, }
 ];
 
 @NgModule({
