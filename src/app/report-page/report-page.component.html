@@ -1,4 +1,67 @@
 <div class="spinner_block" *ngIf="isLoading">
   <mat-spinner></mat-spinner>
-</div>
+</div> 
+<div class="devide_block">
+  <app-header></app-header>
 
+  <div class="container">
+    <div class="container_content">
+      <div class="title_block">
+        <h1>Платежи</h1>
+        <button >Добавить</button>
+      </div>
+
+      <div class="filter_content">
+        <form class="filter_form">
+          <div class="filter_block" >
+            <input type="text" placeholder="имя" formControlName="id">
+            <input type="text" placeholder="Цена" formControlName="spice">  
+            <input type="text" placeholder="Скорость" formControlName="speed"> 
+            <input type="text" placeholder="Комментарий" formControlName="comment">  
+            <button  >ОК</button>
+          </div> 
+        </form>
+      </div>
+
+      <div class="table_container">
+        <table class="resp-tab">
+          <thead>
+            <tr>
+              <th>Имя</th>
+              <th>Цена</th>
+              <th>Скорость</th> 
+              <th>Комментарий</th>  
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr >
+              <td><span class="table_span">Имя</span>
+                <h1>lorem</h1>
+              </td>
+              <td><span class="table_span">Цена</span>
+                <h1>lorem</h1>
+              </td>
+              <td><span class="table_span">Скорость</span>
+                <h1>lorem</h1>
+              </td>
+ 
+              <td><span class="table_span">Платежи</span>
+                <h1>lorem</h1>
+              </td>
+ 
+             
+            </tr>
+          </tbody>
+        </table>
+      </div>
+     
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
