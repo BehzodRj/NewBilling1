@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'services', component: ServicesPageComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersPageComponent, canActivate: [AuthGuard] },
   { path: 'devices', component: DevicesPageComponent, canActivate: [AuthGuard] },
-  { path: 'firewall', component: FirewallPageComponent, canActivate: [AuthGuard] }
+  { path: 'firewall', component: FirewallPageComponent, canActivate: [AuthGuard] },
+  { path: 'payments', component: ReportPageComponent, }
 ];
 
 @NgModule({
