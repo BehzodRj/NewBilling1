@@ -24,6 +24,12 @@ import { FirewallPageComponent } from './firewall-page/firewall-page.component';
 import { TransactionHistoryPageComponent } from './transaction-history-page/transaction-history-page.component';
 import { DevicesPageComponent } from './devices-page/devices-page.component';
 import { ReportPageComponent } from './report-page/report-page.component';
+import { ReportsActivePageComponent } from './reports-active-page/reports-active-page.component';
+import { ReportsPassivePageComponent } from './reports-passive-page/reports-passive-page.component';
+import { ReportsArchievePageComponent } from './reports-archieve-page/reports-archieve-page.component';
+import { ReportsTarifsPageComponent } from './reports-tarifs-page/reports-tarifs-page.component';
+import { ReportsAgePageComponent } from './reports-age-page/reports-age-page.component';
+import { ReportsGenderPageComponent } from './reports-gender-page/reports-gender-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,13 @@ import { ReportPageComponent } from './report-page/report-page.component';
     FirewallPageComponent,
     TransactionHistoryPageComponent,
     DevicesPageComponent,
-    ReportPageComponent
+    ReportPageComponent,
+    ReportsActivePageComponent,
+    ReportsPassivePageComponent,
+    ReportsArchievePageComponent,
+    ReportsTarifsPageComponent,
+    ReportsAgePageComponent,
+    ReportsGenderPageComponent
   ],
   imports: [
     BrowserModule,

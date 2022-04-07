@@ -7,6 +7,12 @@ import { AuthGuard } from './auth.guard';
 import { ServicesPageComponent } from './services-page/services-page.component';
 import { TarifsPageComponent } from './tarifs-page/tarifs-page.component';
 import { ReportPageComponent } from './report-page/report-page.component';
+import { ReportsActivePageComponent } from './reports-active-page/reports-active-page.component';
+import { ReportsPassivePageComponent } from './reports-passive-page/reports-passive-page.component';
+import { ReportsArchievePageComponent } from './reports-archieve-page/reports-archieve-page.component';
+import { ReportsTarifsPageComponent } from './reports-tarifs-page/reports-tarifs-page.component';
+import { ReportsAgePageComponent } from './reports-age-page/reports-age-page.component';
+import { ReportsGenderPageComponent } from './reports-gender-page/reports-gender-page.component';
 import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { DevicesPageComponent } from './devices-page/devices-page.component';
@@ -18,6 +24,12 @@ const routes: Routes = [
   { path: 'transaction-history/:id', component: TransactionHistoryPageComponent, canActivate: [AuthGuard] },
   { path: 'tarifs', component: TarifsPageComponent, canActivate: [AuthGuard] },
   { path: 'reports', component: ReportPageComponent, canActivate: [AuthGuard] },
+  { path: 'reportsActive', component: ReportsActivePageComponent, canActivate: [AuthGuard] },
+  { path: 'reportsPassive', component: ReportsPassivePageComponent, canActivate: [AuthGuard] },
+  { path: 'reportsArchieve', component: ReportsArchievePageComponent, canActivate: [AuthGuard] },
+  { path: 'reportsTarif', component: ReportsTarifsPageComponent, canActivate: [AuthGuard] },
+  { path: 'reportsAge', component: ReportsAgePageComponent, canActivate: [AuthGuard] },
+  { path: 'reportsGender', component: ReportsGenderPageComponent, canActivate: [AuthGuard] },
   { path: 'transactions', component: TransactionsPageComponent, canActivate: [AuthGuard] },
   { path: 'services', component: ServicesPageComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersPageComponent, canActivate: [AuthGuard] },

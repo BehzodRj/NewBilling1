@@ -7,19 +7,20 @@
       <h2 routerLink="/accounts" routerLinkActive="active">Аккаунты</h2>
       <h2 routerLink="/tarifs" routerLinkActive="active">Тарифы</h2>
       <mat-accordion>
-        <mat-expansion-panel style="background-color: transparent; box-shadow: 0; border: 1px solid #EA3E2A;" hideToggle>
+        <mat-expansion-panel style="background-color: transparent; box-shadow: 0;" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title style="font-family: Raleway;  font-weight: 100; font-size: 21px; color: #E3E6EC; cursor: pointer;">
               Отчёты
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <h2 routerLink="/reports" routerLinkActive="active">Активные</h2>
-          <h2 routerLink="/reports" routerLinkActive="active">Пассивные</h2>
-          <h2 routerLink="/reports" routerLinkActive="active">Архивные</h2>
-          <h2 routerLink="/reports" routerLinkActive="active">Тарифы</h2>
-          <h2 routerLink="/reports" routerLinkActive="active">Возраст</h2>
-          <h2 routerLink="/reports" routerLinkActive="active">Пол</h2>
-        </mat-expansion-panel>
+            <h2 routerLink="/reports" routerLinkActive="active">Все</h2>
+            <h2 routerLink="/reportsActive" routerLinkActive="active">Активные</h2>
+            <h2 routerLink="/reportsPassive" routerLinkActive="active">Пассивные</h2>
+            <h2 routerLink="/reportsArchieve" routerLinkActive="active">Архивные</h2>
+            <h2 routerLink="/reportsTarif" routerLinkActive="active">Тарифы</h2>
+            <h2 routerLink="/reportsAge" routerLinkActive="active">Возраст</h2>
+            <h2 routerLink="/reportsGender" routerLinkActive="active">Пол</h2>
+          </mat-expansion-panel>
       </mat-accordion>
       <h2 routerLink="/transactions" routerLinkActive="active">Транзакции</h2>
       <h2 routerLink="/services" routerLinkActive="active">Услуги</h2>
