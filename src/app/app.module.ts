@@ -23,7 +23,6 @@ import { HeaderComponent } from './header/header.component';
 import { FirewallPageComponent } from './firewall-page/firewall-page.component';
 import { TransactionHistoryPageComponent } from './transaction-history-page/transaction-history-page.component';
 import { DevicesPageComponent } from './devices-page/devices-page.component';
-import { ReportPageComponent } from './report-page/report-page.component';
 import { ReportsActivePageComponent } from './reports-active-page/reports-active-page.component';
 import { ReportsPassivePageComponent } from './reports-passive-page/reports-passive-page.component';
 import { ReportsArchievePageComponent } from './reports-archieve-page/reports-archieve-page.component';
@@ -44,7 +43,6 @@ import { ReportsGenderPageComponent } from './reports-gender-page/reports-gender
     FirewallPageComponent,
     TransactionHistoryPageComponent,
     DevicesPageComponent,
-    ReportPageComponent,
     ReportsActivePageComponent,
     ReportsPassivePageComponent,
     ReportsArchievePageComponent,

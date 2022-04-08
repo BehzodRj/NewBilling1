@@ -6,7 +6,6 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 import { AuthGuard } from './auth.guard';
 import { ServicesPageComponent } from './services-page/services-page.component';
 import { TarifsPageComponent } from './tarifs-page/tarifs-page.component';
-import { ReportPageComponent } from './report-page/report-page.component';
 import { ReportsActivePageComponent } from './reports-active-page/reports-active-page.component';
 import { ReportsPassivePageComponent } from './reports-passive-page/reports-passive-page.component';
 import { ReportsArchievePageComponent } from './reports-archieve-page/reports-archieve-page.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
   { path: 'accounts', component: AccauntsPageComponent, canActivate: [AuthGuard] },
   { path: 'transaction-history/:id', component: TransactionHistoryPageComponent, canActivate: [AuthGuard] },
   { path: 'tarifs', component: TarifsPageComponent, canActivate: [AuthGuard] },
-  { path: 'reports', component: ReportPageComponent, canActivate: [AuthGuard] },
   { path: 'reportsActive', component: ReportsActivePageComponent, canActivate: [AuthGuard] },
   { path: 'reportsPassive', component: ReportsPassivePageComponent, canActivate: [AuthGuard] },
   { path: 'reportsArchieve', component: ReportsArchievePageComponent, canActivate: [AuthGuard] },

@@ -72,6 +72,9 @@ export class DevicesPageComponent implements OnInit {
             localStorage.setItem('refresh_token', response.refresh_token)
             this.isLoading = false
             location.reload()
+          }, error => {
+            localStorage.clear()
+            location.reload()
           })
         }
       })

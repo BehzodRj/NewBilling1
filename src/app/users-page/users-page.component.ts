@@ -74,12 +74,14 @@ export class UsersPageComponent implements OnInit {
       this.isLoading = false
     }, error => {
         this.isLoading = false
-        alert(error.error.Error)
         if(error.status == 401) {
           this.request.refreshRequest(localStorage.getItem('refresh_token')).subscribe( (response: any) => {
             localStorage.setItem('access_token', response.access_token)
             localStorage.setItem('refresh_token', response.refresh_token)
             this.isLoading = false
+            location.reload()
+          }, error => {
+            localStorage.clear()
             location.reload()
           })
         }
