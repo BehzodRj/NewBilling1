@@ -8,18 +8,44 @@
   <div class="container">
     <div class="container_content">
       <div class="title_block">
-        <h1>Отчёты</h1>
+        <h1>Активные отчёты</h1>
       </div>
 
       <div class="filter_content">
         <form class="filter_form">
-          <div class="filter_block">
-            <input type="text" placeholder="имя">
-            <input type="text" placeholder="Цена">
-            <input type="text" placeholder="Скорость">
-            <input type="text" placeholder="Комментарий">
-            <button>ОК</button>
+          <div class="filter_block" [formGroup]="accountsFilterForm">
+            <!-- <input type="text" placeholder="Лицевой Счёт" formControlName="id">
+            <input type="text" placeholder="ФИО" formControlName="fio">
+            <select class="addtable" formControlName="tarif_id">
+              <option value="">Все</option>
+              <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id">{{ tarifs.name }}</option>
+            </select>  
+            <input type="text" placeholder="Скорость" formControlName="speed_cf">
+            <input type="text" placeholder="Адрес" formControlName="acc_info">
+            <input type="text" placeholder="Паспорт" formControlName="passport">
+            <input type="date" placeholder="Год рождения" formControlName="age">
+            <select formControlName="gender">
+              <option value="">Все</option>
+              <option value="M">Man</option>
+              <option value="F">Female</option>
+            </select>
+            <input type="text" placeholder="Ip Адрес" formControlName="ipaddress">
+            <input type="text" placeholder="ONU/PORT" formControlName="comment"> -->
+            <select formControlName="status">
+              <option value="">Все</option>
+              <option>On</option>
+              <option>Off</option>
+            </select>
+            <!-- <input type="date" formControlName="start_create">
+            <input type="date" formControlName="end_create">
+            <input type="date" formControlName="start_date">
+            <input type="date" formControlName="end_date"> -->
+            <button (click)="filterTable()">ОК</button>
           </div>
+
+          <!-- <div class="pagination_block">
+            <input type="number" placeholder="0">
+          </div> -->
         </form>
       </div>
 
@@ -27,35 +53,105 @@
         <table class="resp-tab">
           <thead>
             <tr>
-              <th>Имя</th>
+              <th>Лиц.Счёт</th>
+              <th>ФИО</th>
+              <th>Тариф</th>
+              <th>Баланс</th>
               <th>Цена</th>
               <th>Скорость</th>
-              <th>Комментарий</th>
+              <th>Телефон</th>
+              <th>Дата Окончания</th>
+              <th>IP Адрес</th>
+              <th>Адрес</th>
+              <th>Паспорт</th>
+              <th>Год Рождения</th>
+              <th>Пол</th>
+              <th>Девайс</th>
+              <th>Овердрафта</th>
+              <th>Onu/Port</th>
+              <th>Статус</th>
             </tr>
           </thead>
           <tbody>
 
-            <tr>
-              <td><span class="table_span">Имя</span>
-                <h1>lorem</h1>
+            <tr *ngFor="let reportsActive of reportsActiveData">
+              <td><span class="table_span">Лиц.Счёт</span>
+                <h1>{{ reportsActive.id }}</h1>
               </td>
+
+              <td><span class="table_span">ФИО</span>
+                <h1>{{ reportsActive.fio }}</h1>
+              </td>
+
+              <td><span class="table_span">Тариф</span>
+                <h1>{{ reportsActive.tarif.name }}</h1>
+              </td>
+
+              <td><span class="table_span">Баланс</span>
+                <h1>{{ reportsActive.balance }}</h1>
+              </td>
+
               <td><span class="table_span">Цена</span>
-                <h1>lorem</h1>
+                <h1>{{ reportsActive.price_cf }}</h1>
               </td>
+
               <td><span class="table_span">Скорость</span>
-                <h1>lorem</h1>
+                <h1>{{ reportsActive.speed_cf }}</h1>
               </td>
 
-              <td><span class="table_span">Платежи</span>
-                <h1>lorem</h1>
+              <td><span class="table_span">Телефон</span>
+                <h1>{{ reportsActive.phone_number }}</h1>
               </td>
 
+              <td><span class="table_span">Дата Окончания</span>
+                <h1>{{ reportsActive.end_date | date: 'dd-MM-yyyy' }}</h1>
+              </td>
 
-            </tr>
+              <td><span class="table_span">IP Адрес</span>
+                <h1>{{ reportsActive.ipaddress }}</h1>
+              </td>
+              
+              <td><span class="table_span">Адрес</span>
+                <h1>{{ reportsActive.acc_info }}</h1>
+              </td>
+
+              <td><span class="table_span">Паспорт</span>
+                <h1>{{ reportsActive.passport }}</h1>
+              </td>
+
+              <td><span class="table_span">Год Рождения</span>
+                <h1>{{ reportsActive.age | date: 'dd-MM-yyyy' }}</h1>
+              </td>
+
+              <td><span class="table_span">Пол</span>
+                <h1>{{ reportsActive.gender }}</h1>
+              </td>
+
+              <td><span class="table_span">Девайс</span>
+                <h1>{{ reportsActive.device_type?.name }}</h1>
+              </td>
+
+              <td *ngIf="reportsActive.overdraft < 2"><span class="table_span">Овердрафта</span>
+                <h1>Нет</h1>
+              </td>
+
+              <td *ngIf="reportsActive.overdraft > 1"><span class="table_span">Овердрафта</span>
+                <h1>Да</h1>
+              </td>
+
+              <td><span class="table_span">Onu/Port</span>
+                <h1>{{ reportsActive.comment }}</h1>
+              </td>
+
+              <td><span class="table_span">Статус</span>
+                <h1>{{ reportsActive.account_status?.status }}</h1>
+              </td>
           </tbody>
         </table>
       </div>
-
+      <div class="pagination_block">
+        Количество аккаунтов: {{ numAccounts }}
+      </div>
     </div>
   </div>
 </div>
