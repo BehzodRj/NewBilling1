@@ -29,6 +29,10 @@
         <option value="M">Man</option>
         <option value="F">Female</option>
       </select>
+      <select formControlName="overdraft">
+        <option value="2">Да</option>
+        <option value="1">Нет</option>
+      </select>
       <input class="addtable" type="text" placeholder="Onu/Port" formControlName="comment">
       <button class="addButton" [disabled]="accountsAddForm.invalid" [ngStyle]="{opacity: accountsAddForm.invalid ? '.6' : '1'}"  (click)="addNewTable()">OK</button>
     </form>
@@ -61,6 +65,10 @@
       <select formControlName="gender">
         <option value="M">Man</option>
         <option value="F">Female</option>
+      </select>
+      <select formControlName="overdraft">
+        <option value="2">Да</option>
+        <option value="1">Нет</option>
       </select>
       <input class="addtable" type="text" placeholder="Onu/Port" formControlName="comment">
       <button class="editButton" [disabled]="accountsEditForm.invalid" [ngStyle]="{opacity: accountsEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>

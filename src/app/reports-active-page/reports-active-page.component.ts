@@ -34,7 +34,7 @@ export class ReportsActivePageComponent implements OnInit {
       age: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
       comment: new FormControl('', Validators.required),
-      status: new FormControl('', Validators.required),
+      status: new FormControl('On', Validators.required),
       start_create: new FormControl('', Validators.required),
       end_create: new FormControl('', Validators.required),
       start_date: new FormControl('', Validators.required),

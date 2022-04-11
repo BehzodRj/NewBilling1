@@ -75,6 +75,7 @@ export class AccauntsPageComponent implements OnInit {
       passport: new FormControl(''),
       age: new FormControl(''),
       gender: new FormControl('M'),
+      overdraft: new FormControl(1, Validators.required),
       comment: new FormControl(''),
     })
 
@@ -92,6 +93,7 @@ export class AccauntsPageComponent implements OnInit {
       passport: new FormControl(''),
       age: new FormControl(''),
       gender: new FormControl(''),
+      overdraft: new FormControl('', Validators.required),
       comment: new FormControl(''),
     })
 
@@ -297,7 +299,7 @@ export class AccauntsPageComponent implements OnInit {
       this.isLoading = true
       let ip_adress = `${this.accountsAddForm.controls['ipaddress1'].value}.${this.accountsAddForm.controls['ipaddress2'].value}.${this.accountsAddForm.controls['ipaddress3'].value}.${this.accountsAddForm.controls['ipaddress4'].value}`
       let age = new Date(accountsAddFormData.age)
-      this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, ip_adress, accountsAddFormData.acc_info, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, accountsAddFormData.comment).subscribe(response => {
+      this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, ip_adress, accountsAddFormData.acc_info, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, parseInt(accountsAddFormData.overdraft), accountsAddFormData.comment).subscribe(response => {
         this.isLoading = false
         location.reload()
       }, error => {
@@ -331,7 +333,7 @@ export class AccauntsPageComponent implements OnInit {
       this.isLoading = true
       let ip_adress = `${this.accountsEditForm.controls['ipaddress1'].value}.${this.accountsEditForm.controls['ipaddress2'].value}.${this.accountsEditForm.controls['ipaddress3'].value}.${this.accountsEditForm.controls['ipaddress4'].value}`
       let age = new Date(accountsEditFormData.age)
-      this.request.putAccountsRequest(this.tableId, accountsEditFormData.fio, accountsEditFormData.tarif_id, accountsEditFormData.price_cf, accountsEditFormData.speed_cf, accountsEditFormData.phone_number, ip_adress, accountsEditFormData.acc_info, accountsEditFormData.passport, age.toISOString(), accountsEditFormData.gender, accountsEditFormData.comment).subscribe(response => {
+      this.request.putAccountsRequest(this.tableId, accountsEditFormData.fio, accountsEditFormData.tarif_id, accountsEditFormData.price_cf, accountsEditFormData.speed_cf, accountsEditFormData.phone_number, ip_adress, accountsEditFormData.acc_info, accountsEditFormData.passport, age.toISOString(), accountsEditFormData.gender, parseInt(accountsEditFormData.overdraft), accountsEditFormData.comment).subscribe(response => {
         this.isLoading = false
         location.reload()
       }, error => {

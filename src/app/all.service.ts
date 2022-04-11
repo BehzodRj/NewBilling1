@@ -86,20 +86,20 @@ export class RequestsService {
     return this.http.get(this.url + `/api/account?accounts.id=${id}&fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&acc_info=${acc_info}&passport=*${passport}*&age=${age}&gender=${gender}&ipaddress=${ipaddress}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}`, {headers: header})
   }
 
-  postAccountsRequest(fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, comment: string) {
+  postAccountsRequest(fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, overdraft: any, comment: string) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.post(this.url + '/api/account', {"fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "comment":comment}, {headers: header})
+    return this.http.post(this.url + '/api/account', {"fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "comment":comment}, {headers: header})
   }
   
-  putAccountsRequest(id: number, fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, comment: string) {
+  putAccountsRequest(id: number, fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, overdraft: any, comment: string) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.put(this.url + '/api/account', {"id": id, "fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "comment":comment}, {headers: header})
+    return this.http.put(this.url + '/api/account', {"id": id, "fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "comment":comment}, {headers: header})
   }
 
   deleteAccountsRequest(id: number) {

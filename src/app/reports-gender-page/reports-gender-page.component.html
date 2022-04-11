@@ -14,6 +14,11 @@
       <div class="filter_content">
         <form class="filter_form">
           <div class="filter_block" [formGroup]="accountsFilterForm">
+            <select formControlName="gender">
+              <option value="">Все</option>
+              <option value="M">Man</option>
+              <option value="F">Female</option>
+            </select>
             <!-- <input type="text" placeholder="Лицевой Счёт" formControlName="id">
             <input type="text" placeholder="ФИО" formControlName="fio">
             <select class="addtable" formControlName="tarif_id">
@@ -24,18 +29,13 @@
             <input type="text" placeholder="Адрес" formControlName="acc_info">
             <input type="text" placeholder="Паспорт" formControlName="passport">
             <input type="date" placeholder="Год рождения" formControlName="age">
-            <select formControlName="gender">
-              <option value="">Все</option>
-              <option value="M">Man</option>
-              <option value="F">Female</option>
-            </select>
             <input type="text" placeholder="Ip Адрес" formControlName="ipaddress">
             <input type="text" placeholder="ONU/PORT" formControlName="comment"> -->
-            <select formControlName="status">
+            <!-- <select formControlName="status">
               <option value="">Все</option>
               <option>On</option>
               <option>Off</option>
-            </select>
+            </select> -->
             <!-- <input type="date" formControlName="start_create">
             <input type="date" formControlName="end_create">
             <input type="date" formControlName="start_date">
