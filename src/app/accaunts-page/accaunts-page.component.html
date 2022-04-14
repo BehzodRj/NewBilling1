@@ -34,6 +34,10 @@
         <option value="2">Да</option>
         <option value="1">Нет</option>
       </select>
+      <select formControlName="customr_type">
+        <option>B2C</option>
+        <option>B2B</option>
+      </select>
       <input class="addtable" type="text" placeholder="Onu/Port" formControlName="comment">
       <button class="addButton" [disabled]="accountsAddForm.invalid" [ngStyle]="{opacity: accountsAddForm.invalid ? '.6' : '1'}"  (click)="addNewTable()">OK</button>
     </form>
@@ -71,6 +75,10 @@
       <select formControlName="overdraft">
         <option value="2">Да</option>
         <option value="1">Нет</option>
+      </select>
+      <select formControlName="customr_type">
+        <option>B2C</option>
+        <option>B2B</option>
       </select>
       <input class="addtable" type="text" placeholder="Onu/Port" formControlName="comment">
       <button class="editButton" [disabled]="accountsEditForm.invalid" [ngStyle]="{opacity: accountsEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>
@@ -176,7 +184,7 @@
     <div class="container_content">
       <div class="title_block">
         <h1>Аккаунты</h1>
-        <button (click)="addTable = true">Добавить</button>
+        <button (click)="addTable = true" *ngIf="permitActions">Добавить</button>
       </div>
 
       <div class="filter_content">
@@ -190,6 +198,7 @@
             </select>  
             <input type="text" placeholder="Скорость" formControlName="speed_cf">
             <input type="text" placeholder="Телефон" formControlName="phone_number">
+            <input type="text" placeholder="Ip Адрес" formControlName="ipaddress">
             <input type="text" placeholder="Адрес" formControlName="acc_info">
             <input type="text" placeholder="Паспорт" formControlName="passport">
             <input type="date" placeholder="Год рождения" formControlName="age">
@@ -203,7 +212,11 @@
               <option value="2">Да</option>
               <option value="1">Нет</option>
             </select>
-            <input type="text" placeholder="Ip Адрес" formControlName="ipaddress">
+            <select formControlName="customr_type">
+              <option value="">Все</option>
+              <option>B2C</option>
+              <option>B2B</option>
+            </select>
             <input type="text" placeholder="ONU/PORT" formControlName="comment">
             <select formControlName="status">
               <option value="">Все</option>
@@ -243,6 +256,7 @@
               <th>Пол</th>
               <th>Девайс</th>
               <th>Овердрафта</th>
+              <th>Тип клиента</th>
               <th>Onu/Port</th>
               <th>Статус</th>
               <th>
@@ -324,6 +338,10 @@
                 <h1>Да</h1>
               </td>
 
+              <td><span class="table_span">Тип клиента</span>
+                <h1>{{ accounts.customr_type }}</h1>
+              </td>
+
               <td><span class="table_span">Onu/Port</span>
                 <h1>{{ accounts.comment }}</h1>
               </td>
@@ -337,32 +355,32 @@
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item (click)="openEditTable(accounts.id)">
+                  <button mat-menu-item (click)="openEditTable(accounts.id)" *ngIf="permitActions">
                     <mat-icon>edit</mat-icon>
                     <span>Изменить</span>
                   </button>
 
-                  <button mat-menu-item (click)="deleteTable(accounts.id)">
+                  <button mat-menu-item (click)="deleteTable(accounts.id)" *ngIf="permitActions">
                     <mat-icon>delete</mat-icon>
                     <span>Удалить</span>
                   </button>
 
-                  <button mat-menu-item (click)="openUslugiModal(accounts.id)">
+                  <button mat-menu-item (click)="openUslugiModal(accounts.id)" *ngIf="permitActions">
                     <mat-icon>rss_feed</mat-icon>
                     <span>Услуги</span>
                   </button>
 
-                  <button mat-menu-item (click)="openPaymentModal(accounts.id)">
+                  <button mat-menu-item (click)="openPaymentModal(accounts.id)" *ngIf="permitActions">
                     <mat-icon>payments</mat-icon>
                     <span>Оплата</span>
                   </button>
 
-                  <button mat-menu-item *ngIf="accounts.account_status?.status == 'On'" (click)="lockAccountOff(accounts.id)">
+                  <button mat-menu-item *ngIf="(accounts.account_status?.status == 'On') && (permitActions)" (click)="lockAccountOff(accounts.id)">
                     <mat-icon>lock</mat-icon>
                     <span>Заблокировать</span>
                   </button>
 
-                  <button mat-menu-item *ngIf="accounts.account_status?.status == 'Off'" (click)="lockAccountOn(accounts.id)">
+                  <button mat-menu-item *ngIf="(accounts.account_status?.status == 'Off') && (permitActions)" (click)="lockAccountOn(accounts.id)">
                     <mat-icon>lock_open</mat-icon>
                     <span>Разблокировать </span>
                   </button>
@@ -377,7 +395,7 @@
                     <span>История транзакции</span>
                   </button>
 
-                  <button mat-menu-item (click)="openCreditModal(accounts.id)">
+                  <button mat-menu-item (click)="openCreditModal(accounts.id)" *ngIf="permitActions">
                     <mat-icon>account_balance </mat-icon>
                     <span>Кредит</span>
                   </button>

@@ -41,7 +41,7 @@
     <div class="container_content">
       <div class="title_block">
         <h1>Пользователи</h1>
-        <button (click)="addTable = true">Добавить</button>
+        <button (click)="addTable = true" *ngIf="permitActions">Добавить</button>
         <!-- <div class="search_block">
           <i class="fa fas fa-search"></i>
           <input type="search" placeholder="Поиск" [(ngModel)]="search">
@@ -75,7 +75,7 @@
               <th>ФИО</th>
               <th>Логин</th>
               <th>Роль</th>
-              <th>
+              <th *ngIf="permitActions">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle class="c1" cx="10" cy="10" r="9.5" stroke="black"/>
                   <circle class="c2" cx="10" cy="10" r="3" fill="black"/>
@@ -101,7 +101,7 @@
                 <h1>{{ users.role}}</h1>
               </td>
 
-              <td><span>Действия</span>
+              <td *ngIf="permitActions"><span>Действия</span>
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
                  >
                   <mat-icon>more_vert</mat-icon>

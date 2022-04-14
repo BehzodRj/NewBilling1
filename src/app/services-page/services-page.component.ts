@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-services-page',
@@ -18,6 +19,7 @@ export class ServicesPageComponent implements OnInit {
   editTable = false
   tableId: any
   isLoading = false
+  permitActions = true
 
   constructor(private request: RequestsService) {}
 
@@ -67,6 +69,17 @@ export class ServicesPageComponent implements OnInit {
     //     })
     //   }
     // })
+
+    var token: any = localStorage.getItem('access_token')
+    var decoded: any = jwt_decode(token);
+    console.log(decoded);
+
+    if (decoded.user_role == 'admin') {
+      this.permitActions = true
+    } else if (decoded.user_role == 'sales') {
+      this.permitActions = false
+    }
+    
   }
 
   filterTable() {

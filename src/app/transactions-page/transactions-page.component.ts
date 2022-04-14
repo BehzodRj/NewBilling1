@@ -62,6 +62,7 @@ export class TransactionsPageComponent implements OnInit {
     //    })
     //   }
     // })
+    
   }
 
   filterTable() {
