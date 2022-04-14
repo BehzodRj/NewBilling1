@@ -10,7 +10,8 @@
       <select class="addtable" formControlName="tarif_id">
         <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id" >{{ tarifs.name }}</option>
       </select>
-      <input class="addtable" type="text" placeholder="Телефон" formControlName="phone_number"> 
+      <input class="addtable" type="text" placeholder="Телефон" formControlName="phone_number">
+      <input class="addtable" type="date" formControlName="end_date">
       <input class="addtable" type="number" placeholder="Коэфиценть цены" formControlName="price_cf"> 
       <input class="addtable" type="number" placeholder="Коэфиценть скороста" formControlName="speed_cf"> 
       <div class="ip_block">
@@ -49,7 +50,8 @@
       </select>
       <input class="addtable" type="number" placeholder="Коэфиценть цены" formControlName="price_cf"> 
       <input class="addtable" type="number" placeholder="Коэфиценть скороста" formControlName="speed_cf"> 
-      <input class="addtable" type="text" placeholder="Телефон" formControlName="phone_number"> 
+      <input class="addtable" type="text" placeholder="Телефон" formControlName="phone_number">
+      <input class="addtable" type="date" formControlName="end_date">
       <div class="ip_block">
         <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress1()"  maxlength="3" formControlName="ipaddress1">
         <span class="ip_span">.</span>
@@ -195,6 +197,11 @@
               <option value="">Все</option>
               <option value="M">Man</option>
               <option value="F">Female</option>
+            </select>
+            <select formControlName="overdraft">
+              <option value="">Все</option>
+              <option value="2">Да</option>
+              <option value="1">Нет</option>
             </select>
             <input type="text" placeholder="Ip Адрес" formControlName="ipaddress">
             <input type="text" placeholder="ONU/PORT" formControlName="comment">

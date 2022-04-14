@@ -11,6 +11,7 @@
       <input class="addtable" type="text" placeholder="Пароль" formControlName="password">
       <select class="addtable" formControlName="role">
         <option>admin</option>
+        <option>sales</option>
       </select>
       <button class="addButton"  [disabled]="usersAddForm.invalid" [ngStyle]="{opacity: usersAddForm.invalid ? '.6' : '1'}" (click)="addNewTable()">OK</button>
     </form>
@@ -26,6 +27,7 @@
       <input class="addtable" type="text" placeholder="Пароль" formControlName="password">
       <select class="addtable" formControlName="role">
         <option>admin</option>
+        <option>sales</option>
       </select>
       <button class="editButton" [disabled]="usersEditForm.invalid" [ngStyle]="{opacity: usersEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>
     </form>
@@ -54,6 +56,7 @@
             <select class="addtable" formControlName="role">
               <option value="">Все</option>
               <option>admin</option>
+              <option>sales</option>
             </select>
             <button (click)="filterTable()">ОК</button>
           </div>

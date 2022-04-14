@@ -13,12 +13,13 @@
   .editModal_block {
     position: relative;
     width: 70%;
-    height: 70%;
+    padding: 40px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #E5E5E5;
+    overflow: auto;
 
     .addForm,
     .editForm {
