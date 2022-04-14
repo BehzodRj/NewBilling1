@@ -48,6 +48,7 @@ export class AccauntsPageComponent implements OnInit {
       fio: new FormControl('', Validators.required),
       tarif_id: new FormControl('', Validators.required),
       speed_cf: new FormControl('', Validators.required),
+      phone_number: new FormControl('', Validators.required),
       ipaddress: new FormControl('', Validators.required),
       acc_info: new FormControl('', Validators.required),
       passport: new FormControl('', Validators.required),
@@ -207,7 +208,7 @@ export class AccauntsPageComponent implements OnInit {
       var start_date: any = new Date(accountsFilterFormData.start_date)
       var end_date: any = new Date(accountsFilterFormData.end_date)
       this.isLoading = true
-      this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.ipaddress, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.')).subscribe(response => {
+      this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.ipaddress, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.')).subscribe(response => {
         this.accountsData = response
         this.isLoading = false
         this.numAccounts = this.accountsData.length
@@ -226,7 +227,7 @@ export class AccauntsPageComponent implements OnInit {
         this.isLoading = true
         var start_create: any = new Date(accountsFilterFormData.start_create)
         var end_create: any = new Date(accountsFilterFormData.end_create)
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.ipaddress, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), '', '').subscribe(response => {
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.ipaddress, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), '', '').subscribe(response => {
           this.accountsData = response
           this.isLoading = false
           this.numAccounts = this.accountsData.length
@@ -248,7 +249,7 @@ export class AccauntsPageComponent implements OnInit {
         this.isLoading = true
         var start_date: any = new Date(accountsFilterFormData.start_date)
         var end_date: any = new Date(accountsFilterFormData.end_date)
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.ipaddress, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.')).subscribe(response => {
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.ipaddress, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.')).subscribe(response => {
           this.accountsData = response
           this.isLoading = false
           this.numAccounts = this.accountsData.length
@@ -268,7 +269,7 @@ export class AccauntsPageComponent implements OnInit {
         })
     } else {
         this.isLoading = true
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.ipaddress, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', '', '').subscribe(response => {
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.ipaddress, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', '', '').subscribe(response => {
           this.accountsData = response
           this.isLoading = false
           this.numAccounts = this.accountsData.length

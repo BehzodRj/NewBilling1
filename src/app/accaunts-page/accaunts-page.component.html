@@ -187,6 +187,7 @@
               <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id">{{ tarifs.name }}</option>
             </select>  
             <input type="text" placeholder="Скорость" formControlName="speed_cf">
+            <input type="text" placeholder="Телефон" formControlName="phone_number">
             <input type="text" placeholder="Адрес" formControlName="acc_info">
             <input type="text" placeholder="Паспорт" formControlName="passport">
             <input type="date" placeholder="Год рождения" formControlName="age">
@@ -226,6 +227,7 @@
               <th>Цена</th>
               <th>Скорость</th>
               <th>Телефон</th>
+              <th>Дата Создания</th>
               <th>Дата Окончания</th>
               <th>IP Адрес</th>
               <th>Адрес</th>
@@ -273,6 +275,10 @@
 
               <td><span class="table_span">Телефон</span>
                 <h1>{{ accounts.phone_number }}</h1>
+              </td>
+
+              <td><span class="table_span">Дата Создания</span>
+                <h1>{{ accounts.created_at | date: 'dd-MM-yyyy' }}</h1>
               </td>
 
               <td><span class="table_span">Дата Окончания</span>

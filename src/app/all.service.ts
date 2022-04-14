@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestsService {
-  private url = 'http://45.94.219.6:12345'
+  private url = 'https://api.nets.tj'
   // http://45.94.219.6:12345
   // https://api.nets.tj
 
@@ -78,12 +78,12 @@ export class RequestsService {
     return this.http.get(this.url + '/api/account', {headers: header})
   }
 
-  getFilterAccountsRequest(id: any, fio: string, tarif_id: string, speed_cf: string, acc_info: string, passport: any, age: any, gender: any, ipaddress: any, comment: string, status: any, start_created: any, end_created: any, start_date: any, end_date: any) {
+  getFilterAccountsRequest(id: any, fio: string, tarif_id: string, speed_cf: string, phone_number: number, acc_info: string, passport: any, age: any, gender: any, ipaddress: any, comment: string, status: any, start_created: any, end_created: any, start_date: any, end_date: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.get(this.url + `/api/account?accounts.id=${id}&fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&acc_info=${acc_info}&passport=*${passport}*&age=${age}&gender=${gender}&ipaddress=${ipaddress}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}`, {headers: header})
+    return this.http.get(this.url + `/api/account?accounts.id=${id}&fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&phone_number=*${phone_number}*&acc_info=${acc_info}&passport=*${passport}*&age=${age}&gender=${gender}&ipaddress=${ipaddress}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}`, {headers: header})
   }
 
   postAccountsRequest(fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, overdraft: any, comment: string) {
