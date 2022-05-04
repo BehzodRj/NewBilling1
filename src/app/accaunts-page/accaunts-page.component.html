@@ -177,6 +177,149 @@
   </div>
 </div>
 
+<div class="uslugi_modal-container" *ngIf="paymentModal">
+  <div class="uslugi_modal-content">
+    <i class="fas fa-times" (click)="paymentModal = false"></i>
+    <div class="uslugi_modal-block">
+    <form class="payment_add-block" [formGroup]="addPaymentForm">
+      <input type="number" placeholder="Сумма" formControlName="summa">
+      <input type="text" placeholder="Коментарии" formControlName="comment">
+      <button (click)="addNewPayment()" [disabled]="addPaymentForm.invalid" [ngStyle]="{opacity: addPaymentForm.invalid ? '.6' : '1'}">Добавить</button>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="uslugi_modal-container" *ngIf="additionalIpModal">
+  <div class="uslugi_modal-content">
+    <i class="fas fa-times" (click)="additionalIpModal = false"></i>
+    <div class="uslugi_modal-block">
+      <table class="resp-tab-modal">
+        <thead>
+            <tr>
+                <th>Account ID</th>
+                <th>ID</th>
+                <th>IP</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let additionalIp of additionalIpData">
+                <td><span class="table_span-modal">Account ID</span>{{ additionalIp.account_id }}</td>
+                <td><span class="table_span-modal">ID</span>{{ additionalIp.id }}</td>
+                <td><span class="table_span-modal">IP</span>{{ additionalIp.ip }}</td>
+                <td style="display: flex;"><span class="table_span-modal">Действия</span>
+                  <h1 style="font-size: 12px;" (click)="deleteAdditionalIp(additionalIp.id)">Удалить</h1>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form style="align-items: center;" class="service_add-block" [formGroup]="addAdditionalIpForm">
+      <input style="width: 100%;" class="addtable" type="text" placeholder="ip" formControlName="ip">
+      <button [disabled]="addAdditionalIpForm.invalid" [ngStyle]="{opacity: addAdditionalIpForm.invalid ? '.6' : '1'}" (click)="addNewAdditionalIp()">Добавить</button>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="uslugi_modal-container" *ngIf="additionalInfoModal">
+  <div class="uslugi_modal-content">
+    <i class="fas fa-times" (click)="additionalInfoModal = false"></i>
+    <div class="uslugi_modal-block">
+      <table class="resp-tab-modal">
+        <thead>
+            <tr>
+              <th>Аккаунт ID</th>
+                <th>ID</th>
+                <th>Город</th>
+                <th>Тип подключения</th>
+                <th>Подключения пользователья</th>
+                <th>Контакты пользователья</th>
+                <th>Округ</th>
+                <th>Улица</th>
+                <th>Номер улицы</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let additionalInfo of additionalInfoData">
+                <td><span class="table_span-modal">Аккаунт ID</span>{{ additionalInfo.account_id }}</td>
+                <td><span class="table_span-modal">ID</span>{{ additionalInfo.id }}</td>
+                <td><span class="table_span-modal">Город</span>{{ additionalInfo.city?.name }}</td>
+                <td><span class="table_span-modal">Тип подключения</span>{{ additionalInfo.connect_type?.name }}</td>
+                <td><span class="table_span-modal">Подключения пользователья</span>{{ additionalInfo.connect_user?.fio }}</td>
+                <td><span class="table_span-modal">Контакты пользователья</span>{{ additionalInfo.contact_user?.fio }}</td>
+                <td><span class="table_span-modal">Округ</span>{{ additionalInfo.district?.name }}</td>
+                <td><span class="table_span-modal">Улица</span>{{ additionalInfo.street?.name }}</td>
+                <td><span class="table_span-modal">Номер улицы</span>{{ additionalInfo.street_number }}</td>
+                <td style="display: flex;"><span class="table_span-modal">Действия</span>
+                  <h1 style="font-size: 12px;" (click)="changeAdditionalInfo(additionalInfo.id)">Изменить</h1>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form style="align-items: center;" class="service_add-block" [formGroup]="addAdditionalInfoForm">
+      <select>
+        <option value="">1</option>
+        <option value="">2</option>
+      </select>
+      
+      <select>
+        <option value="">1</option>
+        <option value="">2</option>
+      </select>
+
+      <select>
+        <option value="">1</option>
+        <option value="">2</option>
+      </select>
+
+      <select>
+        <option value="">1</option>
+        <option value="">2</option>
+      </select>
+
+      <select>
+        <option value="">1</option>
+        <option value="">2</option>
+      </select>
+
+      <select>
+        <option value="">1</option>
+        <option value="">2</option>
+      </select>
+
+      <select>
+        <option value="">1</option>
+        <option value="">2</option>
+      </select>
+
+      <select>
+        <option value="">1</option>
+        <option value="">2</option>
+      </select>
+      
+      <button *ngIf="!editAdditionalInfo" [disabled]="addAdditionalInfoForm.invalid" [ngStyle]="{opacity: addAdditionalInfoForm.invalid ? '.6' : '1'}" (click)="addNewAdditionalInfo()">Добавить</button>
+      <button *ngIf="editAdditionalInfo" [disabled]="addAdditionalInfoForm.invalid" [ngStyle]="{opacity: addAdditionalInfoForm.invalid ? '.6' : '1'}" (click)="EditAdditionalInfo()">Изменить</button>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="uslugi_modal-container" *ngIf="extandsModal">
+  <div class="uslugi_modal-content">
+    <i class="fas fa-times" (click)="extandsModal = false"></i>
+    <div class="uslugi_modal-block">
+    <form class="payment_add-block" [formGroup]="addExtandsForm">
+      <input type="date" formControlName="end_date">
+      <button (click)="addNewExtands()" [disabled]="addExtandsForm.invalid" [ngStyle]="{opacity: addExtandsForm.invalid ? '.6' : '1'}">Добавить</button>
+    </form>
+    </div>
+  </div>
+</div>
+
 <div class="devide_block">
   <app-header></app-header>
 
@@ -398,6 +541,23 @@
                   <button mat-menu-item (click)="openCreditModal(accounts.id)" *ngIf="permitActions">
                     <mat-icon>account_balance </mat-icon>
                     <span>Кредит</span>
+                  </button>
+
+                  <button mat-menu-item (click)="openAddiitionalIpModal(accounts.id)" *ngIf="permitActions">
+                    <mat-icon>dns</mat-icon>
+                    <span>Дополнительный ip</span>
+                  </button>
+
+                  <!-- Хозирашда Коммент -->
+
+                  <!-- <button mat-menu-item (click)="openAdditionalInfoModal(accounts.id)" *ngIf="permitActions">
+                    <mat-icon>add_chart</mat-icon>
+                    <span>Дополнительная информация</span>
+                  </button> -->
+
+                  <button mat-menu-item (click)="openExtandsModal(accounts.id)" *ngIf="permitActions">
+                    <mat-icon>event</mat-icon>
+                    <span>Продлить</span>
                   </button>
                 </mat-menu>
               </td>

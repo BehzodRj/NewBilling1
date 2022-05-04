@@ -17,6 +17,7 @@ export class TransactionsPageComponent implements OnInit {
   editTable = false
   addText = 'Добавить'
   isLoading = false
+  summ = 0
 
   constructor(private request: RequestsService) { }
 
@@ -71,9 +72,13 @@ export class TransactionsPageComponent implements OnInit {
       var start_date: any = new Date(transactionsFilterFormData.start_date)
       var end_date: any = new Date(transactionsFilterFormData.end_date)
       this.isLoading = true
+      this.summ = 0
       this.request.getFilterTransactionsRequest(transactionsFilterFormData.id, transactionsFilterFormData.operator, transactionsFilterFormData.txn_date,  transactionsFilterFormData.txn_id, transactionsFilterFormData.comment,  start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.')).subscribe(response => {
         this.transactionsData = response
         this.isLoading = false
+        this.transactionsData.forEach( (element: any) => {
+          this.summ += element.summ
+        });
       }, error => {
         this.isLoading = false
         if(error.status == 401) {
@@ -90,9 +95,13 @@ export class TransactionsPageComponent implements OnInit {
       })
     } else {
       this.isLoading = true
+      this.summ = 0
       this.request.getFilterTransactionsRequest(transactionsFilterFormData.id, transactionsFilterFormData.operator, transactionsFilterFormData.txn_date,  transactionsFilterFormData.txn_id, transactionsFilterFormData.comment, '', '').subscribe(response => {
         this.transactionsData = response
         this.isLoading = false
+        this.transactionsData.forEach( (element: any) => {
+          this.summ += element.summ
+        });
       }, error => {
         this.isLoading = false
         if(error.status == 401) {

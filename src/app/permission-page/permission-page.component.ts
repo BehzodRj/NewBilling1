@@ -4,11 +4,11 @@ import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 
 @Component({
-  selector: 'app-firewall-page',
-  templateUrl: './firewall-page.component.html',
-  styleUrls: ['./firewall-page.component.scss']
+  selector: 'app-permission-page',
+  templateUrl: './permission-page.component.html',
+  styleUrls: ['./permission-page.component.scss']
 })
-export class FirewallPageComponent implements OnInit {
+export class PermissionPageComponent implements OnInit {
   permissionData: any = []
   permissionAddForm!: FormGroup
   permissionEditForm!: FormGroup
@@ -32,27 +32,15 @@ export class FirewallPageComponent implements OnInit {
     
     this.permissionFilterForm = new FormGroup({
       id: new FormControl('', Validators.required),
-      firewall_host: new FormControl('', Validators.required),
-      firewall_port: new FormControl('', Validators.required),
-      firewall_user: new FormControl('', Validators.required),
-      firewall_password: new FormControl('', Validators.required),
-      firewall_dysh_path: new FormControl('', Validators.required)
+      name: new FormControl('', Validators.required),
     })
 
     this.permissionAddForm = new FormGroup({
-      firewall_host: new FormControl('', Validators.required),
-      firewall_port: new FormControl('', Validators.required),
-      firewall_user: new FormControl('', Validators.required),
-      firewall_password: new FormControl('', Validators.required),
-      firewall_dysh_path: new FormControl('', Validators.required)
+      name: new FormControl('', Validators.required),
     })
 
     this.permissionEditForm = new FormGroup({
-      firewall_host: new FormControl('', Validators.required),
-      firewall_port: new FormControl('', Validators.required),
-      firewall_user: new FormControl('', Validators.required),
-      firewall_password: new FormControl('', Validators.required),
-      firewall_dysh_path: new FormControl('', Validators.required)
+      name: new FormControl('', Validators.required),
     })
 
     // this.isLoading = true
@@ -73,6 +61,7 @@ export class FirewallPageComponent implements OnInit {
 
     var token: any = localStorage.getItem('access_token')
     var decoded: any = jwt_decode(token);
+    console.log(decoded);
 
     if (decoded.user_role == 'admin') {
       this.permitActions = true
@@ -85,7 +74,7 @@ export class FirewallPageComponent implements OnInit {
   filterTable() {
     const permissionFilterFormData = {...this.permissionFilterForm.value}
     this.isLoading = true
-    this.request.getFilterFireWallRequest(permissionFilterFormData.id, permissionFilterFormData.firewall_host, permissionFilterFormData.firewall_port, permissionFilterFormData.firewall_user, permissionFilterFormData.firewall_password, permissionFilterFormData.firewall_dysh_path).subscribe( (response: any) => {
+    this.request.getFilterPermissionRequest(permissionFilterFormData.id, permissionFilterFormData.name).subscribe( (response: any) => {
       this.permissionData = response.reverse()
       this.isLoading = false
     }, error => {
@@ -107,7 +96,7 @@ export class FirewallPageComponent implements OnInit {
   addNewTable() {
     const permissionAddFormData = {...this.permissionAddForm.value}
     this.isLoading = true
-    this.request.postFireWallRequest(permissionAddFormData.firewall_host, permissionAddFormData.firewall_port, permissionAddFormData.firewall_user, permissionAddFormData.firewall_password, permissionAddFormData.firewall_dysh_path).subscribe(response => {
+    this.request.postPermissionRequest(permissionAddFormData.name).subscribe(response => {
       this.isLoading = false
       location.reload()
     }, error => {
@@ -117,15 +106,15 @@ export class FirewallPageComponent implements OnInit {
   }
   
   openEditTable(id: number) {
-    this.tableId = id    
+    this.tableId = id
     this.editTable = true
-    this.permissionEditForm.patchValue(this.permissionData.filter( (res: any) => res.ID ==  id)[0])
+    this.permissionEditForm.patchValue(this.permissionData.filter( (res: any) => res.id ==  id)[0])
   }
 
   editNewTable() {
     const permissionEditFormData = {...this.permissionEditForm.value}
     this.isLoading = true
-    this.request.putFireWallRequest(this.tableId, permissionEditFormData.firewall_host, permissionEditFormData.firewall_port, permissionEditFormData.firewall_user, permissionEditFormData.firewall_password, permissionEditFormData.firewall_dysh_path).subscribe(response => {
+    this.request.putPermissionRequest(this.tableId, permissionEditFormData.name).subscribe(response => {
       this.isLoading = false
       location.reload()
     }, error => {
@@ -135,21 +124,21 @@ export class FirewallPageComponent implements OnInit {
   }
 
 
-  // deleteTable(id: number) {
-  //   this.isLoading = true
-  //   let deleteConf = confirm("Вы уверени что хотите удалить данный ID: " + id)
-  //   if(deleteConf == true) {
-  //     this.request.deleteFireWallRequest(id).subscribe(response => {
-  //       this.isLoading = false
-  //       location.reload()
-  //     }, error => {
-  //       this.isLoading = false
-  //       alert(error.error.Error)
-  //     })
-  //   } else {
-  //     this.isLoading = false
-  //   }
-  // }
+  deleteTable(id: number) {
+    this.isLoading = true
+    let deleteConf = confirm("Вы уверени что хотите удалить данный ID: " + id)
+    if(deleteConf == true) {
+      this.request.deletePermissionRequest(id).subscribe(response => {
+        this.isLoading = false
+        location.reload()
+      }, error => {
+        this.isLoading = false
+        alert(error.error.Error)
+      })
+    } else {
+      this.isLoading = false
+    }
+  }
 
 
 }

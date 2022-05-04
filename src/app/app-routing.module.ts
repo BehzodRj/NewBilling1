@@ -16,6 +16,7 @@ import { TransactionsPageComponent } from './transactions-page/transactions-page
 import { UsersPageComponent } from './users-page/users-page.component';
 import { DevicesPageComponent } from './devices-page/devices-page.component';
 import { FirewallPageComponent } from './firewall-page/firewall-page.component';
+import { PermissionPageComponent } from './permission-page/permission-page.component';
 
 const routes: Routes = [
   { path: '', component: AuthPageComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'transactions', component: TransactionsPageComponent, canActivate: [AuthGuard] },
   { path: 'services', component: ServicesPageComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersPageComponent, canActivate: [AuthGuard] },
+  { path: 'permission', component: PermissionPageComponent, canActivate: [AuthGuard] },
   { path: 'devices', component: DevicesPageComponent, canActivate: [AuthGuard] },
   { path: 'firewall', component: FirewallPageComponent, canActivate: [AuthGuard] }
 ];

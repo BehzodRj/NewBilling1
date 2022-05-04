@@ -9,30 +9,38 @@ import jwt_decode from "jwt-decode";
   styleUrls: ['./accaunts-page.component.scss'],
 })
 export class AccauntsPageComponent implements OnInit {
+  accountsData: any = []
   tarifsData: any = []
   servicesData: any = []
   paymentData: any = []
   creditData: any = []
   servicesLinkData: any = []
-  addServiceForm!: FormGroup
-  addPaymentForm!: FormGroup
-  addCreditForm!: FormGroup
-  editCreditForm!: FormGroup
-  accountsData: any = []
+  additionalIpData: any = []
+  additionalInfoData: any = []
   accountsAddForm!: FormGroup
   accountsEditForm!: FormGroup
   accountsFilterForm!: FormGroup
-  page: any
-  search: any
+  addServiceForm!: FormGroup
+  addPaymentForm!: FormGroup
+  addCreditForm!: FormGroup
+  addAdditionalIpForm!: FormGroup
+  addAdditionalInfoForm!: FormGroup
+  addExtandsForm!: FormGroup
   addTable = false
   editTable = false
-  tableId: any
   isLoading = false
   uslugiModal = false
   paymentModal = false
   creditModal = false
   editCredit = false
+  additionalIpModal = false
+  additionalInfoModal = false
+  extandsModal = false
+  editAdditionalInfo = false
   permitActions = true
+  tableId: any
+  page: any
+  search: any
   serviceId: any
   numAccounts: any = 0
 
@@ -121,6 +129,18 @@ export class AccauntsPageComponent implements OnInit {
       expire_at: new FormControl('')
     })
 
+    this.addAdditionalIpForm = new FormGroup({
+      ip: new FormControl(''),
+    })
+
+    this.addAdditionalInfoForm = new FormGroup({
+      ip: new FormControl(''),
+    })
+
+    this.addExtandsForm = new FormGroup({
+      end_date: new FormControl('', Validators.required),
+    })
+
     // this.isLoading = true
     // this.request.getAccountsRequest().subscribe( (response: any) => {
     //   this.accountsData = response
@@ -155,7 +175,6 @@ export class AccauntsPageComponent implements OnInit {
 
     var token: any = localStorage.getItem('access_token')
     var decoded: any = jwt_decode(token);
-    console.log(decoded);
 
     if (decoded.user_role == 'admin') {
       this.permitActions = true
@@ -528,6 +547,144 @@ export class AccauntsPageComponent implements OnInit {
         this.editCredit = false
         this.addCreditForm.reset()
       })
+    }, error => {
+      this.isLoading = false
+      alert(error.error.Error)
+    })
+  }
+
+  openAddiitionalIpModal(id: any) {
+    this.serviceId = id
+    this.additionalIpModal = true
+    this.isLoading = true
+    this.request.getAdditionalIpRequest().subscribe( (response: any) => {
+      this.additionalIpData = response
+      this.isLoading = false
+    }, error => {
+      this.isLoading = false
+      alert(error.error.Error)
+       if(error.status == 401) {
+        this.request.refreshRequest(localStorage.getItem('refresh_token')).subscribe( (response: any) => {
+          localStorage.setItem('access_token', response.access_token)
+          localStorage.setItem('refresh_token', response.refresh_token)
+          this.isLoading = false
+          location.reload()
+        })
+      }
+    })
+  }
+
+  addNewAdditionalIp() {
+    const addAdditionalIpFormData = {...this.addAdditionalIpForm.value}
+    this.isLoading = true
+    this.request.postAdditionalIpRequest(this.serviceId, addAdditionalIpFormData.ip).subscribe(response => {
+      this.isLoading = false
+      this.request.getAdditionalIpRequest().subscribe( (response: any) => {
+        this.additionalIpData = response
+      })
+    }, error => {
+      this.isLoading = false
+      alert(error.error.Error)
+    })
+  }
+
+  deleteAdditionalIp(id: any) {
+    this.isLoading = true
+    let deleteConf = confirm("Вы уверени что хотите удалить данный Лицевой Счёт: " + id)
+    if(deleteConf == true) {
+      this.request.deleteAdditionalIpRequest(id).subscribe(response => {
+        this.isLoading = false
+        this.request.getAdditionalIpRequest().subscribe(response => {
+          this.additionalIpData = response
+        })
+      }, error => {
+        this.isLoading = false
+        alert(error.error.Error)
+      })
+    } else {
+      this.isLoading = false
+    }
+  }
+
+  openAdditionalInfoModal(id: any) {
+    this.serviceId = id
+    this.additionalInfoModal = true
+    this.isLoading = true
+    this.request.getAdditionalInfoRequest().subscribe( (response: any) => {
+      this.additionalInfoData = response
+      this.isLoading = false
+    }, error => {
+      this.isLoading = false
+      alert(error.error.Error)
+       if(error.status == 401) {
+        this.request.refreshRequest(localStorage.getItem('refresh_token')).subscribe( (response: any) => {
+          localStorage.setItem('access_token', response.access_token)
+          localStorage.setItem('refresh_token', response.refresh_token)
+          this.isLoading = false
+          location.reload()
+        })
+      }
+    })
+
+    this.request.getUsersRequest().subscribe( (response: any) => {
+      console.log(response);
+    })
+  }
+
+  addNewAdditionalInfo() {
+    const addCreditFormData = {...this.addCreditForm.value}
+    this.isLoading = true
+    let expire_at = new Date(addCreditFormData.expire_at)
+    this.request.postCreditRequest(this.serviceId, addCreditFormData.comment, expire_at.toISOString()).subscribe(response => {
+      this.isLoading = false
+      this.request.getCreditRequest().subscribe( (response: any) => {
+        this.creditData = response
+      })
+    }, error => {
+      this.isLoading = false
+      alert(error.error.Error)
+    })
+  }
+
+  changeAdditionalInfo(id: number) {
+    this.editCredit = true
+    let creditDataById = this.creditData.filter( (res: any) => res.id == id )[0]
+    this.addCreditForm.patchValue(creditDataById)
+    let expire_at = new Date(creditDataById.expire_at)
+    let expire_atFormat = expire_at.toLocaleDateString().split('.')
+    this.addCreditForm.controls['expire_at'].patchValue(`${expire_atFormat[2]}-${expire_atFormat[1]}-${expire_atFormat[0]}`)
+    this.serviceId = creditDataById.id
+  }
+
+  EditAdditionalInfo() {
+    const addCreditFormData = {...this.addCreditForm.value}
+    this.isLoading = true
+    let expire_at = new Date(addCreditFormData.expire_at)
+    this.request.putCreditRequest(this.serviceId, this.serviceId, addCreditFormData.comment, expire_at.toISOString()).subscribe(response => {
+      this.isLoading = false
+      this.request.getCreditRequest().subscribe( (response: any) => {
+        this.creditData = response
+        this.editCredit = false
+        this.addCreditForm.reset()
+      })
+    }, error => {
+      this.isLoading = false
+      alert(error.error.Error)
+    })
+  }
+
+  openExtandsModal(id: any) {
+    this.serviceId = id
+    this.extandsModal = true
+  }
+  
+  addNewExtands() {
+    const addExtandsFormData = {...this.addExtandsForm.value}
+    this.isLoading = true
+    let end_date = new Date(addExtandsFormData.end_date)
+    this.request.putExtensionRequest(this.serviceId, end_date.toISOString()).subscribe(response => {
+      this.isLoading = false
+      location.reload()
     }, error => {
       this.isLoading = false
       alert(error.error.Error)

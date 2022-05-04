@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestsService {
-  private url = 'http://45.94.219.6:12345'
+  private url = 'https://api.nets.tj'
   // http://45.94.219.6:12345
   // https://api.nets.tj
 
@@ -16,7 +16,7 @@ export class RequestsService {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
     })
-    return this.http.post(this.url + '/login',  {"login": login, "password": password}, {headers: header})
+    return this.http.post(this.url + '/login', {"login": login, "password": password}, {headers: header})
   }
 
   refreshRequest(refresh_token: any) {
@@ -133,6 +133,69 @@ export class RequestsService {
     })
     return this.http.get(this.url + '/api/account/on?id=' + id, {headers: header})
   }
+
+  // Additional Ip
+  getAdditionalIpRequest() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/additional_ip', {headers: header})
+  }
+
+  postAdditionalIpRequest(account_id: any, ip: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.post(this.url + '/api/additional_ip', {"account_id": account_id, "ip":ip}, {headers: header})
+  }
+
+  deleteAdditionalIpRequest(id: number) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.delete(this.url + '/api/additional_ip?id=' + id, {headers: header})
+  }
+  // End of Additional Ip
+
+  // Additional Info
+  getAdditionalInfoRequest() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/account_additional_info', {headers: header})
+  }
+
+  postAdditionalInfoRequest(account_id: number, city_id: any, district_id: any, street_id: any, street_number: any, street_apartment: any, connect_type_id: any, сonnect_user_id: any, contact_user_id: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.post(this.url + '/api/account_additional_info', {"account_id": account_id, "city_id": city_id,  "district_id": district_id,  "street_id": street_id,  "street_number": street_number, "street_apartment": street_apartment, "connect_type_id": connect_type_id,  "сonnect_user_id": сonnect_user_id, "contact_user_id": contact_user_id 
+      }, {headers: header})
+  }
+
+  putAdditionalInfoRequest(id: number, account_id: number, city_id: any, district_id: any, street_id: any, street_number: any, street_apartment: any, connect_type_id: any, сonnect_user_id: any, contact_user_id: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.put(this.url + '/api/account_additional_info', {"id": id, "account_id": account_id, "city_id": city_id,  "district_id": district_id,  "street_id": street_id,  "street_number": street_number, "street_apartment": street_apartment, "connect_type_id": connect_type_id,  "сonnect_user_id": сonnect_user_id, "contact_user_id": contact_user_id}, {headers: header})
+  }
+  // End of Additional Info
+
+  // Extension
+  putExtensionRequest(account_id: number, end_date: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.put(this.url + '/api/account/end_date_update', {"account_id": account_id, "end_date": end_date}, {headers: header})
+  }
+  // End of Extension
 
   // End of Accounts
 
@@ -252,6 +315,49 @@ export class RequestsService {
     })
     return this.http.delete(this.url + '/api/user?id=' + id, {headers: header})
   }
+
+  // Permission
+  getFilterPermissionRequest(id: any, name: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + `/api/permission?id=${id}&name=${name}`, {headers: header})
+  }
+
+  getPermissionRequest() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/permission', {headers: header})
+  }
+  
+  postPermissionRequest(name: string) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.post(this.url + '/api/permission', {"name": name}, {headers: header})
+  }
+  
+  putPermissionRequest(id: number, name: string) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.put(this.url + '/api/permission', {"id": id}, {headers: header})
+  }
+
+  deletePermissionRequest(id: number) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.delete(this.url + '/api/permission?id=' + id, {headers: header})
+  }
+  // End of Permission
+
   // End of Users
 
   // Service Link
@@ -356,4 +462,46 @@ export class RequestsService {
   }
   // End of Devices
 
+
+  // FireWall
+  getFireWallRequest() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/conf_firewall', {headers: header})
+  }
+
+  getFilterFireWallRequest(id: number, firewall_host: any, firewall_port: any, firewall_user: any, firewall_password: any, firewall_dysh_path: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + `/api/conf_firewall?ID=${id}&firewall_host=${firewall_host}&firewall_port=${firewall_port}&firewall_user=${firewall_user}&firewall_password=${firewall_password}&firewall_dysh_path=${firewall_dysh_path}`, {headers: header})
+  }
+
+  postFireWallRequest(firewall_host: any, firewall_port: any, firewall_user: any, firewall_password: any, firewall_dysh_path: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.post(this.url + '/api/conf_firewall', {"firewall_host": firewall_host, "firewall_port": firewall_port, "firewall_user": firewall_user, "firewall_password": firewall_password, "firewall_dysh_path": firewall_dysh_path}, {headers: header})
+  }
+  
+  putFireWallRequest(ID: any, firewall_host: any, firewall_port: any, firewall_user: any, firewall_password: any, firewall_dysh_path: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.put(this.url + '/api/conf_firewall', {"ID": ID, "firewall_host": firewall_host, "firewall_port": firewall_port, "firewall_user": firewall_user, "firewall_password": firewall_password, "firewall_dysh_path": firewall_dysh_path}, {headers: header})
+  }
+
+  // deleteFireWallRequest(id: number) {
+  //   let header: HttpHeaders = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': `${localStorage.getItem('access_token')}`
+  //   })
+  //   return this.http.delete(this.url + '/api/conf_firewall?id=' + id, {headers: header})
+  // }
+  // End of FireWall
 }

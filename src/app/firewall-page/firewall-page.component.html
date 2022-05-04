@@ -2,12 +2,133 @@
   <mat-spinner></mat-spinner>
 </div>
 
+<div class="addModal_content" *ngIf="addTable">
+  <div class="addModal_block">
+    <i class="fas fa-times" (click)="addTable = false"></i>
+    <form class="addForm" [formGroup]="permissionAddForm">
+      <input class="addtable" type="text" placeholder="Хост" formControlName="firewall_host">
+      <input class="addtable" type="text" placeholder="Порт" formControlName="firewall_port">
+      <input class="addtable" type="text" placeholder="Имя" formControlName="firewall_user">
+      <input class="addtable" type="text" placeholder="Пароль" formControlName="firewall_password">
+      <input class="addtable" type="text" placeholder="Dysh Path" formControlName="firewall_dysh_path">
+      <button class="addButton"  [disabled]="permissionAddForm.invalid" [ngStyle]="{opacity: permissionAddForm.invalid ? '.6' : '1'}" (click)="addNewTable()">OK</button>
+    </form>
+  </div>
+</div>
+
+<div class="editModal_content" *ngIf="editTable">
+  <div class="editModal_block">
+    <i class="fas fa-times" (click)="editTable = false" ></i>
+    <form class="editForm" [formGroup]="permissionEditForm">
+      <input class="addtable" type="text" placeholder="Хост" formControlName="firewall_host">
+      <input class="addtable" type="text" placeholder="Порт" formControlName="firewall_port">
+      <input class="addtable" type="text" placeholder="Имя" formControlName="firewall_user">
+      <input class="addtable" type="text" placeholder="Пароль" formControlName="firewall_password">
+      <input class="addtable" type="text" placeholder="Dysh Path" formControlName="firewall_dysh_path">
+      <button class="editButton" [disabled]="permissionEditForm.invalid" [ngStyle]="{opacity: permissionEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>
+    </form>
+  </div>
+</div>
+
 <div class="devide_block">
   <app-header></app-header>
 
   <div class="container">
     <div class="container_content">
-      
+      <div class="title_block">
+        <h1>FireWall</h1>
+        <button (click)="addTable = true" *ngIf="permitActions">Добавить</button>
+        <!-- <div class="search_block">
+          <i class="fa fas fa-search"></i>
+          <input type="search" placeholder="Поиск" [(ngModel)]="search">
+        </div> -->
+      </div>
+
+      <div class="filter_content">
+        <form class="filter_form">
+          <div class="filter_block" [formGroup]="permissionFilterForm">
+            <input type="text" placeholder="ID" formControlName="id">
+            <!-- <input type="text" placeholder="Хост" formControlName="firewall_host">
+            <input type="text" placeholder="Порт" formControlName="firewall_port">
+            <input type="text" placeholder="Пользователь" formControlName="firewall_user">
+            <input type="text" placeholder="Пароль" formControlName="firewall_password">
+            <input type="text" placeholder="Dysh_path" formControlName="firewall_dysh_path"> -->
+            <button (click)="filterTable()">ОК</button>
+          </div>
+
+          <!-- <div class="pagination_block">
+            <input type="number" placeholder="0">
+          </div> -->
+        </form>
+      </div>
+
+      <div class="table_container">
+        <table class="resp-tab">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Пользователь</th>
+              <th>Хост</th>
+              <th>Порт</th>
+              <th>Пароль</th>
+              <th>Dysh Path</th>
+              <th *ngIf="permitActions">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle class="c1" cx="10" cy="10" r="9.5" stroke="black"/>
+                  <circle class="c2" cx="10" cy="10" r="3" fill="black"/>
+                </svg>  
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let permission of permissionData">
+              <td><span>ID</span>
+                <h1>{{ permission.ID}}</h1>
+              </td>
+
+              <td><span>Пользователь</span>
+                <h1>{{ permission.firewall_user}}</h1>
+              </td>
+
+              <td><span>Хост</span>
+                <h1>{{ permission.firewall_host}}</h1>
+              </td>
+
+              <td><span>Порт</span>
+                <h1>{{ permission.firewall_port}}</h1>
+              </td>
+
+              <td><span>Пароль</span>
+                <h1>{{ permission.firewall_password}}</h1>
+              </td>
+
+              <td><span>Dysh Path</span>
+                <h1>{{ permission.firewall_dysh_path}}</h1>
+              </td>
+
+              <td *ngIf="permitActions"><span>Действия</span>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="openEditTable(permission.ID)">
+                    <mat-icon>edit</mat-icon>
+                    <span>Изменить</span>
+                  </button>
+
+                  <!-- <button mat-menu-item (click)="deleteTable(permission.id)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Удалить</span>
+                  </button> -->
+                </mat-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination_block">
+        <pagination-controls nextLabel="Далее" previousLabel="Назад" (pageChange)="page = $event"></pagination-controls>
+      </div>
     </div>
   </div>
 </div>
