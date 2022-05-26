@@ -13,17 +13,24 @@
   .editModal_block {
     position: relative;
     width: 70%;
+    overflow: auto;
     height: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #E5E5E5;
+    padding: 10px;
 
     .addForm,
     .editForm {
       display: flex;
       flex-direction: column;
+      align-items: center
+      
+      ;
+      overflow: auto;
+      width: 80%;
 
       .addtable,
       select,
@@ -31,6 +38,7 @@
         margin-bottom: 20px;
         width: 250px;
         height: 30px;
+        padding: 15px 0;
         text-indent: 10px;
         font-family: 'Raleway', sans-serif;
         font-weight: normal;
@@ -41,12 +49,16 @@
         box-sizing: border-box;
         border-radius: 21px;
         outline: none;
+        @media screen and (max-width:500px) {
+          width: 200px;
+        }
       }
 
       .addButton,
       .editButton {
         width: 250px;
         height: 30px;
+        padding: 10px 0;
         font-family: 'Raleway', sans-serif;
         font-weight: 600;
         font-size: 14px;
@@ -59,6 +71,9 @@
 
         &:active {
           background-color: #973328;
+        }
+        @media screen and (max-width:500px) {
+          width: 200px;
         }
       }
     }
@@ -85,10 +100,13 @@
       box-sizing: border-box;
       border-radius: 21px;
       outline: none;
-
+      @media screen and (max-width:500px) {
+        width: 200px;
+      }
       .ip_input {
         text-indent: 10px;
         width: 40px;
+        padding: 20px 0;
         background-color: transparent;
         border: none;
         outline: none;
@@ -244,7 +262,8 @@
           .ip_block {
             margin-bottom: 20px;
             width: 250px;
-            height: 30px;
+            height: 50px;
+            padding: 20px 0;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -259,6 +278,7 @@
             .ip_input {
               text-indent: 10px;
               width: 40px;
+              padding: 20px 0;
               background-color: transparent;
               border: none;
               outline: none;
