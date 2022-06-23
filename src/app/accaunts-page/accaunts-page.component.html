@@ -30,7 +30,6 @@
         <option value="M">Man</option>
         <option value="F">Female</option>
       </select>
-<<<<<<< HEAD
       <select formControlName="overdraft">
         <option value="2">Да</option>
         <option value="1">Нет</option>
@@ -39,9 +38,6 @@
         <option>B2C</option>
         <option>B2B</option>
       </select>
-=======
-
->>>>>>> 42aff5c1ec4f5e771be05e604b1beddc80e73e29
       <select formControlName="connect_by">
         <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
       </select>
@@ -82,7 +78,6 @@
         <option value="M">Man</option>
         <option value="F">Female</option>
       </select>
-<<<<<<< HEAD
       <select formControlName="overdraft">
         <option value="2">Да</option>
         <option value="1">Нет</option>
@@ -91,9 +86,6 @@
         <option>B2C</option>
         <option>B2B</option>
       </select>
-=======
-
->>>>>>> 42aff5c1ec4f5e771be05e604b1beddc80e73e29
       <select formControlName="connect_by">
         <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
       </select>
@@ -390,19 +382,7 @@
             <input type="date" formControlName="end_create">
             <input type="date" formControlName="start_date">
             <input type="date" formControlName="end_date">
-<<<<<<< HEAD
             <input type="number" placeholder="0" formControlName="page_size">
-=======
-
-            <select formControlName="connect_by">
-              <option value="">Кто подключил</option>
-              <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
-            </select>
-            <select formControlName="contact_by">
-              <option value="">Кто привел</option>
-              <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
-            </select>
->>>>>>> 42aff5c1ec4f5e771be05e604b1beddc80e73e29
             <button (click)="filterTable()">ОК</button>
           </div>
 
@@ -530,10 +510,6 @@
               <td><span class="table_span">Кто привел</span>
                 <h1>{{ accounts.contact_user?.fio }}</h1>
               </td>
-<<<<<<< HEAD
-=======
-              
->>>>>>> 42aff5c1ec4f5e771be05e604b1beddc80e73e29
               <td><span class="table_span">Статус</span>
                 <h1>{{ accounts.account_status?.status }}</h1>
               </td>
