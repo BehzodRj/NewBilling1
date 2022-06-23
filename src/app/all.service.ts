@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestsService {
-  private url = 'https://api.nets.tj'
+  private url = 'http://45.94.219.6:12345'
   // http://45.94.219.6:12345
   // https://api.nets.tj
 
@@ -78,12 +78,12 @@ export class RequestsService {
     return this.http.get(this.url + '/api/account', {headers: header})
   }
 
-  getFilterAccountsRequest(id: any, fio: string, tarif_id: string, speed_cf: string, phone_number: number, ipaddress: any, acc_info: string, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, status: any, start_created: any, end_created: any, start_date: any, end_date: any) {
+  getFilterAccountsRequest(id: any, fio: string, tarif_id: string, speed_cf: string, phone_number: number, ipaddress: any, acc_info: string, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, status: any, start_created: any, end_created: any, start_date: any, end_date: any, page_size: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.get(this.url + `/api/account?accounts.id=${id}&fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&phone_number=*${phone_number}*&ipaddress=${ipaddress}&acc_info=${acc_info}&passport=*${passport}*&age=${age}&gender=${gender}&overdraft=${overdraft}&customr_type=${customr_type}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}`, {headers: header})
+    return this.http.get(this.url + `/api/account?accounts.id=${id}&fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&phone_number=*${phone_number}*&ipaddress=${ipaddress}&acc_info=${acc_info}&passport=*${passport}*&age=${age}&gender=${gender}&overdraft=${overdraft}&customr_type=${customr_type}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}&page_size=${page_size}`, {headers: header})
   }
 
   postAccountsRequest(fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, end_date: any, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string) {

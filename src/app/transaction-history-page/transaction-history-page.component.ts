@@ -10,6 +10,8 @@ import { RequestsService } from '../all.service';
 export class TransactionHistoryPageComponent implements OnInit {
   transactionHistoryData: any = []
   isLoading = false
+  summPlus = 0
+  summMinus = 0
 
   constructor(private request: RequestsService, private route: ActivatedRoute) {}
 
@@ -22,9 +24,18 @@ export class TransactionHistoryPageComponent implements OnInit {
 
     this.isLoading = true
     this.route.params.subscribe( (params: any) => {
+      this.summPlus = 0
+      this.summMinus = 0
       this.request.getFilterTransactionsRequest(params.id, '', '', '', '', '', '').subscribe(response => {
         this.transactionHistoryData = response
         this.isLoading = false
+        this.transactionHistoryData.forEach( (element: any) => {
+          if(element.summ < 0) {
+            this.summMinus -= -element.summ
+          } else {
+            this.summPlus += element.summ
+          }
+        });
       }, error => {
         this.isLoading = false
         if(error.status == 401) {
