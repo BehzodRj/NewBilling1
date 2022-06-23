@@ -39,6 +39,7 @@
               <th>Лиц.Счёт</th>
               <th>Оператор</th>
               <th>Сумма</th>
+              <th>Тип транзакции</th>
               <th>Дата</th>
               <th>Дата Транзакции</th>
               <th>ID Транзакции</th>
@@ -67,6 +68,10 @@
 
               <td><span>Сумма</span>
                 <h1>{{ transactions.summ }}</h1>
+              </td>
+
+              <td><span>Тип транзакции</span>
+                <h1>{{ transactions.transaction_type?.type }}</h1>
               </td>
 
               <td><span>Дата</span>

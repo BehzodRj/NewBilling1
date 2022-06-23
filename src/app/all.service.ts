@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestsService {
-  private url = 'http://45.94.219.6:12345'
+  private url = 'https://api.nets.tj'
   // http://45.94.219.6:12345
   // https://api.nets.tj
 
