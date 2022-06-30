@@ -5,14 +5,9 @@
   <div class="addModal_content" *ngIf="addTable">
     <div class="addModal_block">
       <i class="fas fa-times" (click)="addTable = false"></i>
-      <form class="addForm" [formGroup]="permissionAddForm">
+      <form class="addForm" [formGroup]="roleAddForm">
         <input class="addtable" type="text" placeholder="Имя" formControlName="name">
-        <select formControlName="routes">
-          <option value="">Все</option>
-          <option *ngFor="let permissionRoute of permissionRouteData" [value]="permissionRoute.id">{{ permissionRoute.path }}</option>
-        </select>
-        
-        <button class="addButton"  [disabled]="permissionAddForm.invalid" [ngStyle]="{opacity: permissionAddForm.invalid ? '.6' : '1'}" (click)="addNewTable()">OK</button>
+        <button class="addButton"  [disabled]="roleAddForm.invalid" [ngStyle]="{opacity: roleAddForm.invalid ? '.6' : '1'}" (click)="addNewTable()">OK</button>
       </form>
     </div>
   </div>
@@ -20,13 +15,9 @@
   <div class="editModal_content" *ngIf="editTable">
     <div class="editModal_block">
       <i class="fas fa-times" (click)="editTable = false" ></i>
-      <form class="editForm" [formGroup]="permissionEditForm">
+      <form class="editForm" [formGroup]="roleEditForm">
         <input class="addtable" type="text" placeholder="Имя" formControlName="name">
-        <select formControlName="routes">
-          <option value="">Все</option>
-          <option *ngFor="let permissionRoute of permissionRouteData" [value]="permissionRoute.id">{{ permissionRoute.path }}</option>
-        </select>
-        <button class="editButton" [disabled]="permissionEditForm.invalid" [ngStyle]="{opacity: permissionEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>
+        <button class="editButton" [disabled]="roleEditForm.invalid" [ngStyle]="{opacity: roleEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>
       </form>
     </div>
   </div>
@@ -37,7 +28,7 @@
     <div class="container">
       <div class="container_content">
         <div class="title_block">
-          <h1>Доступ</h1>
+          <h1>Ролы</h1>
           <button (click)="addTable = true" *ngIf="permitActions">Добавить</button>
           <!-- <div class="search_block">
             <i class="fa fas fa-search"></i>
@@ -47,13 +38,9 @@
   
         <div class="filter_content">
           <form class="filter_form">
-            <div class="filter_block" [formGroup]="permissionFilterForm">
-              <input type="text" placeholder="ID" formControlName="id">
+            <div class="filter_block" [formGroup]="roleFilterForm">
+              <input type="number" placeholder="ID" formControlName="id">
               <input type="text" placeholder="Имя" formControlName="name">
-              <select formControlName="routes">
-                <option value="">Все</option>
-                <option *ngFor="let permissionRoute of permissionRouteData" [value]="permissionRoute.id">{{ permissionRoute.path }}</option>
-              </select>
               <button (click)="filterTable()">ОК</button>
             </div>
   
@@ -78,13 +65,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let permission of permissionData">
+              <tr *ngFor="let role of roleData">
                 <td><span>ID</span>
-                  <h1>{{ permission.id}}</h1>
+                  <h1>{{ role.id}}</h1>
                 </td>
   
                 <td><span>ФИО</span>
-                  <h1>{{ permission.name}}</h1>
+                  <h1>{{ role.name}}</h1>
                 </td>
   
                 <td *ngIf="permitActions"><span>Действия</span>
@@ -93,14 +80,9 @@
                     <mat-icon>more_vert</mat-icon>
                   </button>
                   <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="openEditTable(permission.id)">
+                    <button mat-menu-item (click)="openEditTable(role.id)">
                       <mat-icon>edit</mat-icon>
                       <span>Изменить</span>
-                    </button>
-  
-                    <button mat-menu-item (click)="deleteTable(permission.id)">
-                      <mat-icon>delete</mat-icon>
-                      <span>Удалить</span>
                     </button>
                   </mat-menu>
                 </td>

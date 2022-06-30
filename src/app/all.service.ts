@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestsService {
-  private url = 'https://api.nets.tj'
+  private url = 'http://45.94.219.6:12345'
   // http://45.94.219.6:12345
   // https://api.nets.tj
 
@@ -317,12 +317,12 @@ export class RequestsService {
   }
 
   // Permission
-  getFilterPermissionRequest(id: any, name: any) {
+  getFilterPermissionRequest(id: any, name: any, rout_id: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.get(this.url + `/api/permission?id=${id}&name=${name}`, {headers: header})
+    return this.http.get(this.url + `/api/permission?id=${id}&name=${name}&rout_id=${rout_id}`, {headers: header})
   }
 
   getPermissionRequest() {
@@ -333,20 +333,20 @@ export class RequestsService {
     return this.http.get(this.url + '/api/permission', {headers: header})
   }
   
-  postPermissionRequest(name: string) {
+  postPermissionRequest(name: string, user_id: number, group_id: number, rout_id: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.post(this.url + '/api/permission', {"name": name}, {headers: header})
+    return this.http.post(this.url + '/api/permission', {"name": name, "user_id": user_id, "group_id": group_id, "rout_id": rout_id}, {headers: header})
   }
   
-  putPermissionRequest(id: number, name: string) {
+  putPermissionRequest(id: number, name: string, user_id: number, group_id: number, rout_id: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.put(this.url + '/api/permission', {"id": id}, {headers: header})
+    return this.http.put(this.url + '/api/permission', {"id": id, "name": name, "user_id": user_id, "group_id": group_id, "rout_id": rout_id}, {headers: header})
   }
 
   deletePermissionRequest(id: number) {
@@ -356,6 +356,16 @@ export class RequestsService {
     })
     return this.http.delete(this.url + '/api/permission?id=' + id, {headers: header})
   }
+
+  // Permission Routes
+  getPermissionRouteRequest() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/permission/routes', {headers: header})
+  }
+  // End Permission Route
   // End of Permission
 
   // End of Users
@@ -459,6 +469,41 @@ export class RequestsService {
       'Authorization': `${localStorage.getItem('access_token')}`
     })
     return this.http.delete(this.url + '/api/device_type?id=' + id, {headers: header})
+  }
+  // End of Devices
+
+
+  // Devices
+  getRoleRequest() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/group', {headers: header})
+  }
+
+  getFilterRoleRequest(id: number, name: string) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + `/api/group?id=${id}&name=${name}`, {headers: header})
+  }
+
+  postRoleRequest(name: string) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.post(this.url + '/api/group', {"name": name}, {headers: header})
+  }
+  
+  putRoleRequest(id: number, name: string) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.put(this.url + '/api/group', {"id": id, "name": name}, {headers: header})
   }
   // End of Devices
 

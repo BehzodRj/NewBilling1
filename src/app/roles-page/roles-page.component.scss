@@ -19,14 +19,16 @@
     align-items: center;
     justify-content: center;
     background-color: #E5E5E5;
+    overflow: auto;
 
     .addForm,
     .editForm {
       display: flex;
       flex-direction: column;
-
+      @media screen and (max-width:500px) {
+        padding: 100px 20px;
+      }
       .addtable,
-      select,
       .editTable {
         margin-bottom: 20px;
         width: 250px;
@@ -41,6 +43,9 @@
         box-sizing: border-box;
         border-radius: 21px;
         outline: none;
+        @media screen and (max-width:500px) {
+            width: 200px;
+        }
       }
 
       .addButton,
@@ -60,6 +65,9 @@
         &:active {
           background-color: #973328;
         }
+        @media screen and (max-width:500px) {
+          width: 200px;
+      }
       }
     }
 
