@@ -18,10 +18,12 @@ import { DevicesPageComponent } from './devices-page/devices-page.component';
 import { PermissionPageComponent } from './permission-page/permission-page.component';
 import { RolesPageComponent } from './roles-page/roles-page.component';
 import { FirewallPageComponent } from './firewall-page/firewall-page.component';
+import { HistoryChangePageComponent } from './history-change-page/history-change-page.component';
 
 const routes: Routes = [
   { path: '', component: AuthPageComponent},
   { path: 'accounts', component: AccauntsPageComponent, canActivate: [AuthGuard] },
+  { path: 'historyAccount', component: HistoryChangePageComponent, canActivate: [AuthGuard] },
   { path: 'transaction-history/:id', component: TransactionHistoryPageComponent, canActivate: [AuthGuard] },
   { path: 'tarifs', component: TarifsPageComponent, canActivate: [AuthGuard] },
   { path: 'reportsActive', component: ReportsActivePageComponent, canActivate: [AuthGuard] },

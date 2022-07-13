@@ -31,6 +31,7 @@ import { ReportsAgePageComponent } from './reports-age-page/reports-age-page.com
 import { ReportsGenderPageComponent } from './reports-gender-page/reports-gender-page.component';
 import { PermissionPageComponent } from './permission-page/permission-page.component';
 import { RolesPageComponent } from './roles-page/roles-page.component';
+import { HistoryChangePageComponent } from './history-change-page/history-change-page.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { RolesPageComponent } from './roles-page/roles-page.component';
     ReportsAgePageComponent,
     ReportsGenderPageComponent,
     PermissionPageComponent,
-    RolesPageComponent
+    RolesPageComponent,
+    HistoryChangePageComponent
   ],
   imports: [
     BrowserModule,
