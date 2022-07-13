@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestsService {
-  private url = 'http://45.94.219.6:12345'
+  private url = 'https://api.nets.tj'
   // http://45.94.219.6:12345
   // https://api.nets.tj
 
@@ -91,7 +91,7 @@ export class RequestsService {
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.post(this.url + '/api/account', {"accounts.fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "end_date": end_date, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "customr_type": customr_type, "comment":comment, "connect_user_id": connect_by*1, "contact_user_id": contact_by*1}, {headers: header})
+    return this.http.post(this.url + '/api/account', {"fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "end_date": end_date, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "customr_type": customr_type, "comment":comment, "connect_user_id": connect_by*1, "contact_user_id": contact_by*1}, {headers: header})
   }
   
   putAccountsRequest(id: number, fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, end_date: any, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, connect_by: any, contact_by: any) {
@@ -99,7 +99,7 @@ export class RequestsService {
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.put(this.url + '/api/account', {"id": id, "accounts.fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "end_date": end_date, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "customr_type": customr_type, "comment":comment,"connect_user_id":connect_by*1,"contact_user_id":contact_by*1}, {headers: header})
+    return this.http.put(this.url + '/api/account', {"id": id, "fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "end_date": end_date, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "customr_type": customr_type, "comment":comment,"connect_user_id":connect_by*1,"contact_user_id":contact_by*1}, {headers: header})
   }
 
   deleteAccountsRequest(id: number) {
