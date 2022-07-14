@@ -1,0 +1,93 @@
+.devide_block {
+  .container {
+    .container_content {
+      max-width: 1800px;
+      margin: 38px auto 10px auto;
+
+      .title_block {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        h1 {
+          font-family: "Raleway", sans-serif;
+          font-weight: 600;
+          font-size: 30px;
+          color: #000000;
+        }
+      }
+
+      .table_container{
+         h1{
+              font-family: 'Roboto';
+              font-weight: 600;
+              font-size: 36px;    
+              color: #000000;
+              
+            }
+        .table_content{
+          .title_block{
+            display: flex;
+            justify-content: center;
+          
+          table{
+            width: 90%;
+            tbody{
+              tr{
+              text-align: left;
+                th{
+                  font-family: 'Raleway';
+                  font-weight: 600;
+                  font-size: 18px;
+                  color: #000000;
+                  padding: 10px 0px;
+                }
+              }
+              tr{
+                
+                td{
+                    border: none !important;
+                    list-style: none;
+                    font-family: 'Raleway';
+                    font-weight: 400;
+                    font-size: 16px;
+                    color: #000000;
+                    padding: 10px 0px;
+                    background: #E5E5E5;;
+                }
+              }
+            }
+          }
+          .table{
+            margin-top: 50px;
+            tbody{
+              tr{
+                background: #202020;
+                th{
+                  font-family: 'Raleway';
+                  font-weight: 600;
+                  font-size: 18px;     
+                  color: #FFFFFF !important;
+                  text-align: center;
+                  
+                }
+              }
+              tr{
+                td{
+                  font-family: 'Roboto';
+                  font-weight: 400;
+                  font-size: 16px;
+                  color: #000000;
+                  text-align: center;
+                }
+                
+              }
+              
+            }
+          }
+        }
+        }
+      }
+    }
+  }
+}
