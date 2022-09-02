@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 import * as XLSX from 'xlsx'; 
@@ -23,15 +23,15 @@ export class AccauntsPageComponent implements OnInit {
   additionalInfoData: any = []
   fireWallData: any = []
   fireWall4Table: any = []
-  accountsAddForm!: UntypedFormGroup
-  accountsEditForm!: UntypedFormGroup
-  accountsFilterForm!: UntypedFormGroup
-  addServiceForm!: UntypedFormGroup
-  addPaymentForm!: UntypedFormGroup
-  addCreditForm!: UntypedFormGroup
-  addAdditionalIpForm!: UntypedFormGroup
-  addAdditionalInfoForm!: UntypedFormGroup
-  addExtandsForm!: UntypedFormGroup
+  accountsAddForm!: FormGroup
+  accountsEditForm!: FormGroup
+  accountsFilterForm!: FormGroup
+  addServiceForm!: FormGroup
+  addPaymentForm!: FormGroup
+  addCreditForm!: FormGroup
+  addAdditionalIpForm!: FormGroup
+  addAdditionalInfoForm!: FormGroup
+  addExtandsForm!: FormGroup
   addTable = false
   editTable = false
   isLoading = false
@@ -60,103 +60,103 @@ export class AccauntsPageComponent implements OnInit {
     } else if(!localStorage.getItem('isDark')) {
       document.body.classList.toggle('dark-theme')
     }
-    this.accountsFilterForm = new UntypedFormGroup({
-      id: new UntypedFormControl('', Validators.required),    
-      fio: new UntypedFormControl('', Validators.required),
-      tarif_id: new UntypedFormControl('', Validators.required),
-      speed_cf: new UntypedFormControl('', Validators.required),
-      phone_number: new UntypedFormControl('', Validators.required),
-      ipaddress: new UntypedFormControl('', Validators.required),
-      acc_info: new UntypedFormControl('', Validators.required),
-      conf_firewall_id: new UntypedFormControl('', Validators.required),
-      passport: new UntypedFormControl('', Validators.required),
-      age: new UntypedFormControl('', Validators.required),
-      gender: new UntypedFormControl('', Validators.required),
-      overdraft: new UntypedFormControl('', Validators.required),
-      customr_type: new UntypedFormControl('', Validators.required),
-      comment: new UntypedFormControl('', Validators.required),
-      status: new UntypedFormControl('', Validators.required),
-      start_create: new UntypedFormControl('', Validators.required),
-      end_create: new UntypedFormControl('', Validators.required),
-      start_date: new UntypedFormControl('', Validators.required),
-      end_date: new UntypedFormControl('', Validators.required),
-      connect_by: new UntypedFormControl('', Validators.required),
-      contact_by: new UntypedFormControl('', Validators.required),
-      page_size: new UntypedFormControl('', Validators.required)
+    this.accountsFilterForm = new FormGroup({
+      id: new FormControl('', Validators.required),    
+      fio: new FormControl('', Validators.required),
+      tarif_id: new FormControl('', Validators.required),
+      speed_cf: new FormControl('', Validators.required),
+      phone_number: new FormControl('', Validators.required),
+      ipaddress: new FormControl('', Validators.required),
+      acc_info: new FormControl('', Validators.required),
+      conf_firewall_id: new FormControl('', Validators.required),
+      passport: new FormControl('', Validators.required),
+      age: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      overdraft: new FormControl('', Validators.required),
+      customr_type: new FormControl('', Validators.required),
+      comment: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
+      start_create: new FormControl('', Validators.required),
+      end_create: new FormControl('', Validators.required),
+      start_date: new FormControl('', Validators.required),
+      end_date: new FormControl('', Validators.required),
+      connect_by: new FormControl('', Validators.required),
+      contact_by: new FormControl('', Validators.required),
+      page_size: new FormControl('', Validators.required)
     })
 
-    this.accountsAddForm = new UntypedFormGroup({
-      fio: new UntypedFormControl('', Validators.required),
-      tarif_id: new UntypedFormControl('', Validators.required),
-      price_cf: new UntypedFormControl(1, Validators.required),
-      speed_cf: new UntypedFormControl(1, Validators.required),
-      phone_number: new UntypedFormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]),
-      end_date: new UntypedFormControl('', Validators.required),
-      ipaddress1: new UntypedFormControl('', Validators.required),
-      ipaddress2: new UntypedFormControl('', Validators.required),
-      ipaddress3: new UntypedFormControl('', Validators.required),
-      ipaddress4: new UntypedFormControl('', Validators.required),
-      acc_info: new UntypedFormControl(''),
-      conf_firewall_id: new UntypedFormControl(''),
-      passport: new UntypedFormControl(''),
-      age: new UntypedFormControl('', Validators.required),
-      gender: new UntypedFormControl('M'),
-      overdraft: new UntypedFormControl(1, Validators.required),
-      customr_type: new UntypedFormControl('B2C', Validators.required),
-      comment: new UntypedFormControl(''),
-      connect_by: new UntypedFormControl('', Validators.required),
-      contact_by: new UntypedFormControl('', Validators.required),
+    this.accountsAddForm = new FormGroup({
+      fio: new FormControl('', Validators.required),
+      tarif_id: new FormControl('', Validators.required),
+      price_cf: new FormControl(1, Validators.required),
+      speed_cf: new FormControl(1, Validators.required),
+      phone_number: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]),
+      end_date: new FormControl('', Validators.required),
+      ipaddress1: new FormControl('', Validators.required),
+      ipaddress2: new FormControl('', Validators.required),
+      ipaddress3: new FormControl('', Validators.required),
+      ipaddress4: new FormControl('', Validators.required),
+      acc_info: new FormControl(''),
+      conf_firewall_id: new FormControl(''),
+      passport: new FormControl(''),
+      age: new FormControl('', Validators.required),
+      gender: new FormControl('M'),
+      overdraft: new FormControl(1, Validators.required),
+      customr_type: new FormControl('B2C', Validators.required),
+      comment: new FormControl(''),
+      connect_by: new FormControl('', Validators.required),
+      contact_by: new FormControl('', Validators.required),
     })
 
-    this.accountsEditForm = new UntypedFormGroup({
-      fio: new UntypedFormControl('', Validators.required),
-      tarif_id: new UntypedFormControl('', Validators.required),
-      price_cf: new UntypedFormControl(1, Validators.required),
-      speed_cf: new UntypedFormControl(1, Validators.required),
-      phone_number: new UntypedFormControl('', Validators.required),
-      end_date: new UntypedFormControl('', Validators.required),
-      ipaddress1: new UntypedFormControl('', Validators.required),
-      ipaddress2: new UntypedFormControl('', Validators.required),
-      ipaddress3: new UntypedFormControl('', Validators.required),
-      ipaddress4: new UntypedFormControl('', Validators.required),
-      acc_info: new UntypedFormControl(''),
-      conf_firewall_id: new UntypedFormControl(''),
-      passport: new UntypedFormControl(''),
-      age: new UntypedFormControl('', Validators.required),
-      gender: new UntypedFormControl(''),
-      overdraft: new UntypedFormControl(''),
-      customr_type: new UntypedFormControl('', Validators.required),
-      comment: new UntypedFormControl(''),
-      connect_by: new UntypedFormControl('', Validators.required),
-      contact_by: new UntypedFormControl('', Validators.required),
+    this.accountsEditForm = new FormGroup({
+      fio: new FormControl('', Validators.required),
+      tarif_id: new FormControl('', Validators.required),
+      price_cf: new FormControl(1, Validators.required),
+      speed_cf: new FormControl(1, Validators.required),
+      phone_number: new FormControl('', Validators.required),
+      end_date: new FormControl('', Validators.required),
+      ipaddress1: new FormControl('', Validators.required),
+      ipaddress2: new FormControl('', Validators.required),
+      ipaddress3: new FormControl('', Validators.required),
+      ipaddress4: new FormControl('', Validators.required),
+      acc_info: new FormControl(''),
+      conf_firewall_id: new FormControl(''),
+      passport: new FormControl(''),
+      age: new FormControl('', Validators.required),
+      gender: new FormControl(''),
+      overdraft: new FormControl(''),
+      customr_type: new FormControl('', Validators.required),
+      comment: new FormControl(''),
+      connect_by: new FormControl('', Validators.required),
+      contact_by: new FormControl('', Validators.required),
     })
 
-    this.addServiceForm = new UntypedFormGroup({
-      created_at: new UntypedFormControl('', Validators.required),
-      name: new UntypedFormControl('1', Validators.required)
+    this.addServiceForm = new FormGroup({
+      created_at: new FormControl('', Validators.required),
+      name: new FormControl('1', Validators.required)
     })
 
 
-    this.addPaymentForm = new UntypedFormGroup({
-      summa: new UntypedFormControl('', Validators.required),
-      comment: new UntypedFormControl('')
+    this.addPaymentForm = new FormGroup({
+      summa: new FormControl('', Validators.required),
+      comment: new FormControl('')
     })
 
-    this.addCreditForm = new UntypedFormGroup({
-      comment: new UntypedFormControl(''),
-      expire_at: new UntypedFormControl('')
+    this.addCreditForm = new FormGroup({
+      comment: new FormControl(''),
+      expire_at: new FormControl('')
     })
 
-    this.addAdditionalIpForm = new UntypedFormGroup({
-      ip: new UntypedFormControl(''),
+    this.addAdditionalIpForm = new FormGroup({
+      ip: new FormControl(''),
     })
 
-    this.addAdditionalInfoForm = new UntypedFormGroup({
-      ip: new UntypedFormControl(''),
+    this.addAdditionalInfoForm = new FormGroup({
+      ip: new FormControl(''),
     })
 
-    this.addExtandsForm = new UntypedFormGroup({
-      end_date: new UntypedFormControl('', Validators.required),
+    this.addExtandsForm = new FormGroup({
+      end_date: new FormControl('', Validators.required),
     })
 
     // this.isLoading = true
