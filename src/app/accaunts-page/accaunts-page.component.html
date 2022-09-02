@@ -1,610 +1,1011 @@
 <div class="spinner_block" *ngIf="isLoading">
-  <mat-spinner></mat-spinner>
-</div>
-
-<div class="addModal_content" *ngIf="addTable">
-  <div class="addModal_block">
-    <i class="fas fa-times" (click)="addTable = false"></i>
-    <form class="addForm" [formGroup]="accountsAddForm">
-      <input class="addtable" type="text" placeholder="ФИО" formControlName="fio">
-      <select class="addtable" formControlName="tarif_id">
-        <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id" >{{ tarifs.name }}</option>
-      </select>
-      <input class="addtable" type="text" placeholder="Телефон" formControlName="phone_number">
-      <input class="addtable" type="date" formControlName="end_date">
-      <input class="addtable" type="number" placeholder="Коэфиценть цены" formControlName="price_cf"> 
-      <input class="addtable" type="number" placeholder="Коэфиценть скороста" formControlName="speed_cf"> 
-      <div class="ip_block">
-        <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress1()"  maxlength="3" formControlName="ipaddress1">
-        <span class="ip_span">.</span>
-        <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress2()" maxlength="3" formControlName="ipaddress2">
-        <span class="ip_span">.</span>
-        <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress3()" maxlength="3" formControlName="ipaddress3">
-        <span class="ip_span">.</span>
-        <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress4()" maxlength="3" formControlName="ipaddress4">
-      </div>
-      <input class="addtable" type="text" placeholder="Адрес" formControlName="acc_info">
-      <input class="addtable" type="text" placeholder="Паспорт" formControlName="passport">
-      <input class="addtable" type="date" placeholder="Год рождения" formControlName="age">
-      <select formControlName="gender">
-        <option value="M">Man</option>
-        <option value="F">Female</option>
-      </select>
-      <select formControlName="overdraft">
-        <option value="2">Да</option>
-        <option value="1">Нет</option>
-      </select>
-      <select formControlName="customr_type">
-        <option>B2C</option>
-        <option>B2B</option>
-      </select>
-      <select formControlName="connect_by">
-        <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
-      </select>
-      <select formControlName="contact_by">
-        <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
-      </select>
-      <input class="addtable" type="text" placeholder="Onu/Port" formControlName="comment">
-      <button class="addButton" [disabled]="accountsAddForm.invalid" [ngStyle]="{opacity: accountsAddForm.invalid ? '.6' : '1'}"  (click)="addNewTable()">OK</button>
-    </form>
+    <mat-spinner></mat-spinner>
   </div>
-</div>
-
-<div class="editModal_content" *ngIf="editTable">
-  <div class="editModal_block">
-    <i class="fas fa-times" (click)="editTable = false" ></i>
-    <form class="editForm" [formGroup]="accountsEditForm">
-      <input class="addtable" type="text" placeholder="ФИО" formControlName="fio">
-      <select class="addtable" formControlName="tarif_id">
-        <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id" >{{ tarifs.name }}</option>
-      </select>
-      <input class="addtable" type="number" placeholder="Коэфиценть цены" formControlName="price_cf"> 
-      <input class="addtable" type="number" placeholder="Коэфиценть скороста" formControlName="speed_cf"> 
-      <input class="addtable" type="text" placeholder="Телефон" formControlName="phone_number">
-      <input class="addtable" type="date" formControlName="end_date">
-      <div class="ip_block">
-        <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress1()"  maxlength="3" formControlName="ipaddress1">
-        <span class="ip_span">.</span>
-        <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress2()" maxlength="3" formControlName="ipaddress2">
-        <span class="ip_span">.</span>
-        <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress3()" maxlength="3" formControlName="ipaddress3">
-        <span class="ip_span">.</span>
-        <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress4()" maxlength="3" formControlName="ipaddress4">
-      </div>
-      <input class="addtable" type="text" placeholder="Адрес" formControlName="acc_info">
-      <input class="addtable" type="text" placeholder="Паспорт" formControlName="passport">
-      <input class="addtable" type="date" placeholder="Год рождения" formControlName="age">
-      <select formControlName="gender">
-        <option value="M">Man</option>
-        <option value="F">Female</option>
-      </select>
-      <select formControlName="overdraft">
-        <option value="2">Да</option>
-        <option value="1">Нет</option>
-      </select>
-      <select formControlName="customr_type">
-        <option>B2C</option>
-        <option>B2B</option>
-      </select>
-      <select formControlName="connect_by">
-        <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
-      </select>
-      <select formControlName="contact_by">
-        <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
-      </select>
-      <input class="addtable" type="text" placeholder="Onu/Port" formControlName="comment">
-      <button class="editButton" [disabled]="accountsEditForm.invalid" [ngStyle]="{opacity: accountsEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>
-    </form>
-  </div>
-</div>
-
-<div class="uslugi_modal-container" *ngIf="uslugiModal">
-  <div class="uslugi_modal-content">
-    <i class="fas fa-times" (click)="uslugiModal = false"></i>
-    <div class="uslugi_modal-block">
-      <table class="resp-tab-modal">
-        <thead>
-            <tr>
-                <th>Название</th>
-                <th>Дата начало</th>
-                <th>Дата окончания</th>
-                <th>Цена</th>
-                <th>Статус</th>
-                <th>Действия</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let servicesLink of servicesLinkData">
-                <td><span class="table_span-modal">Название</span>{{ servicesLink.service?.name }}</td>
-                <td><span class="table_span-modal">Дата начало</span>{{ servicesLink.created_at | date: 'dd-MM-yyyy' }}</td>
-                <td><span class="table_span-modal">Дата окончания</span>{{ servicesLink.expire_at | date: 'dd-MM-yyyy' }}</td>
-                <td><span class="table_span-modal">Цена</span>{{ servicesLink.service?.price }}</td>
-                <td><span class="table_span-modal">Статус</span>{{ servicesLink.deleted ? 'Удаленно' : 'Активный' }}</td>
-                <td><span class="table_span-modal">Действия</span><h1 style="font-size: 12px;" (click)="deleteService(servicesLink.id)">Удалить</h1></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <form class="service_add-block" [formGroup]="addServiceForm">
-      <input class="addtable" type="date" formControlName="created_at">
-      <select formControlName="name">
-        <option *ngFor="let servicesData of servicesData" [value]="servicesData.id">{{ servicesData.name }}</option>
-      </select>
-      <button [disabled]="addServiceForm.invalid" [ngStyle]="{opacity: addServiceForm.invalid ? '.6' : '1'}" (click)="addNewService()">Добавить</button>
-    </form>
+  
+  <div class="addModal_content" *ngIf="addTable">
+    <div class="addModal_block">
+      <i class="fas fa-times" (click)="addTable = false"></i>
+      <form class="addForm" [formGroup]="accountsAddForm">
+  
+        <div class="add_block_items">
+          <h1 class="add_title">ФИО</h1>
+          <input class="addtable" type="text" formControlName="fio">
+        </div>
+        
+        <div class="add_block_items">
+          <h1 class="add_title">Тарифы</h1>
+          <select class="addtable" formControlName="tarif_id">
+            <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id" >{{ tarifs.name }}</option>
+          </select>
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Телефон</h1>
+          <input class="addtable" type="text" formControlName="phone_number">
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Дата окончание</h1>
+          <input class="addtable" type="date" formControlName="end_date">
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Коэфиценть цены</h1>
+          <input class="addtable" type="number" formControlName="price_cf"> 
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Коэфиценть скороста</h1>
+          <input class="addtable" type="number" formControlName="speed_cf"> 
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">IP Адресс</h1>
+          <div class="ip_block">
+            <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress1()"  maxlength="3" formControlName="ipaddress1">
+            <span class="ip_span">.</span>
+            <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress2()" maxlength="3" formControlName="ipaddress2">
+            <span class="ip_span">.</span>
+            <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress3()" maxlength="3" formControlName="ipaddress3">
+            <span class="ip_span">.</span>
+            <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress4()" maxlength="3" formControlName="ipaddress4">
+          </div>
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Адрес</h1>
+          <input class="addtable" type="text" formControlName="acc_info">
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Файрволл</h1>
+          <select formControlName="conf_firewall_id">
+            <option *ngFor="let fireWall of fireWallData" [value]="fireWall.id">{{ fireWall.firewall_host }} - {{ fireWall.comment }}</option>
+          </select>
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Паспорт</h1>
+          <input class="addtable" type="text" formControlName="passport">
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Год рождения</h1>
+          <input class="addtable" type="date" formControlName="age">
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Пол</h1>
+          <select formControlName="gender">
+            <option value="M">Man</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Овердрафта</h1>
+          <select formControlName="overdraft">
+            <option value="2">Да</option>
+            <option value="1">Нет</option>
+          </select>
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Тип клиента</h1>
+          <select formControlName="customr_type">
+            <option>B2C</option>
+            <option>B2B</option>
+          </select>
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Кто подключил</h1>
+          <select formControlName="connect_by">
+            <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
+          </select>
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Кто привёл</h1>
+          <select formControlName="contact_by">
+            <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
+          </select>
+        </div>
+  
+        <div class="add_block_items">
+          <h1 class="add_title">Onu/Port</h1>
+          <input class="addtable" type="text" formControlName="comment">
+        </div>
+  
+        <button class="addButton" [disabled]="accountsAddForm.invalid" [ngStyle]="{opacity: accountsAddForm.invalid ? '.6' : '1'}"  (click)="addNewTable()">OK</button>
+  
+      </form>
     </div>
   </div>
-</div>
+  
+  <div class="editModal_content" *ngIf="editTable">
+    <div class="editModal_block">
+      <i class="fas fa-times" (click)="editTable = false" ></i>
+      <form class="editForm" [formGroup]="accountsEditForm">
 
+        <div class="edit_block_items">
+            <h1 class="edit_title">ФИО</h1>
+            <input class="addtable" type="text" formControlName="fio">
+        </div>
 
-<div class="uslugi_modal-container" *ngIf="paymentModal">
-  <div class="uslugi_modal-content">
-    <i class="fas fa-times" (click)="paymentModal = false"></i>
-    <div class="uslugi_modal-block">
-    <form class="payment_add-block" [formGroup]="addPaymentForm">
-      <input type="number" placeholder="Сумма" formControlName="summa">
-      <input type="text" placeholder="Коментарии" formControlName="comment">
-      <button (click)="addNewPayment()" [disabled]="addPaymentForm.invalid" [ngStyle]="{opacity: addPaymentForm.invalid ? '.6' : '1'}">Добавить</button>
-    </form>
-    </div>
-  </div>
-</div>
-
-<div class="uslugi_modal-container" *ngIf="creditModal">
-  <div class="uslugi_modal-content">
-    <i class="fas fa-times" (click)="creditModal = false"></i>
-    <div class="uslugi_modal-block">
-      <table class="resp-tab-modal">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Дата начало</th>
-                <th>Дата окончания</th>
-                <th>Коментарии</th>
-                <th>Статус</th>
-                <th>Действия</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let credit of creditData">
-                <td><span class="table_span-modal">ID</span>{{ credit.id }}</td>
-                <td><span class="table_span-modal">Дата начало</span>{{ credit.created_at | date: 'dd-MM-yyyy' }}</td>
-                <td><span class="table_span-modal">Дата окончания</span>{{ credit.expire_at | date: 'dd-MM-yyyy' }}</td>
-                <td><span class="table_span-modal">Коментарии</span>{{ credit.comment }}</td>
-                <td><span class="table_span-modal">Статус</span>{{ credit.deleted ? 'Удаленно' : 'Активный' }}</td>
-                <td style="display: flex;"><span class="table_span-modal">Действия</span>
-                  <h1 style="font-size: 12px;" (click)="changeCredit(credit.id)">Изменить</h1>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <form style="align-items: center;" class="service_add-block" [formGroup]="addCreditForm">
-      <textarea style="width: 230px; height: 56px; padding: 10px; outline: none;" placeholder="Коментарии" formControlName="comment"></textarea>
-      <input style="width: 100%;" class="addtable" type="date" formControlName="expire_at">
-      <button *ngIf="!editCredit" [disabled]="addCreditForm.invalid" [ngStyle]="{opacity: addCreditForm.invalid ? '.6' : '1'}" (click)="addNewCredit()">Добавить</button>
-      <button *ngIf="editCredit" [disabled]="addCreditForm.invalid" [ngStyle]="{opacity: addCreditForm.invalid ? '.6' : '1'}" (click)="addEditCredit()">Изменить</button>
-    </form>
-    </div>
-  </div>
-</div>
-
-<div class="uslugi_modal-container" *ngIf="paymentModal">
-  <div class="uslugi_modal-content">
-    <i class="fas fa-times" (click)="paymentModal = false"></i>
-    <div class="uslugi_modal-block">
-    <form class="payment_add-block" [formGroup]="addPaymentForm">
-      <input type="number" placeholder="Сумма" formControlName="summa">
-      <input type="text" placeholder="Коментарии" formControlName="comment">
-      <button (click)="addNewPayment()" [disabled]="addPaymentForm.invalid" [ngStyle]="{opacity: addPaymentForm.invalid ? '.6' : '1'}">Добавить</button>
-    </form>
-    </div>
-  </div>
-</div>
-
-<div class="uslugi_modal-container" *ngIf="additionalIpModal">
-  <div class="uslugi_modal-content">
-    <i class="fas fa-times" (click)="additionalIpModal = false"></i>
-    <div class="uslugi_modal-block">
-      <table class="resp-tab-modal">
-        <thead>
-            <tr>
-                <th>Account ID</th>
-                <th>ID</th>
-                <th>IP</th>
-                <th>Действия</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let additionalIp of additionalIpData">
-                <td><span class="table_span-modal">Account ID</span>{{ additionalIp.account_id }}</td>
-                <td><span class="table_span-modal">ID</span>{{ additionalIp.id }}</td>
-                <td><span class="table_span-modal">IP</span>{{ additionalIp.ip }}</td>
-                <td style="display: flex;"><span class="table_span-modal">Действия</span>
-                  <h1 style="font-size: 12px;" (click)="deleteAdditionalIp(additionalIp.id)">Удалить</h1>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <form style="align-items: center;" class="service_add-block" [formGroup]="addAdditionalIpForm">
-      <input style="width: 100%;" class="addtable" type="text" placeholder="ip" formControlName="ip">
-      <button [disabled]="addAdditionalIpForm.invalid" [ngStyle]="{opacity: addAdditionalIpForm.invalid ? '.6' : '1'}" (click)="addNewAdditionalIp()">Добавить</button>
-    </form>
-    </div>
-  </div>
-</div>
-
-<div class="uslugi_modal-container" *ngIf="additionalInfoModal">
-  <div class="uslugi_modal-content">
-    <i class="fas fa-times" (click)="additionalInfoModal = false"></i>
-    <div class="uslugi_modal-block">
-      <table class="resp-tab-modal">
-        <thead>
-            <tr>
-              <th>Аккаунт ID</th>
-                <th>ID</th>
-                <th>Город</th>
-                <th>Тип подключения</th>
-                <th>Подключения пользователья</th>
-                <th>Контакты пользователья</th>
-                <th>Округ</th>
-                <th>Улица</th>
-                <th>Номер улицы</th>
-                <th>Действия</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let additionalInfo of additionalInfoData">
-                <td><span class="table_span-modal">Аккаунт ID</span>{{ additionalInfo.account_id }}</td>
-                <td><span class="table_span-modal">ID</span>{{ additionalInfo.id }}</td>
-                <td><span class="table_span-modal">Город</span>{{ additionalInfo.city?.name }}</td>
-                <td><span class="table_span-modal">Тип подключения</span>{{ additionalInfo.connect_type?.name }}</td>
-                <td><span class="table_span-modal">Подключения пользователья</span>{{ additionalInfo.connect_user?.fio }}</td>
-                <td><span class="table_span-modal">Контакты пользователья</span>{{ additionalInfo.contact_user?.fio }}</td>
-                <td><span class="table_span-modal">Округ</span>{{ additionalInfo.district?.name }}</td>
-                <td><span class="table_span-modal">Улица</span>{{ additionalInfo.street?.name }}</td>
-                <td><span class="table_span-modal">Номер улицы</span>{{ additionalInfo.street_number }}</td>
-                <td style="display: flex;"><span class="table_span-modal">Действия</span>
-                  <h1 style="font-size: 12px;" (click)="changeAdditionalInfo(additionalInfo.id)">Изменить</h1>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <form style="align-items: center;" class="service_add-block" [formGroup]="addAdditionalInfoForm">
-      <select>
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
-      
-      <select>
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
-
-      <select>
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
-
-      <select>
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
-
-      <select>
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
-
-      <select>
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
-
-      <select>
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
-
-      <select>
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
-      
-      <button *ngIf="!editAdditionalInfo" [disabled]="addAdditionalInfoForm.invalid" [ngStyle]="{opacity: addAdditionalInfoForm.invalid ? '.6' : '1'}" (click)="addNewAdditionalInfo()">Добавить</button>
-      <button *ngIf="editAdditionalInfo" [disabled]="addAdditionalInfoForm.invalid" [ngStyle]="{opacity: addAdditionalInfoForm.invalid ? '.6' : '1'}" (click)="EditAdditionalInfo()">Изменить</button>
-    </form>
-    </div>
-  </div>
-</div>
-
-<div class="uslugi_modal-container" *ngIf="extandsModal">
-  <div class="uslugi_modal-content">
-    <i class="fas fa-times" (click)="extandsModal = false"></i>
-    <div class="uslugi_modal-block">
-    <form class="payment_add-block" [formGroup]="addExtandsForm">
-      <input type="date" formControlName="end_date">
-      <button (click)="addNewExtands()" [disabled]="addExtandsForm.invalid" [ngStyle]="{opacity: addExtandsForm.invalid ? '.6' : '1'}">Добавить</button>
-    </form>
-    </div>
-  </div>
-</div>
-
-<div class="devide_block">
-  <app-header></app-header>
-
-  <div class="container">
-    <div class="container_content">
-      <div class="title_block">
-        <h1>Аккаунты</h1>
-        <button (click)="addTable = true" *ngIf="permitActions">Добавить</button>
-      </div>
-
-      <div class="filter_content">
-        <form class="filter_form">
-          <div class="filter_block" [formGroup]="accountsFilterForm">
-            <input type="text" placeholder="Лицевой Счёт" formControlName="id">
-            <input type="text" placeholder="ФИО" formControlName="fio">
+        <div class="edit_block_items">
+            <h1 class="edit_title">Тарифы</h1>
             <select class="addtable" formControlName="tarif_id">
-              <option value="">Все</option>
-              <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id">{{ tarifs.name }}</option>
-            </select>  
-            <input type="text" placeholder="Скорость" formControlName="speed_cf">
-            <input type="text" placeholder="Телефон" formControlName="phone_number">
-            <input type="text" placeholder="Ip Адрес" formControlName="ipaddress">
-            <input type="text" placeholder="Адрес" formControlName="acc_info">
-            <input type="text" placeholder="Паспорт" formControlName="passport">
-            <input type="date" placeholder="Год рождения" formControlName="age">
+              <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id" >{{ tarifs.name }}</option>
+            </select>
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Коэфиценть цены</h1>
+            <input class="addtable" type="number" formControlName="price_cf"> 
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Коэфиценть скороста</h1>
+            <input class="addtable" type="number" formControlName="speed_cf"> 
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Телефон</h1>
+            <input class="addtable" type="text" formControlName="phone_number">
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Дата окончание</h1>
+            <input class="addtable" type="date" formControlName="end_date">
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">IP Адресс</h1>
+            <div class="ip_block">
+              <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress1()"  maxlength="3" formControlName="ipaddress1">
+              <span class="ip_span">.</span>
+              <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress2()" maxlength="3" formControlName="ipaddress2">
+              <span class="ip_span">.</span>
+              <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress3()" maxlength="3" formControlName="ipaddress3">
+              <span class="ip_span">.</span>
+              <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress4()" maxlength="3" formControlName="ipaddress4">
+            </div>
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Адрес</h1>
+            <input class="addtable" type="text" formControlName="acc_info">
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Файрволл</h1>
+            <select formControlName="conf_firewall_id">
+              <option *ngFor="let fireWall of fireWallData" [value]="fireWall.id">{{ fireWall.firewall_host }} - {{ fireWall.comment }}</option>
+            </select>
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Паспорт</h1>
+            <input class="addtable" type="text" formControlName="passport">
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Год рождения</h1>
+            <input class="addtable" type="date" formControlName="age">
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Пол</h1>
             <select formControlName="gender">
-              <option value="">Все</option>
               <option value="M">Man</option>
               <option value="F">Female</option>
             </select>
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Овердрафта</h1>
             <select formControlName="overdraft">
-              <option value="">Все</option>
               <option value="2">Да</option>
               <option value="1">Нет</option>
             </select>
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Тип клиента</h1>
             <select formControlName="customr_type">
-              <option value="">Все</option>
               <option>B2C</option>
               <option>B2B</option>
             </select>
-            <input type="text" placeholder="ONU/PORT" formControlName="comment">
-            <select formControlName="status">
-              <option value="">Все</option>
-              <option>On</option>
-              <option>Off</option>
-            </select>
-            <input type="date" formControlName="start_create">
-            <input type="date" formControlName="end_create">
-            <input type="date" formControlName="start_date">
-            <input type="date" formControlName="end_date">
-            <input type="number" placeholder="0" formControlName="page_size">
+        </div>
 
+        <div class="edit_block_items">
+            <h1 class="edit_title">Кто подключил</h1>
             <select formControlName="connect_by">
-              <option value="">Кто подключил</option>
               <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
             </select>
+        </div>
+
+        <div class="edit_block_items">
+            <h1 class="edit_title">Кто привёл</h1>
             <select formControlName="contact_by">
-              <option value="">Кто привел</option>
               <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
             </select>
-            <button (click)="filterTable()">ОК</button>
-          </div>
+        </div>
 
-          <!-- <div class="pagination_block">
-            <input type="number" placeholder="0">
-          </div> -->
-        </form>
-      </div>
+        <div class="edit_block_items">
+            <h1 class="edit_title">Onu/Port</h1>
+            <input class="addtable" type="text" placeholder="Onu/Port" formControlName="comment">
+        </div>
 
-      <div class="table_container">
-        <table class="resp-tab">
+        <button class="editButton" [disabled]="accountsEditForm.invalid" [ngStyle]="{opacity: accountsEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>
+
+      </form>
+    </div>
+  </div>
+  
+  <div class="uslugi_modal-container" *ngIf="uslugiModal">
+    <div class="uslugi_modal-content">
+      <i class="fas fa-times" (click)="uslugiModal = false"></i>
+      <div class="uslugi_modal-block">
+        <table class="resp-tab-modal">
           <thead>
-            <tr>
-              <th>Лиц.Счёт</th>
-              <th>ФИО</th>
-              <th>Тариф</th>
-              <th>Баланс</th>
-              <th>Цена</th>
-              <th>Скорость</th>
-              <th>Телефон</th>
-              <th>Дата Создания</th>
-              <th>Дата Окончания</th>
-              <th>IP Адрес</th>
-              <th>Адрес</th>
-              <th>Паспорт</th>
-              <th>Год Рождения</th>
-              <th>Пол</th>
-              <th>Девайс</th>
-              <th>Овердрафта</th>
-              <th>Тип клиента</th>
-              <th>Onu/Port</th>
-              <th>Кто подключил</th>
-              <th>Кто привел</th>
-              <th>Статус</th>
-              <th>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle class="c1" cx="10" cy="10" r="9.5" stroke="black"/>
-                  <circle class="c2" cx="10" cy="10" r="3" fill="black"/>
-                </svg>  
-              </th>
-            </tr>
+              <tr>
+                  <th>Название</th>
+                  <th>Дата начало</th>
+                  <th>Дата окончания</th>
+                  <th>Цена</th>
+                  <th>Статус</th>
+                  <th>Действия</th>
+              </tr>
           </thead>
           <tbody>
-
-            <tr *ngFor="let accounts of accountsData" [formGroup]="accountsEditForm">
-              <td><span class="table_span">Лиц.Счёт</span>
-                <h1>{{ accounts.id }}</h1>
-              </td>
-
-              <td><span class="table_span">ФИО</span>
-                <h1>{{ accounts.fio }}</h1>
-              </td>
-
-              <td><span class="table_span">Тариф</span>
-                <h1>{{ accounts.tarif.name }}</h1>
-              </td>
-
-              <td><span class="table_span">Баланс</span>
-                <h1>{{ accounts.balance }}</h1>
-              </td>
-
-              <td><span class="table_span">Цена</span>
-                <h1>{{ accounts.price_cf }}</h1>
-              </td>
-
-              <td><span class="table_span">Скорость</span>
-                <h1>{{ accounts.speed_cf }}</h1>
-              </td>
-
-              <td><span class="table_span">Телефон</span>
-                <h1>{{ accounts.phone_number }}</h1>
-              </td>
-
-              <td><span class="table_span">Дата Создания</span>
-                <h1>{{ accounts.created_at | date: 'dd-MM-yyyy' }}</h1>
-              </td>
-
-              <td><span class="table_span">Дата Окончания</span>
-                <h1>{{ accounts.end_date | date: 'dd-MM-yyyy' }}</h1>
-              </td>
-
-              <td><span class="table_span">IP Адрес</span>
-                <h1>{{ accounts.ipaddress }}</h1>
-              </td>
-              
-              <td><span class="table_span">Адрес</span>
-                <h1>{{ accounts.acc_info }}</h1>
-              </td>
-
-              <td><span class="table_span">Паспорт</span>
-                <h1>{{ accounts.passport }}</h1>
-              </td>
-
-              <td><span class="table_span">Год Рождения</span>
-                <h1>{{ accounts.age | date: 'dd-MM-yyyy' }}</h1>
-              </td>
-
-              <td><span class="table_span">Пол</span>
-                <h1>{{ accounts.gender }}</h1>
-              </td>
-
-              <td><span class="table_span">Девайс</span>
-                <h1>{{ accounts.device_type?.name }}</h1>
-              </td>
-
-              <td *ngIf="accounts.overdraft < 2"><span class="table_span">Овердрафта</span>
-                <h1>Нет</h1>
-              </td>
-
-              <td *ngIf="accounts.overdraft > 1"><span class="table_span">Овердрафта</span>
-                <h1>Да</h1>
-              </td>
-
-              <td><span class="table_span">Тип клиента</span>
-                <h1>{{ accounts.customr_type }}</h1>
-              </td>
-
-              <td><span class="table_span">Onu/Port</span>
-                <h1>{{ accounts.comment }}</h1>
-              </td>
-
-              <td><span class="table_span">Мастер по подключению</span>
-                <h1>{{ accounts.connect_user?.fio }}</h1>
-              </td>
-              <td><span class="table_span">Кто привел</span>
-                <h1>{{ accounts.contact_user?.fio }}</h1>
-              </td>
-              
-              <td><span class="table_span">Статус</span>
-                <h1>{{ accounts.account_status?.status }}</h1>
-              </td>
-
-              <td><span class="table_span">Действия</span>
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item (click)="openEditTable(accounts.id)" *ngIf="permitActions">
-                    <mat-icon>edit</mat-icon>
-                    <span>Изменить</span>
-                  </button>
-
-                  <button mat-menu-item (click)="deleteTable(accounts.id)" *ngIf="permitActions">
-                    <mat-icon>delete</mat-icon>
-                    <span>Удалить</span>
-                  </button>
-
-                  <button mat-menu-item (click)="openUslugiModal(accounts.id)" *ngIf="permitActions">
-                    <mat-icon>rss_feed</mat-icon>
-                    <span>Услуги</span>
-                  </button>
-
-                  <button mat-menu-item (click)="openPaymentModal(accounts.id)" *ngIf="permitActions">
-                    <mat-icon>payments</mat-icon>
-                    <span>Оплата</span>
-                  </button>
-
-                  <button mat-menu-item *ngIf="(accounts.account_status?.status == 'On') && (permitActions)" (click)="lockAccountOff(accounts.id)">
-                    <mat-icon>lock</mat-icon>
-                    <span>Заблокировать</span>
-                  </button>
-
-                  <button mat-menu-item *ngIf="(accounts.account_status?.status == 'Off') && (permitActions)" (click)="lockAccountOn(accounts.id)">
-                    <mat-icon>lock_open</mat-icon>
-                    <span>Разблокировать </span>
-                  </button>
-
-                  <button mat-menu-item (click)="refreshAccount(accounts.id)">
-                    <mat-icon>refresh</mat-icon>
-                    <span>Обновить</span>
-                  </button>
-
-                  <button mat-menu-item [routerLink]="['/transaction-history', accounts.id]">
-                    <mat-icon>visibility</mat-icon>
-                    <span>История транзакции</span>
-                  </button>
-
-                  <button mat-menu-item (click)="openCreditModal(accounts.id)" *ngIf="permitActions">
-                    <mat-icon>account_balance </mat-icon>
-                    <span>Кредит</span>
-                  </button>
-
-                  <button mat-menu-item (click)="openAddiitionalIpModal(accounts.id)" *ngIf="permitActions">
-                    <mat-icon>dns</mat-icon>
-                    <span>Дополнительный ip</span>
-                  </button>
-
-                  <!-- Хозирашда Коммент -->
-
-                  <!-- <button mat-menu-item (click)="openAdditionalInfoModal(accounts.id)" *ngIf="permitActions">
-                    <mat-icon>add_chart</mat-icon>
-                    <span>Дополнительная информация</span>
-                  </button> -->
-
-                  <button mat-menu-item (click)="openExtandsModal(accounts.id)" *ngIf="permitActions">
-                    <mat-icon>event</mat-icon>
-                    <span>Продлить</span>
-                  </button>
-                </mat-menu>
-              </td>
-            </tr>
+              <tr *ngFor="let servicesLink of servicesLinkData">
+                  <td><span class="table_span-modal">Название</span>{{ servicesLink.service?.name }}</td>
+                  <td><span class="table_span-modal">Дата начало</span>{{ servicesLink.created_at | date: 'dd-MM-yyyy' }}</td>
+                  <td><span class="table_span-modal">Дата окончания</span>{{ servicesLink.expire_at | date: 'dd-MM-yyyy' }}</td>
+                  <td><span class="table_span-modal">Цена</span>{{ servicesLink.service?.price }}</td>
+                  <td><span class="table_span-modal">Статус</span>{{ servicesLink.deleted ? 'Удаленно' : 'Активный' }}</td>
+                  <td><span class="table_span-modal">Действия</span><h1 style="font-size: 12px;" (click)="deleteService(servicesLink.id)">Удалить</h1></td>
+              </tr>
           </tbody>
-        </table>
-      </div>
-      <div class="pagination_block">
-        Количество аккаунтов: {{ numAccounts }}
+      </table>
+  
+      <form class="service_add-block" [formGroup]="addServiceForm">
+        <input class="addtable" type="date" formControlName="created_at">
+        <select formControlName="name">
+          <option *ngFor="let servicesData of servicesData" [value]="servicesData.id">{{ servicesData.name }}</option>
+        </select>
+        <button [disabled]="addServiceForm.invalid" [ngStyle]="{opacity: addServiceForm.invalid ? '.6' : '1'}" (click)="addNewService()">Добавить</button>
+      </form>
       </div>
     </div>
   </div>
-
-
-
-
-
-
-</div>
+  
+  
+  <div class="uslugi_modal-container" *ngIf="paymentModal">
+    <div class="uslugi_modal-content">
+      <i class="fas fa-times" (click)="paymentModal = false"></i>
+      <div class="uslugi_modal-block">
+      <form class="payment_add-block" [formGroup]="addPaymentForm">
+        <input type="number" placeholder="Сумма" formControlName="summa">
+        <input type="text" placeholder="Коментарии" formControlName="comment">
+        <button (click)="addNewPayment()" [disabled]="addPaymentForm.invalid" [ngStyle]="{opacity: addPaymentForm.invalid ? '.6' : '1'}">Добавить</button>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="uslugi_modal-container" *ngIf="creditModal">
+    <div class="uslugi_modal-content">
+      <i class="fas fa-times" (click)="creditModal = false"></i>
+      <div class="uslugi_modal-block">
+        <table class="resp-tab-modal">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Дата начало</th>
+                  <th>Дата окончания</th>
+                  <th>Коментарии</th>
+                  <th>Статус</th>
+                  <th>Действия</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let credit of creditData">
+                  <td><span class="table_span-modal">ID</span>{{ credit.id }}</td>
+                  <td><span class="table_span-modal">Дата начало</span>{{ credit.created_at | date: 'dd-MM-yyyy' }}</td>
+                  <td><span class="table_span-modal">Дата окончания</span>{{ credit.expire_at | date: 'dd-MM-yyyy' }}</td>
+                  <td><span class="table_span-modal">Коментарии</span>{{ credit.comment }}</td>
+                  <td><span class="table_span-modal">Статус</span>{{ credit.deleted ? 'Удаленно' : 'Активный' }}</td>
+                  <td style="display: flex;"><span class="table_span-modal">Действия</span>
+                    <h1 style="font-size: 12px;" (click)="changeCredit(credit.id)">Изменить</h1>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  
+      <form style="align-items: center;" class="service_add-block" [formGroup]="addCreditForm">
+        <textarea style="width: 230px; height: 56px; padding: 10px; outline: none;" placeholder="Коментарии" formControlName="comment"></textarea>
+        <input style="width: 100%;" class="addtable" type="date" formControlName="expire_at">
+        <button *ngIf="!editCredit" [disabled]="addCreditForm.invalid" [ngStyle]="{opacity: addCreditForm.invalid ? '.6' : '1'}" (click)="addNewCredit()">Добавить</button>
+        <button *ngIf="editCredit" [disabled]="addCreditForm.invalid" [ngStyle]="{opacity: addCreditForm.invalid ? '.6' : '1'}" (click)="addEditCredit()">Изменить</button>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="uslugi_modal-container" *ngIf="paymentModal">
+    <div class="uslugi_modal-content">
+      <i class="fas fa-times" (click)="paymentModal = false"></i>
+      <div class="uslugi_modal-block">
+      <form class="payment_add-block" [formGroup]="addPaymentForm">
+        <input type="number" placeholder="Сумма" formControlName="summa">
+        <input type="text" placeholder="Коментарии" formControlName="comment">
+        <button (click)="addNewPayment()" [disabled]="addPaymentForm.invalid" [ngStyle]="{opacity: addPaymentForm.invalid ? '.6' : '1'}">Добавить</button>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="uslugi_modal-container" *ngIf="additionalIpModal">
+    <div class="uslugi_modal-content">
+      <i class="fas fa-times" (click)="additionalIpModal = false"></i>
+      <div class="uslugi_modal-block">
+        <table class="resp-tab-modal">
+          <thead>
+              <tr>
+                  <th>Account ID</th>
+                  <th>ID</th>
+                  <th>IP</th>
+                  <th>Действия</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let additionalIp of additionalIpData">
+                  <td><span class="table_span-modal">Account ID</span>{{ additionalIp.account_id }}</td>
+                  <td><span class="table_span-modal">ID</span>{{ additionalIp.id }}</td>
+                  <td><span class="table_span-modal">IP</span>{{ additionalIp.ip }}</td>
+                  <td style="display: flex;"><span class="table_span-modal">Действия</span>
+                    <h1 style="font-size: 12px;" (click)="deleteAdditionalIp(additionalIp.id)">Удалить</h1>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  
+      <form style="align-items: center;" class="service_add-block" [formGroup]="addAdditionalIpForm">
+        <input style="width: 100%;" class="addtable" type="text" placeholder="ip" formControlName="ip">
+        <button [disabled]="addAdditionalIpForm.invalid" [ngStyle]="{opacity: addAdditionalIpForm.invalid ? '.6' : '1'}" (click)="addNewAdditionalIp()">Добавить</button>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="uslugi_modal-container" *ngIf="additionalInfoModal">
+    <div class="uslugi_modal-content">
+      <i class="fas fa-times" (click)="additionalInfoModal = false"></i>
+      <div class="uslugi_modal-block">
+        <table class="resp-tab-modal">
+          <thead>
+              <tr>
+                <th>Аккаунт ID</th>
+                  <th>ID</th>
+                  <th>Город</th>
+                  <th>Тип подключения</th>
+                  <th>Подключения пользователья</th>
+                  <th>Контакты пользователья</th>
+                  <th>Округ</th>
+                  <th>Улица</th>
+                  <th>Номер улицы</th>
+                  <th>Действия</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let additionalInfo of additionalInfoData">
+                  <td><span class="table_span-modal">Аккаунт ID</span>{{ additionalInfo.account_id }}</td>
+                  <td><span class="table_span-modal">ID</span>{{ additionalInfo.id }}</td>
+                  <td><span class="table_span-modal">Город</span>{{ additionalInfo.city?.name }}</td>
+                  <td><span class="table_span-modal">Тип подключения</span>{{ additionalInfo.connect_type?.name }}</td>
+                  <td><span class="table_span-modal">Подключения пользователья</span>{{ additionalInfo.connect_user?.fio }}</td>
+                  <td><span class="table_span-modal">Контакты пользователья</span>{{ additionalInfo.contact_user?.fio }}</td>
+                  <td><span class="table_span-modal">Округ</span>{{ additionalInfo.district?.name }}</td>
+                  <td><span class="table_span-modal">Улица</span>{{ additionalInfo.street?.name }}</td>
+                  <td><span class="table_span-modal">Номер улицы</span>{{ additionalInfo.street_number }}</td>
+                  <td style="display: flex;"><span class="table_span-modal">Действия</span>
+                    <h1 style="font-size: 12px;" (click)="changeAdditionalInfo(additionalInfo.id)">Изменить</h1>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  
+      <form style="align-items: center;" class="service_add-block" [formGroup]="addAdditionalInfoForm">
+        <select>
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+        
+        <select>
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+  
+        <select>
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+  
+        <select>
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+  
+        <select>
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+  
+        <select>
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+  
+        <select>
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+  
+        <select>
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+        
+        <button *ngIf="!editAdditionalInfo" [disabled]="addAdditionalInfoForm.invalid" [ngStyle]="{opacity: addAdditionalInfoForm.invalid ? '.6' : '1'}" (click)="addNewAdditionalInfo()">Добавить</button>
+        <button *ngIf="editAdditionalInfo" [disabled]="addAdditionalInfoForm.invalid" [ngStyle]="{opacity: addAdditionalInfoForm.invalid ? '.6' : '1'}" (click)="EditAdditionalInfo()">Изменить</button>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="uslugi_modal-container" *ngIf="extandsModal">
+    <div class="uslugi_modal-content">
+      <i class="fas fa-times" (click)="extandsModal = false"></i>
+      <div class="uslugi_modal-block">
+      <form class="payment_add-block" [formGroup]="addExtandsForm">
+        <input type="date" formControlName="end_date">
+        <button (click)="addNewExtands()" [disabled]="addExtandsForm.invalid" [ngStyle]="{opacity: addExtandsForm.invalid ? '.6' : '1'}">Добавить</button>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="devide_block">
+    <app-header></app-header>
+  
+    <div class="container">
+      <div class="container_content">
+        <div class="title_block">
+          <h1>Аккаунты</h1>
+          <button (click)="addTable = true" *ngIf="permitActions">Добавить</button>
+        </div>
+  
+        <div class="filter_content">
+          <form class="filter_form">
+            <div class="filter_block" [formGroup]="accountsFilterForm">
+              <input type="text" placeholder="Лицевой Счёт" formControlName="id">
+              <input type="text" placeholder="ФИО" formControlName="fio">
+              <select class="addtable" formControlName="tarif_id">
+                <option value="">Все</option>
+                <option *ngFor="let tarifs of tarifsData" [value]="tarifs.id">{{ tarifs.name }}</option>
+              </select>  
+              <input type="text" placeholder="Скорость" formControlName="speed_cf">
+              <input type="text" placeholder="Телефон" formControlName="phone_number">
+              <input type="text" placeholder="Ip Адрес" formControlName="ipaddress">
+              <input type="text" placeholder="Адрес" formControlName="acc_info">
+              <select formControlName="conf_firewall_id">
+                <option value="">Все</option>
+                <option *ngFor="let fireWall of fireWallData" [value]="fireWall.id">{{ fireWall.firewall_host }} - {{ fireWall.comment }}</option>
+              </select>
+              <input type="text" placeholder="Паспорт" formControlName="passport">
+              <input type="date" placeholder="Год рождения" formControlName="age">
+              <select formControlName="gender">
+                <option value="">Все</option>
+                <option value="M">Man</option>
+                <option value="F">Female</option>
+              </select>
+              <select formControlName="overdraft">
+                <option value="">Все</option>
+                <option value="2">Да</option>
+                <option value="1">Нет</option>
+              </select>
+              <select formControlName="customr_type">
+                <option value="">Все</option>
+                <option>B2C</option>
+                <option>B2B</option>
+              </select>
+              <input type="text" placeholder="ONU/PORT" formControlName="comment">
+              <select formControlName="status">
+                <option value="">Все</option>
+                <option>On</option>
+                <option>Off</option>
+              </select>
+              <input type="date" formControlName="start_create">
+              <input type="date" formControlName="end_create">
+              <input type="date" formControlName="start_date">
+              <input type="date" formControlName="end_date">
+              <input type="number" placeholder="0" formControlName="page_size">
+  
+              <select formControlName="connect_by">
+                <option value="">Кто подключил</option>
+                <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
+              </select>
+              <select formControlName="contact_by">
+                <option value="">Кто привел</option>
+                <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
+              </select>
+              <button (click)="filterTable()">ОК</button>
+            </div>
+  
+            <!-- <div class="pagination_block">
+              <input type="number" placeholder="0">
+            </div> -->
+          </form>
+        </div>
+  
+        <div class="table_container">
+          <table class="resp-tab">
+            <thead>
+              <tr>
+                <th>Лиц.Счёт</th>
+                <th>ФИО</th>
+                <th>Тариф</th>
+                <th>Баланс</th>
+                <th>Цена</th>
+                <th>Скорость</th>
+                <th>Телефон</th>
+                <th>Дата Создания</th>
+                <th>Дата Окончания</th>
+                <th>IP Адрес</th>
+                <th>Адрес</th>
+                <th>Файрволл</th>
+                <th>Паспорт</th>
+                <th>Год Рождения</th>
+                <th>Пол</th>
+                <th>Девайс</th>
+                <th>Овердрафта</th>
+                <th>Тип клиента</th>
+                <th>Onu/Port</th>
+                <th>Кто подключил</th>
+                <th>Кто привел</th>
+                <th>Статус</th>
+                <th>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="c1" cx="10" cy="10" r="9.5" stroke="black"/>
+                    <circle class="c2" cx="10" cy="10" r="3" fill="black"/>
+                  </svg>  
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+  
+              <tr *ngFor="let accounts of accountsData" [formGroup]="accountsEditForm">
+                <td><span class="table_span">Лиц.Счёт</span>
+                  <h1>{{ accounts.id }}</h1>
+                </td>
+  
+                <td><span class="table_span">ФИО</span>
+                  <h1>{{ accounts.fio }}</h1>
+                </td>
+  
+                <td><span class="table_span">Тариф</span>
+                  <h1>{{ accounts.tarif.name }}</h1>
+                </td>
+  
+                <td><span class="table_span">Баланс</span>
+                  <h1>{{ accounts.balance }}</h1>
+                </td>
+  
+                <td><span class="table_span">Цена</span>
+                  <h1>{{ accounts.price_cf }}</h1>
+                </td>
+  
+                <td><span class="table_span">Скорость</span>
+                  <h1>{{ accounts.speed_cf }}</h1>
+                </td>
+  
+                <td><span class="table_span">Телефон</span>
+                  <h1>{{ accounts.phone_number }}</h1>
+                </td>
+  
+                <td><span class="table_span">Дата Создания</span>
+                  <h1>{{ accounts.created_at | date: 'dd-MM-yyyy' }}</h1>
+                </td>
+  
+                <td><span class="table_span">Дата Окончания</span>
+                  <h1>{{ accounts.end_date | date: 'dd-MM-yyyy' }}</h1>
+                </td>
+  
+                <td><span class="table_span">IP Адрес</span>
+                  <h1>{{ accounts.ipaddress }}</h1>
+                </td>
+                
+                <td><span class="table_span">Адрес</span>
+                  <h1>{{ accounts.acc_info }}</h1>
+                </td>
+  
+                <td><span class="table_span">Файрволл</span>
+                  <h1>{{ accounts.fireWall4Table.firewall_host }} {{ accounts.fireWall4Table.comment }}</h1>
+                </td>
+  
+                <td><span class="table_span">Паспорт</span>
+                  <h1>{{ accounts.passport }}</h1>
+                </td>
+  
+                <td><span class="table_span">Год Рождения</span>
+                  <h1>{{ accounts.age | date: 'dd-MM-yyyy' }}</h1>
+                </td>
+  
+                <td><span class="table_span">Пол</span>
+                  <h1>{{ accounts.gender }}</h1>
+                </td>
+  
+                <td><span class="table_span">Девайс</span>
+                  <h1>{{ accounts.device_type?.name }}</h1>
+                </td>
+  
+                <td *ngIf="accounts.overdraft < 2"><span class="table_span">Овердрафта</span>
+                  <h1>Нет</h1>
+                </td>
+  
+                <td *ngIf="accounts.overdraft > 1"><span class="table_span">Овердрафта</span>
+                  <h1>Да</h1>
+                </td>
+  
+                <td><span class="table_span">Тип клиента</span>
+                  <h1>{{ accounts.customr_type }}</h1>
+                </td>
+  
+                <td><span class="table_span">Onu/Port</span>
+                  <h1>{{ accounts.comment }}</h1>
+                </td>
+  
+                <td><span class="table_span">Мастер по подключению</span>
+                  <h1>{{ accounts.connect_user?.fio }}</h1>
+                </td>
+                <td><span class="table_span">Кто привел</span>
+                  <h1>{{ accounts.contact_user?.fio }}</h1>
+                </td>
+                
+                <td><span class="table_span">Статус</span>
+                  <h1>{{ accounts.account_status?.status }}</h1>
+                </td>
+  
+                <td><span class="table_span">Действия</span>
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="openEditTable(accounts.id)" *ngIf="permitActions">
+                      <mat-icon>edit</mat-icon>
+                      <span>Изменить</span>
+                    </button>
+  
+                    <button mat-menu-item (click)="deleteTable(accounts.id)" *ngIf="permitActions">
+                      <mat-icon>delete</mat-icon>
+                      <span>Удалить</span>
+                    </button>
+  
+                    <button mat-menu-item (click)="openUslugiModal(accounts.id)" *ngIf="permitActions">
+                      <mat-icon>rss_feed</mat-icon>
+                      <span>Услуги</span>
+                    </button>
+  
+                    <button mat-menu-item (click)="openPaymentModal(accounts.id)" *ngIf="permitActions">
+                      <mat-icon>payments</mat-icon>
+                      <span>Оплата</span>
+                    </button>
+  
+                    <button mat-menu-item *ngIf="(accounts.account_status?.status == 'On') && (permitActions)" (click)="lockAccountOff(accounts.id)">
+                      <mat-icon>lock</mat-icon>
+                      <span>Заблокировать</span>
+                    </button>
+  
+                    <button mat-menu-item *ngIf="(accounts.account_status?.status == 'Off') && (permitActions)" (click)="lockAccountOn(accounts.id)">
+                      <mat-icon>lock_open</mat-icon>
+                      <span>Разблокировать </span>
+                    </button>
+  
+                    <button mat-menu-item (click)="refreshAccount(accounts.id)">
+                      <mat-icon>refresh</mat-icon>
+                      <span>Обновить</span>
+                    </button>
+  
+                    <button mat-menu-item [routerLink]="['/transaction-history', accounts.id]">
+                      <mat-icon>visibility</mat-icon>
+                      <span>История транзакции</span>
+                    </button>
+  
+                    <button mat-menu-item [routerLink]="['/historyAccount', accounts.id]">
+                      <mat-icon>update</mat-icon>
+                      <span>История изменение</span>
+                    </button>
+  
+                    <button mat-menu-item (click)="openCreditModal(accounts.id)" *ngIf="permitActions">
+                      <mat-icon>account_balance </mat-icon>
+                      <span>Кредит</span>
+                    </button>
+  
+                    <button mat-menu-item (click)="openAddiitionalIpModal(accounts.id)" *ngIf="permitActions">
+                      <mat-icon>dns</mat-icon>
+                      <span>Дополнительный ip</span>
+                    </button>
+  
+                    <!-- Хозирашда Коммент -->
+  
+                    <!-- <button mat-menu-item (click)="openAdditionalInfoModal(accounts.id)" *ngIf="permitActions">
+                      <mat-icon>add_chart</mat-icon>
+                      <span>Дополнительная информация</span>
+                    </button> -->
+  
+                    <button mat-menu-item (click)="openExtandsModal(accounts.id)" *ngIf="permitActions">
+                      <mat-icon>event</mat-icon>
+                      <span>Продлить</span>
+                    </button>
+                  </mat-menu>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination_block">
+          <div class="exel_container">
+            <button style="padding: 5px; cursor: pointer;" (click)="exportexcelAccount()">Аккаунт</button>
+            <button style="padding: 5px; margin: 0 10px; cursor: pointer;" (click)="exportexcelReport1()">Отчёт 1</button>
+            <button style="padding: 5px; margin-right: 10px; cursor: pointer;" (click)="exportexcelReport2()">Отчёт 2</button>
+            <button style="padding: 5px;; cursor: pointer;" (click)="exportexcelReport3()">Отчёт 3</button>
+          </div>
+          Количество аккаунтов: {{ numAccounts }}
+        </div>
+      </div>
+    </div>
+  
+  
+    <!-- Account Exel -->
+    <table class="resp-tab" id="excel-table-account" style="display: none;">
+      <thead>
+        <tr>
+          <th>Лиц.Счёт</th>
+          <th>ФИО</th>
+          <th>Тариф</th>
+          <th>Баланс</th>
+          <th>Цена</th>
+          <th>Скорость</th>
+          <th>Телефон</th>
+          <th>Дата Создания</th>
+          <th>Дата Окончания</th>
+          <th>IP Адрес</th>
+          <th>Адрес</th>
+          <th>Паспорт</th>
+          <th>Год Рождения</th>
+          <th>Пол</th>
+          <th>Девайс</th>
+          <th>Овердрафта</th>
+          <th>Тип клиента</th>
+          <th>Onu/Port</th>
+          <th>Кто подключил</th>
+          <th>Кто привел</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let accounts of accountsData">
+          <td>
+            <h1>{{ accounts.id }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.fio }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.tarif.name }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.balance }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.price_cf }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.speed_cf }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.phone_number }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.created_at | date: 'dd-MM-yyyy' }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.end_date | date: 'dd-MM-yyyy' }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.ipaddress }}</h1>
+          </td>
+          
+          <td>
+            <h1>{{ accounts.acc_info }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.passport }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.age | date: 'dd-MM-yyyy' }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.gender }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.device_type?.name }}</h1>
+          </td>
+  
+          <td *ngIf="accounts.overdraft < 2">
+            <h1>Нет</h1>
+          </td>
+  
+          <td *ngIf="accounts.overdraft > 1">
+            <h1>Да</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.customr_type }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.comment }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.connect_user?.fio }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ accounts.contact_user?.fio }}</h1>
+          </td>
+          
+          <td>
+            <h1>{{ accounts.account_status?.status }}</h1>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- End of Account Exel -->
+  
+  
+    <!-- Report 1 Exel -->
+    <table class="resp-tab" id="excel-table-report1" style="display: none;">
+      <thead>
+        <tr>
+          <th>Лиц.Счёт</th>
+          <th>ФИО</th>
+          <th>Цена</th>
+          <th>Счёт</th>
+          <th>Имя Сервиса</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reports1 of report1Data">
+          <td>
+            <h1>{{ reports1.account_id }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports1.fio }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports1.price }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports1.score }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports1.service_name }}</h1>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--End of Report 1 Exel -->
+  
+    <!-- Report 2 Exel -->
+    <table class="resp-tab" id="excel-table-report2" style="display: none;">
+      <thead>
+        <tr>
+          <th>Лиц.Счёт</th>
+          <th>ФИО</th>
+          <th>Цена</th>
+          <th>Счёт</th>
+          <th>Коментарии</th>
+          <th>ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reports2 of report2Data">
+          <td>
+            <h1>{{ reports2.account_id }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports2.fio }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports2.summ }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports2.score }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports2.comment }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports2.id }}</h1>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--End of Report 2 Exel -->
+  
+    <!-- Report 3 Exel -->
+    <table class="resp-tab" id="excel-table-report3" style="display: none;">
+      <thead>
+        <tr>
+          <th>Лиц.Счёт</th>
+          <th>ФИО</th>
+          <th>Цена</th>
+          <th>Счёт</th>
+          <th>Имя Сервиса</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reports3 of report3Data">
+          <td>
+            <h1>{{ reports3.account_id }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports3.fio }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports3.price }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports3.score }}</h1>
+          </td>
+  
+          <td>
+            <h1>{{ reports3.service_name }}</h1>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--End of Report 3 Exel -->
+  
+  </div>  

@@ -78,28 +78,36 @@ export class RequestsService {
     return this.http.get(this.url + '/api/account', {headers: header})
   }
 
-  getFilterAccountsRequest(id: any, fio: string, tarif_id: string, speed_cf: string, phone_number: number, ipaddress: any, acc_info: string, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, status: any, start_created: any, end_created: any, start_date: any, end_date: any, connect_by: any, contact_by: any, page_size: any) {
+  getAccountsByIdRequest(id: number) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.get(this.url + `/api/account?accounts.id=${id}&accounts.fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&phone_number=*${phone_number}*&ipaddress=${ipaddress}&acc_info=${acc_info}&passport=*${passport}*&age=${age}&gender=${gender}&overdraft=${overdraft}&customr_type=${customr_type}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}&connect_user_id=${connect_by}&contact_user_id=${contact_by}&page_size=${page_size}`, {headers: header})
+    return this.http.get(this.url + '/api/account?accounts.id=' + id, {headers: header})
   }
 
-  postAccountsRequest(fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, end_date: any, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, connect_by: any, contact_by: any) {
+  getFilterAccountsRequest(id: any, fio: string, tarif_id: string, speed_cf: string, phone_number: number, ipaddress: any, acc_info: string, conf_firewall_id: number, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, status: any, start_created: any, end_created: any, start_date: any, end_date: any, connect_by: any, contact_by: any, page_size: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.post(this.url + '/api/account', {"fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "end_date": end_date, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "customr_type": customr_type, "comment":comment, "connect_user_id": connect_by*1, "contact_user_id": contact_by*1}, {headers: header})
+    return this.http.get(this.url + `/api/account?accounts.id=${id}&accounts.fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&phone_number=*${phone_number}*&ipaddress=${ipaddress}&acc_info=${acc_info}&conf_firewall_id=${conf_firewall_id}&passport=*${passport}*&age=${age}&gender=${gender}&overdraft=${overdraft}&customr_type=${customr_type}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}&connect_user_id=${connect_by}&contact_user_id=${contact_by}&page_size=${page_size}`, {headers: header})
+  }
+
+  postAccountsRequest(fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, end_date: any, ipaddress: string, acc_info: string, conf_firewall_id: number, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, connect_by: any, contact_by: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.post(this.url + '/api/account', {"fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "end_date": end_date, "ipaddress": ipaddress, "acc_info": acc_info, "conf_firewall_id": conf_firewall_id, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "customr_type": customr_type, "comment":comment, "connect_user_id": connect_by*1, "contact_user_id": contact_by*1}, {headers: header})
   }
   
-  putAccountsRequest(id: number, fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, end_date: any, ipaddress: string, acc_info: string, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, connect_by: any, contact_by: any) {
+  putAccountsRequest(id: number, fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, end_date: any, ipaddress: string, acc_info: string, conf_firewall_id: number, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, connect_by: any, contact_by: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.put(this.url + '/api/account', {"id": id, "fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "end_date": end_date, "ipaddress": ipaddress, "acc_info": acc_info, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "customr_type": customr_type, "comment":comment,"connect_user_id":connect_by*1,"contact_user_id":contact_by*1}, {headers: header})
+    return this.http.put(this.url + '/api/account', {"id": id, "fio":fio, "tarif_id": tarif_id * 1, "price_cf": price_cf, "speed_cf": speed_cf, "phone_number": phone_number, "end_date": end_date, "ipaddress": ipaddress, "acc_info": acc_info, "conf_firewall_id": conf_firewall_id, "passport": passport, "age": age, "gender": gender, "overdraft": overdraft, "customr_type": customr_type, "comment":comment,"connect_user_id":connect_by*1,"contact_user_id":contact_by*1}, {headers: header})
   }
 
   deleteAccountsRequest(id: number) {
@@ -197,6 +205,33 @@ export class RequestsService {
   }
   // End of Extension
 
+  // Reports
+
+  getReport1Request() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/report/7', {headers: header})
+  }
+
+  getReport2Request() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/report/10', {headers: header})
+  }
+
+  getReport3Request() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/report/11', {headers: header})
+  }
+  // End of Reports
+
   // End of Accounts
 
   // Transactions
@@ -232,6 +267,16 @@ export class RequestsService {
     return this.http.post(this.url + '/api/transaction', {"account_id": account_id, "sum": sum, "comment": comment}, {headers: header})
   }
   // End of Transactions
+
+  // Change History
+  getChangeHistoryRequest(id: number) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/account/history?account_id=' + id, {headers: header})
+  }
+  // End of Change History
 
   // Services
   getServicesRequest() {

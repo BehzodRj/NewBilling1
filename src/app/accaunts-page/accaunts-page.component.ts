@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
+import * as XLSX from 'xlsx'; 
 
 @Component({
   selector: 'app-accaunts-page',
@@ -10,6 +11,9 @@ import jwt_decode from "jwt-decode";
 })
 export class AccauntsPageComponent implements OnInit {
   accountsData: any = []
+  report1Data: any = []
+  report2Data: any = []
+  report3Data: any = []
   tarifsData: any = []
   servicesData: any = []
   paymentData: any = []
@@ -17,6 +21,8 @@ export class AccauntsPageComponent implements OnInit {
   servicesLinkData: any = []
   additionalIpData: any = []
   additionalInfoData: any = []
+  fireWallData: any = []
+  fireWall4Table: any = []
   accountsAddForm!: FormGroup
   accountsEditForm!: FormGroup
   accountsFilterForm!: FormGroup
@@ -44,6 +50,7 @@ export class AccauntsPageComponent implements OnInit {
   serviceId: any
   numAccounts: any = 0
   usersData: any = []
+  fileName: any; 
 
   constructor(private request: RequestsService) {}
 
@@ -61,6 +68,7 @@ export class AccauntsPageComponent implements OnInit {
       phone_number: new FormControl('', Validators.required),
       ipaddress: new FormControl('', Validators.required),
       acc_info: new FormControl('', Validators.required),
+      conf_firewall_id: new FormControl('', Validators.required),
       passport: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
@@ -89,6 +97,7 @@ export class AccauntsPageComponent implements OnInit {
       ipaddress3: new FormControl('', Validators.required),
       ipaddress4: new FormControl('', Validators.required),
       acc_info: new FormControl(''),
+      conf_firewall_id: new FormControl(''),
       passport: new FormControl(''),
       age: new FormControl('', Validators.required),
       gender: new FormControl('M'),
@@ -111,6 +120,7 @@ export class AccauntsPageComponent implements OnInit {
       ipaddress3: new FormControl('', Validators.required),
       ipaddress4: new FormControl('', Validators.required),
       acc_info: new FormControl(''),
+      conf_firewall_id: new FormControl(''),
       passport: new FormControl(''),
       age: new FormControl('', Validators.required),
       gender: new FormControl(''),
@@ -196,6 +206,12 @@ export class AccauntsPageComponent implements OnInit {
           })
         }
       })
+
+    this.request.getFireWallRequest().subscribe(response => {
+      this.fireWallData = response
+      console.log(response);
+      
+    })
     var token: any = localStorage.getItem('access_token')
     var decoded: any = jwt_decode(token);
 
@@ -205,7 +221,20 @@ export class AccauntsPageComponent implements OnInit {
       this.permitActions = false
     }
 
+    this.request.getReport1Request().subscribe(response => {
+      this.report1Data = response
+    })
+
+    this.request.getReport2Request().subscribe(response => {
+      this.report2Data = response
+    })
+
+    this.request.getReport3Request().subscribe(response => {
+      this.report3Data = response
+    })
+
   }
+  
   ipadress1(){
     let ipaddress1 = this.accountsAddForm.value.ipaddress1
     let ipaddressEdit1 = this.accountsEditForm.value.ipaddress1
@@ -268,8 +297,11 @@ export class AccauntsPageComponent implements OnInit {
       var start_date: any = new Date(accountsFilterFormData.start_date)
       var end_date: any = new Date(accountsFilterFormData.end_date)
       this.isLoading = true
-      this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe(response => {
+      this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
         this.accountsData = response
+        response.forEach( (element: any) => {
+          this.fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0]
+        });
         this.isLoading = false
         this.numAccounts = this.accountsData.length
       }, error => {
@@ -287,8 +319,11 @@ export class AccauntsPageComponent implements OnInit {
         this.isLoading = true
         var start_create: any = new Date(accountsFilterFormData.start_create)
         var end_create: any = new Date(accountsFilterFormData.end_create)
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe(response => {
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
           this.accountsData = response
+          response.forEach( (element: any) => {
+            this.fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0]
+          });
           this.isLoading = false
           this.numAccounts = this.accountsData.length
         }, error => {
@@ -309,8 +344,11 @@ export class AccauntsPageComponent implements OnInit {
         this.isLoading = true
         var start_date: any = new Date(accountsFilterFormData.start_date)
         var end_date: any = new Date(accountsFilterFormData.end_date)
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe(response => {
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
           this.accountsData = response
+          response.forEach( (element: any) => {
+            this.fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0]
+          });
           this.isLoading = false
           this.numAccounts = this.accountsData.length
         }, error => {
@@ -329,8 +367,14 @@ export class AccauntsPageComponent implements OnInit {
         })
     } else {
         this.isLoading = true
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe(response => {
-          this.accountsData = response
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
+          let n=0;
+          response.forEach( (element: any) => {
+            this.accountsData[n] = element;
+            this.accountsData[n].fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0];
+            console.log(this.accountsData);
+            n++;
+          });
           this.isLoading = false
           this.numAccounts = this.accountsData.length
         }, error => {
@@ -361,7 +405,7 @@ export class AccauntsPageComponent implements OnInit {
       let ip_adress = `${this.accountsAddForm.controls['ipaddress1'].value}.${this.accountsAddForm.controls['ipaddress2'].value}.${this.accountsAddForm.controls['ipaddress3'].value}.${this.accountsAddForm.controls['ipaddress4'].value}`
       let age = new Date(accountsAddFormData.age)
       let end_date = new Date(accountsAddFormData.end_date)
-      this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, end_date.toISOString(), ip_adress, accountsAddFormData.acc_info, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, parseInt(accountsAddFormData.overdraft), accountsAddFormData.customr_type, accountsAddFormData.comment, accountsAddFormData.connect_by, accountsAddFormData.contact_by).subscribe(response => {
+      this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, end_date.toISOString(), ip_adress, accountsAddFormData.acc_info, accountsAddFormData.conf_firewall_id * 1, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, parseInt(accountsAddFormData.overdraft), accountsAddFormData.customr_type, accountsAddFormData.comment, accountsAddFormData.connect_by, accountsAddFormData.contact_by).subscribe(response => {
         this.isLoading = false
         location.reload()
       }, error => {
@@ -402,7 +446,7 @@ export class AccauntsPageComponent implements OnInit {
       let ip_adress = `${this.accountsEditForm.controls['ipaddress1'].value}.${this.accountsEditForm.controls['ipaddress2'].value}.${this.accountsEditForm.controls['ipaddress3'].value}.${this.accountsEditForm.controls['ipaddress4'].value}`
       let age = new Date(accountsEditFormData.age)
       let end_date = new Date(accountsEditFormData.end_date)
-      this.request.putAccountsRequest(this.tableId, accountsEditFormData.fio, accountsEditFormData.tarif_id, accountsEditFormData.price_cf, accountsEditFormData.speed_cf, accountsEditFormData.phone_number, end_date.toISOString(), ip_adress, accountsEditFormData.acc_info, accountsEditFormData.passport, age.toISOString(), accountsEditFormData.gender, parseInt(accountsEditFormData.overdraft), accountsEditFormData.customr_type, accountsEditFormData.comment, accountsEditFormData.connect_by, accountsEditFormData.contact_by).subscribe(response => {
+      this.request.putAccountsRequest(this.tableId, accountsEditFormData.fio, accountsEditFormData.tarif_id, accountsEditFormData.price_cf, accountsEditFormData.speed_cf, accountsEditFormData.phone_number, end_date.toISOString(), ip_adress, accountsEditFormData.acc_info, accountsEditFormData.conf_firewall_id * 1, accountsEditFormData.passport, age.toISOString(), accountsEditFormData.gender, parseInt(accountsEditFormData.overdraft), accountsEditFormData.customr_type, accountsEditFormData.comment, accountsEditFormData.connect_by, accountsEditFormData.contact_by).subscribe(response => {
         this.isLoading = false
         location.reload()
       }, error => {
@@ -748,5 +792,169 @@ export class AccauntsPageComponent implements OnInit {
       alert(error.error.Error)
     })
   }
+
+  exportexcelAccount(): void {
+      this.fileName = 'Аккаунт.xlsx'
+       /* table id is passed over here */   
+       let element = document.getElementById('excel-table-account'); 
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       var wscols = [
+        {wch:8},
+        {wch:40},
+        {wch:20},
+        {wch:20},
+        {wch:20},
+        {wch:20},
+        {wch:30},
+        {wch:30},
+        {wch:30},
+        {wch:30},
+        {wch:40},
+        {wch:30},
+        {wch:30},
+        {wch:10},
+        {wch:20},
+        {wch:10},
+        {wch:15},
+        {wch:40},
+        {wch:40},
+        {wch:20},
+        {wch:15},
+    ];
+    
+    ws['!cols'] = wscols;
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+			
+    }
+
+    exportexcelReport1(): void {
+      this.fileName = 'Отчёт 1.xlsx'
+       /* table id is passed over here */   
+       let element = document.getElementById('excel-table-report1'); 
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       var wscols = [
+        {wch:8},
+        {wch:40},
+        {wch:20},
+        {wch:30},
+        {wch:50},
+        {wch:20},
+        {wch:30},
+        {wch:30},
+        {wch:30},
+        {wch:30},
+        {wch:40},
+        {wch:30},
+        {wch:30},
+        {wch:10},
+        {wch:20},
+        {wch:10},
+        {wch:15},
+        {wch:40},
+        {wch:40},
+        {wch:20},
+        {wch:15},
+    ];
+    
+    ws['!cols'] = wscols;
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+			
+    }
+
+    exportexcelReport2(): void {
+      this.fileName = 'Отчёт 2.xlsx'
+       /* table id is passed over here */   
+       let element = document.getElementById('excel-table-report2'); 
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       var wscols = [
+        {wch:8},
+        {wch:40},
+        {wch:20},
+        {wch:40},
+        {wch:40},
+        {wch:20},
+        {wch:30},
+        {wch:30},
+        {wch:30},
+        {wch:30},
+        {wch:40},
+        {wch:30},
+        {wch:30},
+        {wch:10},
+        {wch:20},
+        {wch:10},
+        {wch:15},
+        {wch:40},
+        {wch:40},
+        {wch:20},
+        {wch:15},
+    ];
+    
+    ws['!cols'] = wscols;
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+			
+    }
+
+    exportexcelReport3(): void {
+      this.fileName = 'Отчёт 3.xlsx'
+       /* table id is passed over here */   
+       let element = document.getElementById('excel-table-report3'); 
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       var wscols = [
+        {wch:8},
+        {wch:40},
+        {wch:20},
+        {wch:20},
+        {wch:50},
+        {wch:20},
+        {wch:30},
+        {wch:30},
+        {wch:30},
+        {wch:30},
+        {wch:40},
+        {wch:30},
+        {wch:30},
+        {wch:10},
+        {wch:20},
+        {wch:10},
+        {wch:15},
+        {wch:40},
+        {wch:40},
+        {wch:20},
+        {wch:15},
+    ];
+    
+    ws['!cols'] = wscols;
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+			
+    }
 
 }

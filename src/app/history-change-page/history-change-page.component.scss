@@ -17,6 +17,107 @@
         }
       }
 
+      .tables_container {
+        margin-top: 40px;
+
+        .resp-tab {
+          border-radius: 5px;
+          font-weight: normal;
+          border: none;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        .resp-tab th,
+        .resp-tab td {
+          padding: 10px 5px;
+          font-size: 13px;
+          font-family: 'Raleway', sans-serif;
+          border: .5px solid #dfdfdd;
+          vertical-align: middle;
+          text-align: center;
+
+          &:nth-child(20) {
+            width: 65px;
+          }
+
+          h1 {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+          }
+
+          button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+          }
+        }
+
+        .resp-tab th {
+          color: #000000;
+          font-weight: bold;
+          border: none;
+          text-transform: uppercase;
+          text-align: center;
+        }
+
+        .resp-tab tr:nth-child(even) {
+          background: #E5E5E5;
+        }
+
+        .table_span {
+          background-color: #EA3E2A;
+          color: #FFF;
+          display: none;
+          font-size: 11px;
+          font-weight: bold;
+          font-family: Verdana, sans-serif;
+          text-transform: uppercase;
+          padding: 5px 10px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        @media(max-width: 1100px) {
+          .resp-tab thead {
+            display: none;
+          }
+
+          .resp-tab tr {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            text-align: center;
+            margin-bottom: 30px;
+          }
+
+          .resp-tab td {
+            margin: 0 -1px -1px 0;
+            padding-top: 35px;
+            position: relative;
+            width: 100% !important;
+            border: 1px solid #EA3E2A;
+
+            &:last-child {
+              text-align: center;
+            }
+          }
+
+          .resp-tab td span {
+            display: block;
+          }
+        }
+
+        @media(max-width: 480px) {
+          .resp-tab td {
+            width: 100%;
+          }
+        }
+      }
+
       .table_container{
          h1{
               font-family: 'Roboto';
@@ -59,7 +160,7 @@
             }
           }
           .table{
-            margin-top: 50px;
+            margin: 50px 0;
             tbody{
               tr{
                 background: #202020;

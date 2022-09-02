@@ -23,7 +23,7 @@ import { HistoryChangePageComponent } from './history-change-page/history-change
 const routes: Routes = [
   { path: '', component: AuthPageComponent},
   { path: 'accounts', component: AccauntsPageComponent, canActivate: [AuthGuard] },
-  { path: 'historyAccount', component: HistoryChangePageComponent, canActivate: [AuthGuard] },
+  { path: 'historyAccount/:id', component: HistoryChangePageComponent, canActivate: [AuthGuard] },
   { path: 'transaction-history/:id', component: TransactionHistoryPageComponent, canActivate: [AuthGuard] },
   { path: 'tarifs', component: TarifsPageComponent, canActivate: [AuthGuard] },
   { path: 'reportsActive', component: ReportsActivePageComponent, canActivate: [AuthGuard] },

@@ -72,6 +72,7 @@
               <th>Порт</th>
               <th>Пароль</th>
               <th>Dysh Path</th>
+              <th>Комментарии</th>
               <th *ngIf="permitActions">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle class="c1" cx="10" cy="10" r="9.5" stroke="black"/>
@@ -83,7 +84,7 @@
           <tbody>
             <tr *ngFor="let permission of permissionData">
               <td><span>ID</span>
-                <h1>{{ permission.ID}}</h1>
+                <h1>{{ permission.id}}</h1>
               </td>
 
               <td><span>Пользователь</span>
@@ -104,6 +105,10 @@
 
               <td><span>Dysh Path</span>
                 <h1>{{ permission.firewall_dysh_path}}</h1>
+              </td>
+
+              <td><span>Комментарии</span>
+                <h1>{{ permission.comment}}</h1>
               </td>
 
               <td *ngIf="permitActions"><span>Действия</span>

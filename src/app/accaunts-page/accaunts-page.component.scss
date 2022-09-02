@@ -26,30 +26,51 @@
     .editForm {
       display: flex;
       flex-direction: column;
+      width: 380px;
 
-      .addtable,
-      select,
-      .editTable {
+      .add_block_items,
+      .edit_block_items {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 15px;
         margin-bottom: 20px;
-        width: 250px;
-        height: 30px;
-        text-indent: 10px;
-        font-family: 'Raleway', sans-serif;
-        font-weight: normal;
-        font-size: 14px;
-        color: #000000;
-        background-color: transparent;
-        border: 0.7px solid #000000;
-        border-radius: 21px;
-        outline: none;
-        @media screen and (max-width:500px) {
-          width: 200px;
+        border-bottom: 1px solid #A7A7A7;
+
+        .add_title,
+        .edit_title {
+          width: 120px;
+          margin: 0;
+          font-family: 'Roboto', sans-serif;
+          font-weight: 400;
+          font-size: 18px;
+          color: #000000;
+        }
+
+        .addtable,
+        select,
+        .editTable {
+          width: 250px;
+          height: 30px;
+          text-indent: 10px;
+          font-family: 'Raleway', sans-serif;
+          font-weight: normal;
+          font-size: 14px;
+          color: #000000;
+          background-color: transparent;
+          border: 0.7px solid #A7A7A7 !important;
+          border-radius: 8px;
+          outline: none;
+
+          @media screen and (max-width:500px) {
+            width: 200px;
+          }
         }
       }
 
       .addButton,
       .editButton {
-        width: 250px;
+        width: 100%;
         height: 30px;
         padding: 10px 0;
         font-family: 'Raleway', sans-serif;
@@ -65,6 +86,7 @@
         &:active {
           background-color: #973328;
         }
+
         @media screen and (max-width:500px) {
           width: 200px;
         }
@@ -80,7 +102,6 @@
     }
 
     .ip_block {
-      margin-bottom: 20px;
       width: 250px;
       height: 30px;
       display: flex;
@@ -89,13 +110,21 @@
       justify-content: center;
       color: #000000;
       background-color: transparent;
-      border: 0.7px solid #000000;
+      border: 0.7px solid #A7A7A7 !important;
       box-sizing: border-box;
-      border-radius: 21px;
+      border-radius: 8px;
       outline: none;
+
+      input {
+        &::placeholder {
+          color: #A7A7A7 !important;
+        }
+      }
+
       @media screen and (max-width:500px) {
         width: 200px;
       }
+
       .ip_input {
         text-indent: 10px;
         width: 40px;
@@ -420,7 +449,7 @@
             box-sizing: border-box;
             border-radius: 21px;
             outline: none;
-      
+
             .ip_input {
               text-indent: 10px;
               width: 40px;
@@ -428,21 +457,21 @@
               background-color: transparent;
               border: none;
               outline: none;
-      
+
               &::-webkit-outer-spin-button,
               &::-webkit-inner-spin-button {
                 -webkit-appearance: none;
                 margin: 0;
               }
-      
+
               &[type=number] {
                 -moz-appearance: textfield;
               }
             }
-      
+
             .ip_span {
               font-size: 20px;
-      
+
             }
           }
         }
@@ -553,7 +582,7 @@
         margin-top: 20px;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
       }
     }
   }
