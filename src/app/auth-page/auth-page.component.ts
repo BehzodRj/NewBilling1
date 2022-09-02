@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestsService } from '../all.service';
 
@@ -9,15 +9,15 @@ import { RequestsService } from '../all.service';
   styleUrls: ['./auth-page.component.scss']
 })
 export class AuthPageComponent implements OnInit {
-  authForm!: FormGroup
+  authForm!: UntypedFormGroup
   isLoading = false
 
   constructor(private request: RequestsService, private router: Router) {}
 
   ngOnInit() {
-    this.authForm = new FormGroup({
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+    this.authForm = new UntypedFormGroup({
+      login: new UntypedFormControl('', Validators.required),
+      password: new UntypedFormControl('', Validators.required)
     })
 
     if(localStorage.getItem('access_token')) {

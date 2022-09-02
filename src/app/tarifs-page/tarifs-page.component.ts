@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 
@@ -10,9 +10,9 @@ import jwt_decode from "jwt-decode";
 })
 export class TarifsPageComponent implements OnInit {
   tarifsData: any = []
-  tarifsFilterForm!: FormGroup
-  tarifsAddForm!: FormGroup
-  tarifsEditForm!: FormGroup
+  tarifsFilterForm!: UntypedFormGroup
+  tarifsAddForm!: UntypedFormGroup
+  tarifsEditForm!: UntypedFormGroup
   page: any
   search: any
   addTable = false
@@ -30,28 +30,28 @@ export class TarifsPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
     
-    this.tarifsFilterForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
-      score: new FormControl('', Validators.required),
-      speed: new FormControl('', Validators.required),
-      comment: new FormControl('', Validators.required)
+    this.tarifsFilterForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      price: new UntypedFormControl('', Validators.required),
+      score: new UntypedFormControl('', Validators.required),
+      speed: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('', Validators.required)
     })
 
-    this.tarifsAddForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
-      score: new FormControl('', Validators.required),
-      speed: new FormControl('', Validators.required),
-      comment: new FormControl('')
+    this.tarifsAddForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      price: new UntypedFormControl('', Validators.required),
+      score: new UntypedFormControl('', Validators.required),
+      speed: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('')
     })
 
-    this.tarifsEditForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
-      score: new FormControl('', Validators.required),
-      speed: new FormControl('', Validators.required),
-      comment: new FormControl('')
+    this.tarifsEditForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      price: new UntypedFormControl('', Validators.required),
+      score: new UntypedFormControl('', Validators.required),
+      speed: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('')
     })
 
     // this.isLoading = true

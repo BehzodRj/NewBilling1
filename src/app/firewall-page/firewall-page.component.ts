@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 
@@ -10,9 +10,9 @@ import jwt_decode from "jwt-decode";
 })
 export class FirewallPageComponent implements OnInit {
   permissionData: any = []
-  permissionAddForm!: FormGroup
-  permissionEditForm!: FormGroup
-  permissionFilterForm!: FormGroup
+  permissionAddForm!: UntypedFormGroup
+  permissionEditForm!: UntypedFormGroup
+  permissionFilterForm!: UntypedFormGroup
   page: any
   search: any
   addTable = false
@@ -30,29 +30,29 @@ export class FirewallPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
     
-    this.permissionFilterForm = new FormGroup({
-      id: new FormControl('', Validators.required),
-      firewall_host: new FormControl('', Validators.required),
-      firewall_port: new FormControl('', Validators.required),
-      firewall_user: new FormControl('', Validators.required),
-      firewall_password: new FormControl('', Validators.required),
-      firewall_dysh_path: new FormControl('', Validators.required)
+    this.permissionFilterForm = new UntypedFormGroup({
+      id: new UntypedFormControl('', Validators.required),
+      firewall_host: new UntypedFormControl('', Validators.required),
+      firewall_port: new UntypedFormControl('', Validators.required),
+      firewall_user: new UntypedFormControl('', Validators.required),
+      firewall_password: new UntypedFormControl('', Validators.required),
+      firewall_dysh_path: new UntypedFormControl('', Validators.required)
     })
 
-    this.permissionAddForm = new FormGroup({
-      firewall_host: new FormControl('', Validators.required),
-      firewall_port: new FormControl('', Validators.required),
-      firewall_user: new FormControl('', Validators.required),
-      firewall_password: new FormControl('', Validators.required),
-      firewall_dysh_path: new FormControl('', Validators.required)
+    this.permissionAddForm = new UntypedFormGroup({
+      firewall_host: new UntypedFormControl('', Validators.required),
+      firewall_port: new UntypedFormControl('', Validators.required),
+      firewall_user: new UntypedFormControl('', Validators.required),
+      firewall_password: new UntypedFormControl('', Validators.required),
+      firewall_dysh_path: new UntypedFormControl('', Validators.required)
     })
 
-    this.permissionEditForm = new FormGroup({
-      firewall_host: new FormControl('', Validators.required),
-      firewall_port: new FormControl('', Validators.required),
-      firewall_user: new FormControl('', Validators.required),
-      firewall_password: new FormControl('', Validators.required),
-      firewall_dysh_path: new FormControl('', Validators.required)
+    this.permissionEditForm = new UntypedFormGroup({
+      firewall_host: new UntypedFormControl('', Validators.required),
+      firewall_port: new UntypedFormControl('', Validators.required),
+      firewall_user: new UntypedFormControl('', Validators.required),
+      firewall_password: new UntypedFormControl('', Validators.required),
+      firewall_dysh_path: new UntypedFormControl('', Validators.required)
     })
 
     // this.isLoading = true

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 
 @Component({
@@ -9,8 +9,8 @@ import { RequestsService } from '../all.service';
 })
 export class TransactionsPageComponent implements OnInit {
   transactionsData: any = []
-  transactionsForm!: FormGroup
-  transactionsFilterForm!: FormGroup
+  transactionsForm!: UntypedFormGroup
+  transactionsFilterForm!: UntypedFormGroup
   page: any
   search: any
   addTable = false
@@ -28,24 +28,24 @@ export class TransactionsPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
     
-    this.transactionsFilterForm = new FormGroup({
-      id: new FormControl('', Validators.required),
-      operator: new FormControl('', Validators.required),
-      txn_date: new FormControl('', Validators.required),
-      txn_id: new FormControl('', Validators.required),
-      comment: new FormControl('', Validators.required),
-      start_date: new FormControl('', Validators.required),
-      end_date: new FormControl('', Validators.required),
+    this.transactionsFilterForm = new UntypedFormGroup({
+      id: new UntypedFormControl('', Validators.required),
+      operator: new UntypedFormControl('', Validators.required),
+      txn_date: new UntypedFormControl('', Validators.required),
+      txn_id: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('', Validators.required),
+      start_date: new UntypedFormControl('', Validators.required),
+      end_date: new UntypedFormControl('', Validators.required),
     })
 
-    this.transactionsForm = new FormGroup({
-      operator: new FormControl('', Validators.required),
-      sum: new FormControl('', Validators.required),
-      score: new FormControl('', Validators.required),
-      date: new FormControl('', Validators.required),
-      txn_date: new FormControl('', Validators.required),
-      txn_id: new FormControl('', Validators.required),
-      comment: new FormControl('', Validators.required)
+    this.transactionsForm = new UntypedFormGroup({
+      operator: new UntypedFormControl('', Validators.required),
+      sum: new UntypedFormControl('', Validators.required),
+      score: new UntypedFormControl('', Validators.required),
+      date: new UntypedFormControl('', Validators.required),
+      txn_date: new UntypedFormControl('', Validators.required),
+      txn_id: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('', Validators.required)
     })
 
     // this.isLoading = true

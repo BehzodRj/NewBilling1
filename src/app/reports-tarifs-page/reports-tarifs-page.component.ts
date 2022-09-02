@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { RequestsService } from '../all.service';
 export class ReportsTarifsPageComponent implements OnInit {
   reportsActiveData: any = []
   tarifsData: any = []
-  accountsFilterForm!: FormGroup
+  accountsFilterForm!: UntypedFormGroup
   isLoading = false
   numAccounts: any = 0
 
@@ -23,25 +23,25 @@ export class ReportsTarifsPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
 
-    this.accountsFilterForm = new FormGroup({
-      id: new FormControl('', Validators.required),    
-      fio: new FormControl('', Validators.required),
-      tarif_id: new FormControl('', Validators.required),
-      speed_cf: new FormControl('', Validators.required),
-      phone_number: new FormControl('', Validators.required),
-      ipaddress: new FormControl('', Validators.required),
-      acc_info: new FormControl('', Validators.required),
-      passport: new FormControl('', Validators.required),
-      age: new FormControl('', Validators.required),
-      gender: new FormControl('', Validators.required),
-      overdraft: new FormControl('', Validators.required),
-      customr_type: new FormControl('', Validators.required),
-      comment: new FormControl('', Validators.required),
-      status: new FormControl('', Validators.required),
-      start_create: new FormControl('', Validators.required),
-      end_create: new FormControl('', Validators.required),
-      start_date: new FormControl('', Validators.required),
-      end_date: new FormControl('', Validators.required),
+    this.accountsFilterForm = new UntypedFormGroup({
+      id: new UntypedFormControl('', Validators.required),    
+      fio: new UntypedFormControl('', Validators.required),
+      tarif_id: new UntypedFormControl('', Validators.required),
+      speed_cf: new UntypedFormControl('', Validators.required),
+      phone_number: new UntypedFormControl('', Validators.required),
+      ipaddress: new UntypedFormControl('', Validators.required),
+      acc_info: new UntypedFormControl('', Validators.required),
+      passport: new UntypedFormControl('', Validators.required),
+      age: new UntypedFormControl('', Validators.required),
+      gender: new UntypedFormControl('', Validators.required),
+      overdraft: new UntypedFormControl('', Validators.required),
+      customr_type: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('', Validators.required),
+      status: new UntypedFormControl('', Validators.required),
+      start_create: new UntypedFormControl('', Validators.required),
+      end_create: new UntypedFormControl('', Validators.required),
+      start_date: new UntypedFormControl('', Validators.required),
+      end_date: new UntypedFormControl('', Validators.required),
     })
     
     // this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', 'On', '', '', '', '').subscribe(response => {

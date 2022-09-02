@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 
@@ -10,9 +10,9 @@ import jwt_decode from "jwt-decode";
 })
 export class UsersPageComponent implements OnInit {
   usersData: any = []
-  usersAddForm!: FormGroup
-  usersEditForm!: FormGroup
-  usersFilterForm!: FormGroup
+  usersAddForm!: UntypedFormGroup
+  usersEditForm!: UntypedFormGroup
+  usersFilterForm!: UntypedFormGroup
   page: any
   search: any
   addTable = false
@@ -30,25 +30,25 @@ export class UsersPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
     
-    this.usersFilterForm = new FormGroup({
-      fio: new FormControl('', Validators.required),
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required),
+    this.usersFilterForm = new UntypedFormGroup({
+      fio: new UntypedFormControl('', Validators.required),
+      login: new UntypedFormControl('', Validators.required),
+      password: new UntypedFormControl('', Validators.required),
+      role: new UntypedFormControl('', Validators.required),
     })
 
-    this.usersAddForm = new FormGroup({
-      fio: new FormControl('', Validators.required),
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      role: new FormControl('admin', Validators.required),
+    this.usersAddForm = new UntypedFormGroup({
+      fio: new UntypedFormControl('', Validators.required),
+      login: new UntypedFormControl('', Validators.required),
+      password: new UntypedFormControl('', Validators.required),
+      role: new UntypedFormControl('admin', Validators.required),
     })
 
-    this.usersEditForm = new FormGroup({
-      fio: new FormControl('', Validators.required),
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required),
+    this.usersEditForm = new UntypedFormGroup({
+      fio: new UntypedFormControl('', Validators.required),
+      login: new UntypedFormControl('', Validators.required),
+      password: new UntypedFormControl('', Validators.required),
+      role: new UntypedFormControl('', Validators.required),
     })
 
     // this.isLoading = true

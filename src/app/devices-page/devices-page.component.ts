@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 
@@ -10,9 +10,9 @@ import jwt_decode from "jwt-decode";
 })
 export class DevicesPageComponent implements OnInit {
   deviceData: any = []
-  deviceAddForm!: FormGroup
-  deviceEditForm!: FormGroup
-  deviceFilterForm!: FormGroup
+  deviceAddForm!: UntypedFormGroup
+  deviceEditForm!: UntypedFormGroup
+  deviceFilterForm!: UntypedFormGroup
   page: any
   search: any
   addTable = false
@@ -30,17 +30,17 @@ export class DevicesPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
     
-    this.deviceFilterForm = new FormGroup({
-      id: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
+    this.deviceFilterForm = new UntypedFormGroup({
+      id: new UntypedFormControl('', Validators.required),
+      name: new UntypedFormControl('', Validators.required),
     })
 
-    this.deviceAddForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+    this.deviceAddForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
     })
 
-    this.deviceEditForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+    this.deviceEditForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
     })
 
     // this.isLoading = true

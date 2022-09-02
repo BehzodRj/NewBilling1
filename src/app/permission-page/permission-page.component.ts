@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 
@@ -11,9 +11,9 @@ import jwt_decode from "jwt-decode";
 export class PermissionPageComponent implements OnInit {
   permissionData: any = []
   permissionRouteData: any = []
-  permissionAddForm!: FormGroup
-  permissionEditForm!: FormGroup
-  permissionFilterForm!: FormGroup
+  permissionAddForm!: UntypedFormGroup
+  permissionEditForm!: UntypedFormGroup
+  permissionFilterForm!: UntypedFormGroup
   page: any
   search: any
   addTable = false
@@ -31,20 +31,20 @@ export class PermissionPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
     
-    this.permissionFilterForm = new FormGroup({
-      id: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
-      routes: new FormControl('', Validators.required)
+    this.permissionFilterForm = new UntypedFormGroup({
+      id: new UntypedFormControl('', Validators.required),
+      name: new UntypedFormControl('', Validators.required),
+      routes: new UntypedFormControl('', Validators.required)
     })
 
-    this.permissionAddForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      routes: new FormControl('', Validators.required)
+    this.permissionAddForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      routes: new UntypedFormControl('', Validators.required)
     })
 
-    this.permissionEditForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      routes: new FormControl('', Validators.required)
+    this.permissionEditForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      routes: new UntypedFormControl('', Validators.required)
     })
 
     // this.isLoading = true

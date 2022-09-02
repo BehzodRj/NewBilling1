@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 
@@ -10,9 +10,9 @@ import jwt_decode from "jwt-decode";
 })
 export class RolesPageComponent implements OnInit {
   roleData: any = []
-  roleAddForm!: FormGroup
-  roleEditForm!: FormGroup
-  roleFilterForm!: FormGroup
+  roleAddForm!: UntypedFormGroup
+  roleEditForm!: UntypedFormGroup
+  roleFilterForm!: UntypedFormGroup
   page: any
   search: any
   addTable = false
@@ -30,17 +30,17 @@ export class RolesPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
     
-    this.roleFilterForm = new FormGroup({
-      id: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
+    this.roleFilterForm = new UntypedFormGroup({
+      id: new UntypedFormControl('', Validators.required),
+      name: new UntypedFormControl('', Validators.required),
     })
 
-    this.roleAddForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+    this.roleAddForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
     })
 
-    this.roleEditForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+    this.roleEditForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
     })
 
     // this.isLoading = true

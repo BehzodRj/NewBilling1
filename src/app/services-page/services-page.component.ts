@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
 
@@ -10,9 +10,9 @@ import jwt_decode from "jwt-decode";
 })
 export class ServicesPageComponent implements OnInit {
   servicesData: any = []
-  servicesAddForm!: FormGroup
-  servicesEditForm!: FormGroup
-  servicesFilterForm!: FormGroup
+  servicesAddForm!: UntypedFormGroup
+  servicesEditForm!: UntypedFormGroup
+  servicesFilterForm!: UntypedFormGroup
   page: any
   search: any
   addTable = false
@@ -30,28 +30,28 @@ export class ServicesPageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
     
-    this.servicesFilterForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
-      score: new FormControl('', Validators.required),
-      month_count: new FormControl('', Validators.required),
-      comment: new FormControl('', Validators.required)
+    this.servicesFilterForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      price: new UntypedFormControl('', Validators.required),
+      score: new UntypedFormControl('', Validators.required),
+      month_count: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('', Validators.required)
     })
 
-    this.servicesAddForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
-      score: new FormControl('', Validators.required),
-      month_count: new FormControl('', Validators.required),
-      comment: new FormControl('')
+    this.servicesAddForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      price: new UntypedFormControl('', Validators.required),
+      score: new UntypedFormControl('', Validators.required),
+      month_count: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('')
     })
 
-    this.servicesEditForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
-      score: new FormControl('', Validators.required),
-      month_count: new FormControl('', Validators.required),
-      comment: new FormControl('')
+    this.servicesEditForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      price: new UntypedFormControl('', Validators.required),
+      score: new UntypedFormControl('', Validators.required),
+      month_count: new UntypedFormControl('', Validators.required),
+      comment: new UntypedFormControl('')
     })
 
     // this.isLoading = true
