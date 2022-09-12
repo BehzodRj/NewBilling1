@@ -38,6 +38,7 @@ const routes: Routes = [
   { path: 'permission', component: PermissionPageComponent, canActivate: [AuthGuard] },
   { path: 'devices', component: DevicesPageComponent, canActivate: [AuthGuard] },
   { path: 'roles', component: RolesPageComponent, canActivate: [AuthGuard] },
+  // { path: 'permission', component: PermissionPageComponent, canActivate: [AuthGuard] },
   { path: 'firewall', component: FirewallPageComponent, canActivate: [AuthGuard] }
 ];
 
