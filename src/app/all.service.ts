@@ -86,7 +86,7 @@ export class RequestsService {
     return this.http.get(this.url + '/api/account?accounts.id=' + id, {headers: header})
   }
 
-  getFilterAccountsRequest(id: any, fio: string, tarif_id: string, speed_cf: string, phone_number: number, ipaddress: any, acc_info: string, conf_firewall_id: number, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: string, status: any, start_created: any, end_created: any, start_date: any, end_date: any, connect_by: any, contact_by: any, page_size: any) {
+  getFilterAccountsRequest(id: any, fio: any, tarif_id: any, speed_cf: any, phone_number: any, ipaddress: any, acc_info: any, conf_firewall_id: any, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: any, status: any, start_created: any, end_created: any, start_date: any, end_date: any, connect_by: any, contact_by: any, page_size: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`

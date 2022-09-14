@@ -298,9 +298,12 @@ export class AccauntsPageComponent implements OnInit {
       var end_date: any = new Date(accountsFilterFormData.end_date)
       this.isLoading = true
       this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
-        this.accountsData = response
+        let n=0;
+        this.accountsData = []
         response.forEach( (element: any) => {
-          this.fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0]
+          this.accountsData[n] = element;
+          this.accountsData[n].fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0];
+          n++;
         });
         this.isLoading = false
         this.numAccounts = this.accountsData.length
@@ -320,9 +323,12 @@ export class AccauntsPageComponent implements OnInit {
         var start_create: any = new Date(accountsFilterFormData.start_create)
         var end_create: any = new Date(accountsFilterFormData.end_create)
         this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
-          this.accountsData = response
+          let n=0;
+          this.accountsData = []
           response.forEach( (element: any) => {
-            this.fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0]
+            this.accountsData[n] = element;
+            this.accountsData[n].fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0];
+            n++;
           });
           this.isLoading = false
           this.numAccounts = this.accountsData.length
@@ -345,9 +351,12 @@ export class AccauntsPageComponent implements OnInit {
         var start_date: any = new Date(accountsFilterFormData.start_date)
         var end_date: any = new Date(accountsFilterFormData.end_date)
         this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
-          this.accountsData = response
+          let n=0;
+          this.accountsData = []
           response.forEach( (element: any) => {
-            this.fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0]
+            this.accountsData[n] = element;
+            this.accountsData[n].fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0];
+            n++;
           });
           this.isLoading = false
           this.numAccounts = this.accountsData.length
@@ -369,10 +378,10 @@ export class AccauntsPageComponent implements OnInit {
         this.isLoading = true
         this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
           let n=0;
+          this.accountsData = []
           response.forEach( (element: any) => {
             this.accountsData[n] = element;
             this.accountsData[n].fireWall4Table = this.fireWallData.filter( (res: any) => res.id ==  element.conf_firewall_id)[0];
-            console.log(this.accountsData);
             n++;
           });
           this.isLoading = false

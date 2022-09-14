@@ -11,6 +11,8 @@ import jwt_decode from "jwt-decode";
 export class PermissionPageComponent implements OnInit {
   permissionData: any = []
   permissionRouteData: any = []
+  roleData: any =[]
+  userData: any = []
   permissionAddForm!: FormGroup
   permissionEditForm!: FormGroup
   permissionFilterForm!: FormGroup
@@ -34,17 +36,23 @@ export class PermissionPageComponent implements OnInit {
     this.permissionFilterForm = new FormGroup({
       id: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
-      routes: new FormControl('', Validators.required)
+      routes: new FormControl('', Validators.required),
+      roles: new FormControl('', Validators.required),
+      users: new FormControl('', Validators.required)
     })
 
     this.permissionAddForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      routes: new FormControl('', Validators.required)
+      routes: new FormControl('', Validators.required),
+      roles: new FormControl('', Validators.required),
+      users: new FormControl('', Validators.required)
     })
 
     this.permissionEditForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      routes: new FormControl('', Validators.required)
+      routes: new FormControl('', Validators.required),
+      roles: new FormControl('', Validators.required),
+      users: new FormControl('', Validators.required)
     })
 
     // this.isLoading = true
@@ -87,6 +95,38 @@ export class PermissionPageComponent implements OnInit {
         })
       }
     })
+
+    this.request.getRoleRequest().subscribe(response => {
+      this.roleData = response
+    }, error => {
+      if(error.status == 401) {
+        this.request.refreshRequest(localStorage.getItem('refresh_token')).subscribe( (response: any) => {
+          localStorage.setItem('access_token', response.access_token)
+          localStorage.setItem('refresh_token', response.refresh_token)
+          this.isLoading = false
+          location.reload()
+        }, error => {
+          localStorage.clear()
+          location.reload()
+        })
+      }
+    })
+
+    this.request.getUsersRequest().subscribe(response => {
+      this.userData = response
+    }, error => {
+      if(error.status == 401) {
+        this.request.refreshRequest(localStorage.getItem('refresh_token')).subscribe( (response: any) => {
+          localStorage.setItem('access_token', response.access_token)
+          localStorage.setItem('refresh_token', response.refresh_token)
+          this.isLoading = false
+          location.reload()
+        }, error => {
+          localStorage.clear()
+          location.reload()
+        })
+      }
+    })
     
   }
 
@@ -116,8 +156,7 @@ export class PermissionPageComponent implements OnInit {
     const permissionAddFormData = {...this.permissionAddForm.value}
     this.isLoading = true
     var token: any = localStorage.getItem('access_token')
-    var decoded: any = jwt_decode(token);
-    this.request.postPermissionRequest(permissionAddFormData.name, decoded.user_id, 1, permissionAddFormData.routes*1).subscribe(response => {
+    this.request.postPermissionRequest(permissionAddFormData.name, permissionAddFormData.users*1, permissionAddFormData.roles*1, permissionAddFormData.routes*1).subscribe(response => {
       this.isLoading = false
       location.reload()
     }, error => {
@@ -136,8 +175,7 @@ export class PermissionPageComponent implements OnInit {
     const permissionEditFormData = {...this.permissionEditForm.value}
     this.isLoading = true
     var token: any = localStorage.getItem('access_token')
-    var decoded: any = jwt_decode(token);
-    this.request.putPermissionRequest(this.tableId, permissionEditFormData.name, decoded.user_id, 1, permissionEditFormData.routes*1).subscribe(response => {
+    this.request.putPermissionRequest(this.tableId, permissionEditFormData.name, permissionEditFormData.users*1, permissionEditFormData.roles*1, permissionEditFormData.routes*1).subscribe(response => {
       this.isLoading = false
       location.reload()
     }, error => {
