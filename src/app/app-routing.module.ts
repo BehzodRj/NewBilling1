@@ -19,6 +19,8 @@ import { PermissionPageComponent } from './permission-page/permission-page.compo
 import { RolesPageComponent } from './roles-page/roles-page.component';
 import { FirewallPageComponent } from './firewall-page/firewall-page.component';
 import { HistoryChangePageComponent } from './history-change-page/history-change-page.component';
+import { EquipmentPageComponent } from './equipment-page/equipment-page.component';
+import { PromotionPageComponent } from './promotion-page/promotion-page.component';
 
 const routes: Routes = [
   { path: '', component: AuthPageComponent},
@@ -30,14 +32,16 @@ const routes: Routes = [
   { path: 'reportsPassive', component: ReportsPassivePageComponent, canActivate: [AuthGuard] },
   { path: 'reportsArchieve', component: ReportsArchievePageComponent, canActivate: [AuthGuard] },
   { path: 'reportsTarif', component: ReportsTarifsPageComponent, canActivate: [AuthGuard] },
+  { path: 'reportsEquipment', component: EquipmentPageComponent, canActivate: [AuthGuard] },
   { path: 'reportsAge', component: ReportsAgePageComponent, canActivate: [AuthGuard] },
   { path: 'reportsGender', component: ReportsGenderPageComponent, canActivate: [AuthGuard] },
   { path: 'transactions', component: TransactionsPageComponent, canActivate: [AuthGuard] },
   { path: 'services', component: ServicesPageComponent, canActivate: [AuthGuard] },
+  { path: 'promotion', component: PromotionPageComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersPageComponent, canActivate: [AuthGuard] },
   { path: 'permission', component: PermissionPageComponent, canActivate: [AuthGuard] },
   { path: 'devices', component: DevicesPageComponent, canActivate: [AuthGuard] },
-  { path: 'roles', component: RolesPageComponent, canActivate: [AuthGuard] },
+  { path: 'group', component: RolesPageComponent, canActivate: [AuthGuard] },
   { path: 'firewall', component: FirewallPageComponent, canActivate: [AuthGuard] }
 ];
 

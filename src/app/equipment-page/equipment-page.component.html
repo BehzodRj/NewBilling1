@@ -1,0 +1,153 @@
+<div class="spinner_block" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+  <div class="addModal_content" *ngIf="addTable">
+    <div class="addModal_block">
+      <i class="fas fa-times" (click)="addTable = false"></i>
+      <form class="addForm" [formGroup]="allAddForm">
+        <input class="addtable" type="text" placeholder="Имя" formControlName="name">
+        <button class="addButton"  [disabled]="allAddForm.invalid" [ngStyle]="{opacity: allAddForm.invalid ? '.6' : '1'}" (click)="addNewTable()">OK</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="editModal_content" *ngIf="editTable">
+    <div class="editModal_block">
+      <i class="fas fa-times" (click)="editTable = false" ></i>
+      <form class="editForm" [formGroup]="allEditForm">
+        <input class="addtable" type="text" placeholder="Имя" formControlName="name">
+        <button class="editButton" [disabled]="allEditForm.invalid" [ngStyle]="{opacity: allEditForm.invalid ? '0.6' : '1'}" (click)="editNewTable()">ОК</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="devide_block">
+    <app-header></app-header>
+  
+    <div class="container">
+      <div class="container_content">
+        <div class="title_block">
+          <h1>Оборудования</h1>
+          <!-- <button (click)="addTable = true" *ngIf="permitActions">Добавить</button> -->
+          <!-- <div class="search_block">
+            <i class="fa fas fa-search"></i>
+            <input type="search" placeholder="Поиск" [(ngModel)]="search">
+          </div> -->
+        </div>
+  
+        <div class="filter_content">
+          <form class="filter_form">
+            <div class="filter_block" [formGroup]="allFilterForm">
+              <input type="text" placeholder="Лиц. Счёт" formControlName="account_id">
+              <input type="text" placeholder="ФИО" formControlName="fio">
+              <input type="date" placeholder="Дата начало" formControlName="created_at">
+              <input type="date" placeholder="Дата окончания" formControlName="expire_at">
+              <input type="date" placeholder="Следующая оплата" formControlName="next_payment">
+              <select formControlName="service">
+                <option value="">Все</option>
+                <option *ngFor="let service of serviceData" [value]="service.id">{{ service.name }}</option>
+              </select>
+              <input type="text" placeholder="Цена" formControlName="price">
+              <select formControlName="deleted">
+                <option value="">Все</option>
+                <option value="false">Активный</option>
+                <option value="true">Удаленно</option>
+              </select>
+              <button (click)="filterTable()">ОК</button>
+            </div>
+  
+            <!-- <div class="pagination_block">
+              <input type="number" placeholder="0">
+            </div> -->
+          </form>
+        </div>
+  
+        <div class="table_container">
+          <table class="resp-tab">
+            <thead>
+              <tr>
+                <th>Лиц. Счёт</th>
+                <th>ФИО</th>
+                <th>Дата начало</th>
+                <th>Дата окончания</th>
+                <th>Следующая оплата</th>
+                <th>Услуги</th>
+                <th>Услуга ID</th>
+                <th>Цена</th>
+                <th>Удаленно</th>
+                <!-- <th *ngIf="permitActions">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="c1" cx="10" cy="10" r="9.5" stroke="black"/>
+                    <circle class="c2" cx="10" cy="10" r="3" fill="black"/>
+                  </svg>  
+                </th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let all of allData">
+                <td><span>Лиц. Счёт</span>
+                  <h1>{{ all.account_id}}</h1>
+                </td>
+  
+                <td><span>ФИО</span>
+                  <h1>{{ all.account?.fio}}</h1>
+                </td>
+
+                <td><span>Дата начало</span>
+                  <h1>{{ all.created_at | date: 'dd-MM-YYYY' }}</h1>
+                </td>
+
+                <td><span>Дата окончания</span>
+                  <h1>{{ all.expire_at | date: 'dd-MM-YYYY' }}</h1>
+                </td>
+
+                <td><span>Следующая оплата</span>
+                  <h1>{{ all.next_payment | date: 'dd-MM-YYYY' }}</h1>
+                </td>
+
+                <td><span>Услуги</span>
+                  <h1>{{ all.service?.name }}</h1>
+                </td>
+
+                <td><span>Услуга ID</span>
+                  <h1>{{ all.service_id }}</h1>
+                </td>
+
+                <td><span>Цена</span>
+                  <h1>{{ all.service?.price }}</h1>
+                </td>
+
+                <td><span>Удаленно</span>
+                  <h1>{{ all.deleted ? 'Удаленно' : 'Активный' }}</h1>
+                </td>
+  
+                <!-- <td *ngIf="permitActions"><span>Действия</span>
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+                   >
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="openEditTable(all.id)">
+                      <mat-icon>edit</mat-icon>
+                      <span>Изменить</span>
+                    </button>
+  
+                    <button mat-menu-item (click)="deleteTable(all.id)">
+                      <mat-icon>delete</mat-icon>
+                      <span>Удалить</span>
+                    </button>
+                  </mat-menu>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination_block">
+          <h4 style="margin-right: 20px;">Количество аккаунтов: {{ numAccounts }}</h4>
+          <h4>Сумма тарифа: {{ summTarifs | number: '1.1-1' }} сомон</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  

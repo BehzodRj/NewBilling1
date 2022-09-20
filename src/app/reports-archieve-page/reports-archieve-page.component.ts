@@ -9,8 +9,6 @@ import { RequestsService } from '../all.service';
 })
 export class ReportsArchievePageComponent implements OnInit {
   reportsActiveData: any = []
-  tarifsData: any = []
-  accountsFilterForm!: FormGroup
   isLoading = false
   numAccounts: any = 0
 
@@ -23,36 +21,10 @@ export class ReportsArchievePageComponent implements OnInit {
       document.body.classList.toggle('dark-theme')
     }
 
-    this.accountsFilterForm = new FormGroup({
-      status: new FormControl('', Validators.required),
-    })
-    
-    // this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', 'On', '', '', '', '').subscribe(response => {
-    //   this.reportsActiveData = response
-    //   this.numAccounts = this.reportsActiveData.length
-    // })
-
-    this.request.getTarifsRequest().subscribe( (response: any) => {
-      this.tarifsData = response
-    }, error => {
-       if(error.status == 401) {
-        this.request.refreshRequest(localStorage.getItem('refresh_token')).subscribe( (response: any) => {
-          localStorage.setItem('access_token', response.access_token)
-          localStorage.setItem('refresh_token', response.refresh_token)
-          this.isLoading = false
-          location.reload()
-        }, error => {
-          localStorage.clear()
-          location.reload()
-        })
-      }
-    })
-  }
-
-  filterTable() {
-    const accountsFilterFormData = {...this.accountsFilterForm.value}
+    let d = new Date()
+    d.setMonth(d.getMonth() - 6)
     this.isLoading = true
-    this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', '', '', '', '', accountsFilterFormData.status, '', '', '', '','','', '').subscribe(response => {
+    this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', d.toISOString(),'','', '').subscribe(response => {
       this.reportsActiveData = response
       this.isLoading = false
       this.numAccounts = this.reportsActiveData.length
@@ -68,5 +40,4 @@ export class ReportsArchievePageComponent implements OnInit {
       }
     })
   }
-
 }

@@ -81,6 +81,13 @@
             <option value="F">Female</option>
           </select>
         </div>
+
+        <div class="add_block_items">
+          <h1 class="add_title">Девайс</h1>
+          <select formControlName="device">
+            <option *ngFor="let device of deviceData" [value]="device.id">{{ device.name }}</option>
+          </select>
+        </div>
   
         <div class="add_block_items">
           <h1 class="add_title">Овердрафта</h1>
@@ -109,6 +116,28 @@
           <h1 class="add_title">Кто привёл</h1>
           <select formControlName="contact_by">
             <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
+          </select>
+        </div>
+
+        <div class="add_block_items">
+          <h1 class="add_title">Table ID</h1>
+          <select formControlName="table_id">
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+
+        <div class="add_block_items">
+          <h1 class="add_title">Тип подключения</h1>
+          <select formControlName="connect_type">
+            <option *ngFor="let connectType of connectTypeData" [value]="connectType.id">{{ connectType.name }}</option>
+          </select>
+        </div>
+
+        <div class="add_block_items">
+          <h1 class="add_title">Тип подключения</h1>
+          <select formControlName="promo_id">
+            <option *ngFor="let promotion of promotionData" [value]="promotion.id">{{ promotion.name }}</option>
           </select>
         </div>
   
@@ -204,6 +233,13 @@
         </div>
 
         <div class="edit_block_items">
+          <h1 class="edit_title">Девайс</h1>
+          <select formControlName="device">
+            <option *ngFor="let device of deviceData" [value]="device.id">{{ device.name }}</option>
+          </select>
+        </div>
+
+        <div class="edit_block_items">
             <h1 class="edit_title">Овердрафта</h1>
             <select formControlName="overdraft">
               <option value="2">Да</option>
@@ -231,6 +267,21 @@
             <select formControlName="contact_by">
               <option *ngFor="let item of usersData" [value]="item.id">{{ item.login }}  - {{ item.fio }}</option>
             </select>
+        </div>
+
+        <div class="edit_block_items">
+          <h1 class="edit_title">Table ID</h1>
+          <select formControlName="table_id">
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+
+        <div class="edit_block_items">
+          <h1 class="edit_title">Тип подключения</h1>
+          <select formControlName="connect_type">
+            <option *ngFor="let connectType of connectTypeData" [value]="connectType.id">{{ connectType.name }}</option>
+          </select>
         </div>
 
         <div class="edit_block_items">
@@ -574,8 +625,10 @@
                 <th>Овердрафта</th>
                 <th>Тип клиента</th>
                 <th>Onu/Port</th>
+                <th>Тип подключения</th>
                 <th>Кто подключил</th>
                 <th>Кто привел</th>
+                <th>Table ID</th>
                 <th>Статус</th>
                 <th>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -667,12 +720,21 @@
                 <td><span class="table_span">Onu/Port</span>
                   <h1>{{ accounts.comment }}</h1>
                 </td>
+
+                <td><span class="table_span">Тип подключения</span>
+                  <h1>{{ accounts.connect_type?.name }}</h1>
+                </td>
   
                 <td><span class="table_span">Мастер по подключению</span>
                   <h1>{{ accounts.connect_user?.fio }}</h1>
                 </td>
+
                 <td><span class="table_span">Кто привел</span>
                   <h1>{{ accounts.contact_user?.fio }}</h1>
+                </td>
+
+                <td><span class="table_span">Table ID</span>
+                  <h1>{{ accounts.table_id }}</h1>
                 </td>
                 
                 <td><span class="table_span">Статус</span>

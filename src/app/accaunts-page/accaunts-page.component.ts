@@ -23,6 +23,9 @@ export class AccauntsPageComponent implements OnInit {
   additionalInfoData: any = []
   fireWallData: any = []
   fireWall4Table: any = []
+  deviceData: any = []
+  connectTypeData: any = []
+  promotionData: any = []
   accountsAddForm!: FormGroup
   accountsEditForm!: FormGroup
   accountsFilterForm!: FormGroup
@@ -101,11 +104,15 @@ export class AccauntsPageComponent implements OnInit {
       passport: new FormControl(''),
       age: new FormControl('', Validators.required),
       gender: new FormControl('M'),
+      device: new FormControl('', Validators.required),
       overdraft: new FormControl(1, Validators.required),
       customr_type: new FormControl('B2C', Validators.required),
       comment: new FormControl(''),
       connect_by: new FormControl('', Validators.required),
       contact_by: new FormControl('', Validators.required),
+      table_id: new FormControl('4', Validators.required),
+      connect_type: new FormControl(''),
+      promo_id: new FormControl('')
     })
 
     this.accountsEditForm = new FormGroup({
@@ -124,11 +131,15 @@ export class AccauntsPageComponent implements OnInit {
       passport: new FormControl(''),
       age: new FormControl('', Validators.required),
       gender: new FormControl(''),
+      device: new FormControl('', Validators.required),
       overdraft: new FormControl(''),
       customr_type: new FormControl('', Validators.required),
       comment: new FormControl(''),
       connect_by: new FormControl('', Validators.required),
       contact_by: new FormControl('', Validators.required),
+      table_id: new FormControl('', Validators.required),
+      connect_type: new FormControl(''),
+      promo_id: new FormControl('')
     })
 
     this.addServiceForm = new FormGroup({
@@ -231,6 +242,19 @@ export class AccauntsPageComponent implements OnInit {
 
     this.request.getReport3Request().subscribe(response => {
       this.report3Data = response
+    })
+
+    this.request.getContentTypeRequest().subscribe(response => {
+      console.log(response);
+      this.connectTypeData = response
+    })
+
+    this.request.getDeviceRequest().subscribe(response => {
+      this.deviceData = response
+    })
+
+    this.request.getPromotionRequest().subscribe(response => {
+      this.promotionData = response
     })
 
   }
@@ -408,19 +432,19 @@ export class AccauntsPageComponent implements OnInit {
     if(this.accountsAddForm.controls['ipaddress1'].value > 255 || this.accountsAddForm.controls['ipaddress2'].value > 255 || this.accountsAddForm.controls['ipaddress3'].value > 255 || this.accountsAddForm.controls['ipaddress4'].value > 255) {
       alert('Максимальное значение IP адресса не может превышать число 255')
     } else if( (this.accountsAddForm.controls['ipaddress1'].value == 255 && this.accountsAddForm.controls['ipaddress2'].value == 255 && this.accountsAddForm.controls['ipaddress3'].value == 255 && this.accountsAddForm.controls['ipaddress4'].value == 255) ) {
-      alert('В IP адрессе не может быть 4 числа 255')
+        alert('В IP адрессе не может быть 4 числа 255')
     } else {
-      this.isLoading = true
-      let ip_adress = `${this.accountsAddForm.controls['ipaddress1'].value}.${this.accountsAddForm.controls['ipaddress2'].value}.${this.accountsAddForm.controls['ipaddress3'].value}.${this.accountsAddForm.controls['ipaddress4'].value}`
-      let age = new Date(accountsAddFormData.age)
-      let end_date = new Date(accountsAddFormData.end_date)
-      this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, end_date.toISOString(), ip_adress, accountsAddFormData.acc_info, accountsAddFormData.conf_firewall_id * 1, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, parseInt(accountsAddFormData.overdraft), accountsAddFormData.customr_type, accountsAddFormData.comment, accountsAddFormData.connect_by, accountsAddFormData.contact_by).subscribe(response => {
-        this.isLoading = false
-        location.reload()
-      }, error => {
-        this.isLoading = false
-        alert(error.error.Error)
-      })
+        this.isLoading = true
+        let ip_adress = `${this.accountsAddForm.controls['ipaddress1'].value}.${this.accountsAddForm.controls['ipaddress2'].value}.${this.accountsAddForm.controls['ipaddress3'].value}.${this.accountsAddForm.controls['ipaddress4'].value}`
+        let age = new Date(accountsAddFormData.age)
+        let end_date = new Date(accountsAddFormData.end_date)
+        this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, end_date.toISOString(), ip_adress, accountsAddFormData.acc_info, accountsAddFormData.conf_firewall_id * 1, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, accountsAddFormData.device, parseInt(accountsAddFormData.overdraft), accountsAddFormData.customr_type, accountsAddFormData.comment, accountsAddFormData.connect_by, accountsAddFormData.contact_by, accountsAddFormData.table_id, accountsAddFormData.connect_type, accountsAddFormData.promo_id).subscribe(response => {
+          this.isLoading = false
+          location.reload()
+        }, error => {
+          this.isLoading = false
+          alert(error.error.Error)
+        })
     }
   }
 
@@ -455,7 +479,7 @@ export class AccauntsPageComponent implements OnInit {
       let ip_adress = `${this.accountsEditForm.controls['ipaddress1'].value}.${this.accountsEditForm.controls['ipaddress2'].value}.${this.accountsEditForm.controls['ipaddress3'].value}.${this.accountsEditForm.controls['ipaddress4'].value}`
       let age = new Date(accountsEditFormData.age)
       let end_date = new Date(accountsEditFormData.end_date)
-      this.request.putAccountsRequest(this.tableId, accountsEditFormData.fio, accountsEditFormData.tarif_id, accountsEditFormData.price_cf, accountsEditFormData.speed_cf, accountsEditFormData.phone_number, end_date.toISOString(), ip_adress, accountsEditFormData.acc_info, accountsEditFormData.conf_firewall_id * 1, accountsEditFormData.passport, age.toISOString(), accountsEditFormData.gender, parseInt(accountsEditFormData.overdraft), accountsEditFormData.customr_type, accountsEditFormData.comment, accountsEditFormData.connect_by, accountsEditFormData.contact_by).subscribe(response => {
+      this.request.putAccountsRequest(this.tableId, accountsEditFormData.fio, accountsEditFormData.tarif_id, accountsEditFormData.price_cf, accountsEditFormData.speed_cf, accountsEditFormData.phone_number, end_date.toISOString(), ip_adress, accountsEditFormData.acc_info, accountsEditFormData.conf_firewall_id * 1, accountsEditFormData.passport, age.toISOString(), accountsEditFormData.gender, accountsEditFormData.device, parseInt(accountsEditFormData.overdraft), accountsEditFormData.customr_type, accountsEditFormData.comment, accountsEditFormData.connect_by, accountsEditFormData.contact_by, accountsEditFormData.table_id, accountsEditFormData.connect_type, accountsEditFormData.promo_id).subscribe(response => {
         this.isLoading = false
         location.reload()
       }, error => {
@@ -485,7 +509,7 @@ export class AccauntsPageComponent implements OnInit {
     this.serviceId = id
     this.uslugiModal = true
     this.isLoading = true
-    this.request.getServiceLinkRequest(id).subscribe( (response: any) => {
+    this.request.getServiceLinkRequestByID(id).subscribe( (response: any) => {
       this.servicesLinkData = response
       this.isLoading = false
     }, error => {
@@ -525,7 +549,7 @@ export class AccauntsPageComponent implements OnInit {
     let created_at = new Date(addServiceFormData.created_at)
     this.request.posServiceLinkRequest(this.serviceId, created_at.toISOString(), addServiceFormData.name).subscribe(response => {
       this.isLoading = false
-      this.request.getServiceLinkRequest(this.serviceId).subscribe(response => {
+      this.request.getServiceLinkRequestByID(this.serviceId).subscribe(response => {
         this.servicesLinkData = response
       })
     }, error => {
@@ -540,7 +564,7 @@ export class AccauntsPageComponent implements OnInit {
     if(deleteConf == true) {
       this.request.deleteServiceLinkRequest(id).subscribe(response => {
         this.isLoading = false
-        this.request.getServiceLinkRequest(this.serviceId).subscribe(response => {
+        this.request.getServiceLinkRequestByID(this.serviceId).subscribe(response => {
           this.servicesLinkData = response
         })
       }, error => {
