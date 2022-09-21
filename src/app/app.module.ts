@@ -34,6 +34,7 @@ import { RolesPageComponent } from './roles-page/roles-page.component';
 import { HistoryChangePageComponent } from './history-change-page/history-change-page.component';
 import { EquipmentPageComponent } from './equipment-page/equipment-page.component';
 import { PromotionPageComponent } from './promotion-page/promotion-page.component';
+import { IpGroupPageComponent } from './ip-group-page/ip-group-page.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { PromotionPageComponent } from './promotion-page/promotion-page.componen
     HistoryChangePageComponent,
     EquipmentPageComponent,
     PromotionPageComponent,
+    IpGroupPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,7 @@ import { PromotionPageComponent } from './promotion-page/promotion-page.componen
     MatIconModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

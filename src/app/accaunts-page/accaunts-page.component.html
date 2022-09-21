@@ -51,6 +51,13 @@
             <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress4()" maxlength="3" formControlName="ipaddress4">
           </div>
         </div>
+
+        <div class="add_block_items">
+          <h1 class="add_title">IP Адресс</h1>
+          <select formControlName="autoIpaddress">
+            <option *ngFor="let IPGroup of IPGroupData" [value]="IPGroup.id">{{ IPGroup.ip_start }}</option>
+          </select>
+        </div>
   
         <div class="add_block_items">
           <h1 class="add_title">Адрес</h1>
@@ -135,7 +142,7 @@
         </div>
 
         <div class="add_block_items">
-          <h1 class="add_title">Тип подключения</h1>
+          <h1 class="add_title">Акция</h1>
           <select formControlName="promo_id">
             <option *ngFor="let promotion of promotionData" [value]="promotion.id">{{ promotion.name }}</option>
           </select>
@@ -200,6 +207,13 @@
               <span class="ip_span">.</span>
               <input class="ip_input" type="number" placeholder="000" (keyup)="ipadress4()" maxlength="3" formControlName="ipaddress4">
             </div>
+        </div>
+
+        <div class="edit_block_items">
+          <h1 class="edit_title">IP Адресс</h1>
+          <select formControlName="autoIpaddress">
+            <option *ngFor="let IPGroup of IPGroupData" [value]="IPGroup.id">{{ IPGroup.ip_start }}</option>
+          </select>
         </div>
 
         <div class="edit_block_items">
@@ -281,6 +295,13 @@
           <h1 class="edit_title">Тип подключения</h1>
           <select formControlName="connect_type">
             <option *ngFor="let connectType of connectTypeData" [value]="connectType.id">{{ connectType.name }}</option>
+          </select>
+        </div>
+
+        <div class="edit_block_items">
+          <h1 class="edit_title">Акция</h1>
+          <select formControlName="promo_id">
+            <option *ngFor="let promotion of promotionData" [value]="promotion.id">{{ promotion.name }}</option>
           </select>
         </div>
 
@@ -820,10 +841,28 @@
         </div>
         <div class="pagination_block">
           <div class="exel_container">
-            <button style="padding: 5px; cursor: pointer;" (click)="exportexcelAccount()">Аккаунт</button>
-            <button style="padding: 5px; margin: 0 10px; cursor: pointer;" (click)="exportexcelReport1()">Отчёт 1</button>
-            <button style="padding: 5px; margin-right: 10px; cursor: pointer;" (click)="exportexcelReport2()">Отчёт 2</button>
-            <button style="padding: 5px;; cursor: pointer;" (click)="exportexcelReport3()">Отчёт 3</button>
+            <button style="padding: 5px; cursor: pointer;" mat-button [matMenuTriggerFor]="account">Аккаунт</button>
+            <mat-menu #account="matMenu">
+              <button mat-menu-item (click)="exportexcelAccount()">Excel</button>
+            </mat-menu>
+
+            <button style="padding: 5px; margin: 0 10px; cursor: pointer;" mat-button [matMenuTriggerFor]="report1">Отчёт 1</button>
+            <mat-menu #report1="matMenu">
+              <button mat-menu-item (click)="exportexcelReport1()">Excel</button>
+              <button mat-menu-item (click)="jsonReport1()">JSON</button>
+            </mat-menu>
+
+            <button style="padding: 5px; margin-right: 10px; cursor: pointer;" mat-button [matMenuTriggerFor]="report2">Отчёт 2</button>
+            <mat-menu #report2="matMenu">
+              <button mat-menu-item (click)="exportexcelReport2()">Excel</button>
+              <button mat-menu-item (click)="jsonReport2()">JSON</button>
+            </mat-menu>
+
+            <button style="padding: 5px; cursor: pointer;" mat-button [matMenuTriggerFor]="report3">Отчёт 3</button>
+            <mat-menu #report3="matMenu">
+              <button mat-menu-item (click)="exportexcelReport3()">Excel</button>
+              <button mat-menu-item (click)="jsonReport3()">JSON</button>
+            </mat-menu>
           </div>
           Количество аккаунтов: {{ numAccounts }}
         </div>

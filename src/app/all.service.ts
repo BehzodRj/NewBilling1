@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestsService {
-  private url = 'https://api.nets.tj'
+  private url = 'http://45.94.219.6:12345'
   // http://45.94.219.6:12345
   // https://api.nets.tj
 
@@ -621,6 +621,60 @@ export class RequestsService {
     return this.http.delete(this.url + '/api/promotion?id=' + id, {headers: header})
   }
   // End of Promotion
+
+
+  // IP Group
+  getIPGroupRequest() {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/ip_group', {headers: header})
+  }
+
+  getFilterIPGroupRequest(id: number, ip_start: any, ip_mask: any, last_ip: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + `/api/ip_group?id=${id}&ip_start=${ip_start}&ip_mask=${ip_mask}&last_ip=${last_ip}`, {headers: header})
+  }
+
+  postIPGroupRequest(ip_start: any, ip_mask: any, last_ip: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.post(this.url + '/api/ip_group', {"ip_start": ip_start, "ip_mask": ip_mask, "last_ip": last_ip}, {headers: header})
+  }
+  
+  putIPGroupRequest(id: number, ip_start: any, ip_mask: any, last_ip: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.put(this.url + '/api/ip_group', {"id": id, "ip_start": ip_start, "ip_mask": ip_mask, "last_ip": last_ip}, {headers: header})
+  }
+
+  deleteIPGroupRequest(id: number) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.delete(this.url + '/api/ip_group?id=' + id, {headers: header})
+  }
+
+  // Next IP
+  getNextIPRequest(id: number) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + '/api/ip_group/next_ip?id=' + id, {headers: header})
+  }
+  // End of Next IP
+
+  // End of IP Group
 
 
   // FireWall

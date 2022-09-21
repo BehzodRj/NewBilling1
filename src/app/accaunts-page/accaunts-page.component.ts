@@ -26,6 +26,7 @@ export class AccauntsPageComponent implements OnInit {
   deviceData: any = []
   connectTypeData: any = []
   promotionData: any = []
+  IPGroupData: any = []
   accountsAddForm!: FormGroup
   accountsEditForm!: FormGroup
   accountsFilterForm!: FormGroup
@@ -94,11 +95,12 @@ export class AccauntsPageComponent implements OnInit {
       price_cf: new FormControl(1, Validators.required),
       speed_cf: new FormControl(1, Validators.required),
       phone_number: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]),
-      end_date: new FormControl('', Validators.required),
-      ipaddress1: new FormControl('', Validators.required),
-      ipaddress2: new FormControl('', Validators.required),
-      ipaddress3: new FormControl('', Validators.required),
-      ipaddress4: new FormControl('', Validators.required),
+      end_date: new FormControl(''),
+      ipaddress1: new FormControl(''),
+      ipaddress2: new FormControl(''),
+      ipaddress3: new FormControl(''),
+      ipaddress4: new FormControl(''),
+      autoIpaddress: new FormControl(''),
       acc_info: new FormControl(''),
       conf_firewall_id: new FormControl(''),
       passport: new FormControl(''),
@@ -121,11 +123,12 @@ export class AccauntsPageComponent implements OnInit {
       price_cf: new FormControl(1, Validators.required),
       speed_cf: new FormControl(1, Validators.required),
       phone_number: new FormControl('', Validators.required),
-      end_date: new FormControl('', Validators.required),
-      ipaddress1: new FormControl('', Validators.required),
-      ipaddress2: new FormControl('', Validators.required),
-      ipaddress3: new FormControl('', Validators.required),
-      ipaddress4: new FormControl('', Validators.required),
+      end_date: new FormControl(''),
+      ipaddress1: new FormControl(''),
+      ipaddress2: new FormControl(''),
+      ipaddress3: new FormControl(''),
+      ipaddress4: new FormControl(''),
+      autoIpaddress: new FormControl(''),
       acc_info: new FormControl(''),
       conf_firewall_id: new FormControl(''),
       passport: new FormControl(''),
@@ -220,7 +223,6 @@ export class AccauntsPageComponent implements OnInit {
 
     this.request.getFireWallRequest().subscribe(response => {
       this.fireWallData = response
-      console.log(response);
       
     })
     var token: any = localStorage.getItem('access_token')
@@ -245,7 +247,6 @@ export class AccauntsPageComponent implements OnInit {
     })
 
     this.request.getContentTypeRequest().subscribe(response => {
-      console.log(response);
       this.connectTypeData = response
     })
 
@@ -255,6 +256,10 @@ export class AccauntsPageComponent implements OnInit {
 
     this.request.getPromotionRequest().subscribe(response => {
       this.promotionData = response
+    })
+
+    this.request.getIPGroupRequest().subscribe(response => {
+      this.IPGroupData = response
     })
 
   }
@@ -438,9 +443,12 @@ export class AccauntsPageComponent implements OnInit {
         let ip_adress = `${this.accountsAddForm.controls['ipaddress1'].value}.${this.accountsAddForm.controls['ipaddress2'].value}.${this.accountsAddForm.controls['ipaddress3'].value}.${this.accountsAddForm.controls['ipaddress4'].value}`
         let age = new Date(accountsAddFormData.age)
         let end_date = new Date(accountsAddFormData.end_date)
-        this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, end_date.toISOString(), ip_adress, accountsAddFormData.acc_info, accountsAddFormData.conf_firewall_id * 1, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, accountsAddFormData.device, parseInt(accountsAddFormData.overdraft), accountsAddFormData.customr_type, accountsAddFormData.comment, accountsAddFormData.connect_by, accountsAddFormData.contact_by, accountsAddFormData.table_id, accountsAddFormData.connect_type, accountsAddFormData.promo_id).subscribe(response => {
+        this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, end_date.toISOString(), ip_adress, accountsAddFormData.acc_info, accountsAddFormData.conf_firewall_id * 1, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, accountsAddFormData * 1, parseInt(accountsAddFormData.overdraft), accountsAddFormData.customr_type, accountsAddFormData.comment, accountsAddFormData.connect_by, accountsAddFormData.contact_by, accountsAddFormData.table_id * 1, accountsAddFormData.connect_type * 1, accountsAddFormData.promo_id * 1).subscribe(response => {
           this.isLoading = false
-          location.reload()
+          this.request.getNextIPRequest(accountsAddFormData.autoIpaddress).subscribe(response => {
+            console.log(response);
+          })
+          // location.reload()
         }, error => {
           this.isLoading = false
           alert(error.error.Error)
@@ -729,9 +737,9 @@ export class AccauntsPageComponent implements OnInit {
       }
     })
 
-    this.request.getUsersRequest().subscribe( (response: any) => {
-      console.log(response);
-    })
+    // this.request.getUsersRequest().subscribe( (response: any) => {
+    //   console.log(response);
+    // })
   }
 
   addNewAdditionalInfo() {
@@ -988,6 +996,39 @@ export class AccauntsPageComponent implements OnInit {
        /* save to file */
        XLSX.writeFile(wb, this.fileName);
 			
+    }
+
+    jsonReport1() {
+      this.request.getReport1Request().subscribe( (response: any) => {
+        var file = new Blob([JSON.stringify(response)], { type: 'application/json' })
+        const link = document.createElement("a")
+        link.href = URL.createObjectURL(file);
+        link.download = 'Отчёт1.txt'
+        link.click()
+        link.remove()
+      })
+    }
+
+    jsonReport2() {
+      this.request.getReport2Request().subscribe( (response: any) => {
+        var file = new Blob([JSON.stringify(response)], { type: 'application/json' })
+        const link = document.createElement("a")
+        link.href = URL.createObjectURL(file);
+        link.download = 'Отчёт2.txt'
+        link.click()
+        link.remove()
+      })
+    }
+
+    jsonReport3() {
+      this.request.getReport3Request().subscribe( (response: any) => {
+        var file = new Blob([JSON.stringify(response)], { type: 'application/json' })
+        const link = document.createElement("a")
+        link.href = URL.createObjectURL(file);
+        link.download = 'Отчёт3.txt'
+        link.click()
+        link.remove()
+      })
     }
 
 }

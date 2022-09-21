@@ -21,6 +21,7 @@ import { FirewallPageComponent } from './firewall-page/firewall-page.component';
 import { HistoryChangePageComponent } from './history-change-page/history-change-page.component';
 import { EquipmentPageComponent } from './equipment-page/equipment-page.component';
 import { PromotionPageComponent } from './promotion-page/promotion-page.component';
+import { IpGroupPageComponent } from './ip-group-page/ip-group-page.component';
 
 const routes: Routes = [
   { path: '', component: AuthPageComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'permission', component: PermissionPageComponent, canActivate: [AuthGuard] },
   { path: 'devices', component: DevicesPageComponent, canActivate: [AuthGuard] },
   { path: 'group', component: RolesPageComponent, canActivate: [AuthGuard] },
+  { path: 'ipgroup', component: IpGroupPageComponent, canActivate: [AuthGuard] },
   { path: 'firewall', component: FirewallPageComponent, canActivate: [AuthGuard] }
 ];
 
