@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccauntsPageComponent } from './accaunts-page/accaunts-page.component';
+import { Report1PageComponent } from './report1-page/report1-page.component';
+import { Report2PageComponent } from './report2-page/report2-page.component';
+import { Report3PageComponent } from './report3-page/report3-page.component';
 import { TransactionHistoryPageComponent } from './transaction-history-page/transaction-history-page.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { AuthGuard } from './auth.guard';
@@ -26,6 +29,9 @@ import { IpGroupPageComponent } from './ip-group-page/ip-group-page.component';
 const routes: Routes = [
   { path: '', component: AuthPageComponent},
   { path: 'accounts', component: AccauntsPageComponent, canActivate: [AuthGuard] },
+  { path: 'report1', component: Report1PageComponent, canActivate: [AuthGuard] },
+  { path: 'report2', component: Report2PageComponent, canActivate: [AuthGuard] },
+  { path: 'report3', component: Report3PageComponent, canActivate: [AuthGuard] },
   { path: 'historyAccount/:id', component: HistoryChangePageComponent, canActivate: [AuthGuard] },
   { path: 'transaction-history/:id', component: TransactionHistoryPageComponent, canActivate: [AuthGuard] },
   { path: 'tarifs', component: TarifsPageComponent, canActivate: [AuthGuard] },

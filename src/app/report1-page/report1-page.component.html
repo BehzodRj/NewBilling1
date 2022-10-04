@@ -1,0 +1,73 @@
+<div class="spinner_block" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+  <div class="devide_block">
+    <app-header></app-header>
+  
+    <div class="container">
+      <div class="container_content">
+        <div class="title_block">
+          <h1>Отчёт 1</h1>
+        </div>
+  
+        <div class="filter_content">
+          <form class="filter_form">
+            <div class="filter_block" [formGroup]="allFilterForm">
+              <input type="date" formControlName="date_from">
+              <input type="date" formControlName="date_to">
+              <button (click)="filterTable()">ОК</button>
+            </div>
+          </form>
+        </div>
+  
+        <div class="table_container" id="excel-table-report1">
+          <table class="resp-tab">
+            <thead>
+              <tr>
+                <th>Лиц.Счёт</th>
+                <th>ФИО</th>
+                <th>Цена</th>
+                <th>Счёт</th>
+                <th>Имя Сервиса</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let all of allData">
+                <td>
+                  <h1>{{ all.account_id }}</h1>
+                </td>
+        
+                <td>
+                  <h1>{{ all.fio }}</h1>
+                </td>
+        
+                <td>
+                  <h1>{{ all.price }}</h1>
+                </td>
+        
+                <td>
+                  <h1>{{ all.score }}</h1>
+                </td>
+        
+                <td>
+                  <h1>{{ all.service_name }}</h1>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination_block">
+          <div class="exel_container">
+            <button style="padding: 5px; margin: 0 10px; cursor: pointer;" mat-button [matMenuTriggerFor]="report1">Отчёт 1</button>
+            <mat-menu #report1="matMenu">
+              <button mat-menu-item (click)="exportexcelReport1()">Excel</button>
+              <button mat-menu-item (click)="jsonReport1()">JSON</button>
+            </mat-menu>
+          </div>
+          <h4 style="margin-right: 20px;">Количество аккаунтов: {{ numAccounts }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  

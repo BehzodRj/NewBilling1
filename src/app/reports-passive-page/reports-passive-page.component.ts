@@ -24,7 +24,7 @@ export class ReportsPassivePageComponent implements OnInit {
     let d = new Date()
     d.setMonth(d.getMonth() - 3)
     this.isLoading = true
-    this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', d.toISOString(),'','', '').subscribe(response => {
+    this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', d.toISOString(),'','', '').subscribe(response => {
       this.reportsActiveData = response
       this.isLoading = false
       this.numAccounts = this.reportsActiveData.length

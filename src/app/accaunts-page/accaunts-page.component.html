@@ -584,6 +584,10 @@
                 <option value="M">Man</option>
                 <option value="F">Female</option>
               </select>
+              <select formControlName="device">
+                <option value="">Все</option>
+                <option *ngFor="let device of deviceData" [value]="device.id">{{ device.name }}</option>
+              </select>
               <select formControlName="overdraft">
                 <option value="">Все</option>
                 <option value="2">Да</option>
@@ -841,28 +845,10 @@
         </div>
         <div class="pagination_block">
           <div class="exel_container">
-            <button style="padding: 5px; cursor: pointer;" mat-button [matMenuTriggerFor]="account">Аккаунт</button>
-            <mat-menu #account="matMenu">
-              <button mat-menu-item (click)="exportexcelAccount()">Excel</button>
-            </mat-menu>
-
-            <button style="padding: 5px; margin: 0 10px; cursor: pointer;" mat-button [matMenuTriggerFor]="report1">Отчёт 1</button>
-            <mat-menu #report1="matMenu">
-              <button mat-menu-item (click)="exportexcelReport1()">Excel</button>
-              <button mat-menu-item (click)="jsonReport1()">JSON</button>
-            </mat-menu>
-
-            <button style="padding: 5px; margin-right: 10px; cursor: pointer;" mat-button [matMenuTriggerFor]="report2">Отчёт 2</button>
-            <mat-menu #report2="matMenu">
-              <button mat-menu-item (click)="exportexcelReport2()">Excel</button>
-              <button mat-menu-item (click)="jsonReport2()">JSON</button>
-            </mat-menu>
-
-            <button style="padding: 5px; cursor: pointer;" mat-button [matMenuTriggerFor]="report3">Отчёт 3</button>
-            <mat-menu #report3="matMenu">
-              <button mat-menu-item (click)="exportexcelReport3()">Excel</button>
-              <button mat-menu-item (click)="jsonReport3()">JSON</button>
-            </mat-menu>
+            <button style="padding: 5px; cursor: pointer;" (click)="exportexcelAccount()">Аккаунт</button>
+            <button style="padding: 5px; margin: 0 10px; cursor: pointer;" routerLink="/report1">Отчёт 1</button>
+            <button style="padding: 5px; margin-right: 10px; cursor: pointer;" routerLink="/report2">Отчёт 2</button>
+            <button style="padding: 5px; cursor: pointer;" routerLink="/report3">Отчёт 3</button>
           </div>
           Количество аккаунтов: {{ numAccounts }}
         </div>
@@ -991,122 +977,4 @@
     </table>
   
     <!-- End of Account Exel -->
-  
-  
-    <!-- Report 1 Exel -->
-    <table class="resp-tab" id="excel-table-report1" style="display: none;">
-      <thead>
-        <tr>
-          <th>Лиц.Счёт</th>
-          <th>ФИО</th>
-          <th>Цена</th>
-          <th>Счёт</th>
-          <th>Имя Сервиса</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let reports1 of report1Data">
-          <td>
-            <h1>{{ reports1.account_id }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports1.fio }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports1.price }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports1.score }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports1.service_name }}</h1>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!--End of Report 1 Exel -->
-  
-    <!-- Report 2 Exel -->
-    <table class="resp-tab" id="excel-table-report2" style="display: none;">
-      <thead>
-        <tr>
-          <th>Лиц.Счёт</th>
-          <th>ФИО</th>
-          <th>Цена</th>
-          <th>Счёт</th>
-          <th>Коментарии</th>
-          <th>ID</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let reports2 of report2Data">
-          <td>
-            <h1>{{ reports2.account_id }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports2.fio }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports2.summ }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports2.score }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports2.comment }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports2.id }}</h1>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!--End of Report 2 Exel -->
-  
-    <!-- Report 3 Exel -->
-    <table class="resp-tab" id="excel-table-report3" style="display: none;">
-      <thead>
-        <tr>
-          <th>Лиц.Счёт</th>
-          <th>ФИО</th>
-          <th>Цена</th>
-          <th>Счёт</th>
-          <th>Имя Сервиса</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let reports3 of report3Data">
-          <td>
-            <h1>{{ reports3.account_id }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports3.fio }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports3.price }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports3.score }}</h1>
-          </td>
-  
-          <td>
-            <h1>{{ reports3.service_name }}</h1>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!--End of Report 3 Exel -->
-  
   </div>  

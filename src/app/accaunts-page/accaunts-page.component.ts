@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../all.service';
 import jwt_decode from "jwt-decode";
-import * as XLSX from 'xlsx'; 
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-accaunts-page',
@@ -76,6 +76,7 @@ export class AccauntsPageComponent implements OnInit {
       passport: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
+      device: new FormControl('', Validators.required),
       overdraft: new FormControl('', Validators.required),
       customr_type: new FormControl('', Validators.required),
       comment: new FormControl('', Validators.required),
@@ -146,7 +147,7 @@ export class AccauntsPageComponent implements OnInit {
     })
 
     this.addServiceForm = new FormGroup({
-      created_at: new FormControl('', Validators.required),
+      created_at: new FormControl(''),
       name: new FormControl('1', Validators.required)
     })
 
@@ -326,7 +327,7 @@ export class AccauntsPageComponent implements OnInit {
       var start_date: any = new Date(accountsFilterFormData.start_date)
       var end_date: any = new Date(accountsFilterFormData.end_date)
       this.isLoading = true
-      this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
+      this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.device, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
         let n=0;
         this.accountsData = []
         response.forEach( (element: any) => {
@@ -351,7 +352,7 @@ export class AccauntsPageComponent implements OnInit {
         this.isLoading = true
         var start_create: any = new Date(accountsFilterFormData.start_create)
         var end_create: any = new Date(accountsFilterFormData.end_create)
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.device, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, start_create.toLocaleDateString().split('.').reverse().join('.'), end_create.toLocaleDateString().split('.').reverse().join('.'), '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
           let n=0;
           this.accountsData = []
           response.forEach( (element: any) => {
@@ -379,7 +380,7 @@ export class AccauntsPageComponent implements OnInit {
         this.isLoading = true
         var start_date: any = new Date(accountsFilterFormData.start_date)
         var end_date: any = new Date(accountsFilterFormData.end_date)
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.device, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', start_date.toLocaleDateString().split('.').reverse().join('.'), end_date.toLocaleDateString().split('.').reverse().join('.'), accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
           let n=0;
           this.accountsData = []
           response.forEach( (element: any) => {
@@ -405,7 +406,7 @@ export class AccauntsPageComponent implements OnInit {
         })
     } else {
         this.isLoading = true
-        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
+        this.request.getFilterAccountsRequest(accountsFilterFormData.id, accountsFilterFormData.fio, accountsFilterFormData.tarif_id, accountsFilterFormData.speed_cf, accountsFilterFormData.phone_number, accountsFilterFormData.ipaddress, accountsFilterFormData.acc_info, accountsFilterFormData.conf_firewall_id, accountsFilterFormData.passport, accountsFilterFormData.age, accountsFilterFormData.gender, accountsFilterFormData.device, accountsFilterFormData.overdraft, accountsFilterFormData.customr_type, accountsFilterFormData.comment, accountsFilterFormData.status, '', '', '', '', accountsFilterFormData.connect_by, accountsFilterFormData.contact_by, accountsFilterFormData.page_size).subscribe( (response: any) => {
           let n=0;
           this.accountsData = []
           response.forEach( (element: any) => {
@@ -443,12 +444,12 @@ export class AccauntsPageComponent implements OnInit {
         let ip_adress = `${this.accountsAddForm.controls['ipaddress1'].value}.${this.accountsAddForm.controls['ipaddress2'].value}.${this.accountsAddForm.controls['ipaddress3'].value}.${this.accountsAddForm.controls['ipaddress4'].value}`
         let age = new Date(accountsAddFormData.age)
         let end_date = new Date(accountsAddFormData.end_date)
-        this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, end_date.toISOString(), ip_adress, accountsAddFormData.acc_info, accountsAddFormData.conf_firewall_id * 1, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, accountsAddFormData * 1, parseInt(accountsAddFormData.overdraft), accountsAddFormData.customr_type, accountsAddFormData.comment, accountsAddFormData.connect_by, accountsAddFormData.contact_by, accountsAddFormData.table_id * 1, accountsAddFormData.connect_type * 1, accountsAddFormData.promo_id * 1).subscribe(response => {
+        this.request.postAccountsRequest(accountsAddFormData.fio, accountsAddFormData.tarif_id, accountsAddFormData.price_cf, accountsAddFormData.speed_cf, accountsAddFormData.phone_number, end_date.toISOString(), ip_adress, accountsAddFormData.acc_info, accountsAddFormData.conf_firewall_id * 1, accountsAddFormData.passport, age.toISOString(), accountsAddFormData.gender, accountsAddFormData.device * 1, parseInt(accountsAddFormData.overdraft), accountsAddFormData.customr_type, accountsAddFormData.comment, accountsAddFormData.connect_by, accountsAddFormData.contact_by, accountsAddFormData.table_id * 1, accountsAddFormData.connect_type * 1, accountsAddFormData.promo_id * 1).subscribe(response => {
           this.isLoading = false
+          location.reload()
           this.request.getNextIPRequest(accountsAddFormData.autoIpaddress).subscribe(response => {
             console.log(response);
           })
-          // location.reload()
         }, error => {
           this.isLoading = false
           alert(error.error.Error)
@@ -487,7 +488,7 @@ export class AccauntsPageComponent implements OnInit {
       let ip_adress = `${this.accountsEditForm.controls['ipaddress1'].value}.${this.accountsEditForm.controls['ipaddress2'].value}.${this.accountsEditForm.controls['ipaddress3'].value}.${this.accountsEditForm.controls['ipaddress4'].value}`
       let age = new Date(accountsEditFormData.age)
       let end_date = new Date(accountsEditFormData.end_date)
-      this.request.putAccountsRequest(this.tableId, accountsEditFormData.fio, accountsEditFormData.tarif_id, accountsEditFormData.price_cf, accountsEditFormData.speed_cf, accountsEditFormData.phone_number, end_date.toISOString(), ip_adress, accountsEditFormData.acc_info, accountsEditFormData.conf_firewall_id * 1, accountsEditFormData.passport, age.toISOString(), accountsEditFormData.gender, accountsEditFormData.device, parseInt(accountsEditFormData.overdraft), accountsEditFormData.customr_type, accountsEditFormData.comment, accountsEditFormData.connect_by, accountsEditFormData.contact_by, accountsEditFormData.table_id, accountsEditFormData.connect_type, accountsEditFormData.promo_id).subscribe(response => {
+      this.request.putAccountsRequest(this.tableId, accountsEditFormData.fio, accountsEditFormData.tarif_id, accountsEditFormData.price_cf, accountsEditFormData.speed_cf, accountsEditFormData.phone_number, end_date.toISOString(), ip_adress, accountsEditFormData.acc_info, accountsEditFormData.conf_firewall_id * 1, accountsEditFormData.passport, age.toISOString(), accountsEditFormData.gender, accountsEditFormData.device * 1, parseInt(accountsEditFormData.overdraft), accountsEditFormData.customr_type, accountsEditFormData.comment, accountsEditFormData.connect_by, accountsEditFormData.contact_by, accountsEditFormData.table_id * 1, accountsEditFormData.connect_type * 1, accountsEditFormData.promo_id * 1).subscribe(response => {
         this.isLoading = false
         location.reload()
       }, error => {
@@ -873,162 +874,6 @@ export class AccauntsPageComponent implements OnInit {
        /* save to file */
        XLSX.writeFile(wb, this.fileName);
 			
-    }
-
-    exportexcelReport1(): void {
-      this.fileName = 'Отчёт 1.xlsx'
-       /* table id is passed over here */   
-       let element = document.getElementById('excel-table-report1'); 
-       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
-
-       var wscols = [
-        {wch:8},
-        {wch:40},
-        {wch:20},
-        {wch:30},
-        {wch:50},
-        {wch:20},
-        {wch:30},
-        {wch:30},
-        {wch:30},
-        {wch:30},
-        {wch:40},
-        {wch:30},
-        {wch:30},
-        {wch:10},
-        {wch:20},
-        {wch:10},
-        {wch:15},
-        {wch:40},
-        {wch:40},
-        {wch:20},
-        {wch:15},
-    ];
-    
-    ws['!cols'] = wscols;
-
-       /* generate workbook and add the worksheet */
-       const wb: XLSX.WorkBook = XLSX.utils.book_new();
-       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-       /* save to file */
-       XLSX.writeFile(wb, this.fileName);
-			
-    }
-
-    exportexcelReport2(): void {
-      this.fileName = 'Отчёт 2.xlsx'
-       /* table id is passed over here */   
-       let element = document.getElementById('excel-table-report2'); 
-       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
-
-       var wscols = [
-        {wch:8},
-        {wch:40},
-        {wch:20},
-        {wch:40},
-        {wch:40},
-        {wch:20},
-        {wch:30},
-        {wch:30},
-        {wch:30},
-        {wch:30},
-        {wch:40},
-        {wch:30},
-        {wch:30},
-        {wch:10},
-        {wch:20},
-        {wch:10},
-        {wch:15},
-        {wch:40},
-        {wch:40},
-        {wch:20},
-        {wch:15},
-    ];
-    
-    ws['!cols'] = wscols;
-
-       /* generate workbook and add the worksheet */
-       const wb: XLSX.WorkBook = XLSX.utils.book_new();
-       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-       /* save to file */
-       XLSX.writeFile(wb, this.fileName);
-			
-    }
-
-    exportexcelReport3(): void {
-      this.fileName = 'Отчёт 3.xlsx'
-       /* table id is passed over here */   
-       let element = document.getElementById('excel-table-report3'); 
-       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
-
-       var wscols = [
-        {wch:8},
-        {wch:40},
-        {wch:20},
-        {wch:20},
-        {wch:50},
-        {wch:20},
-        {wch:30},
-        {wch:30},
-        {wch:30},
-        {wch:30},
-        {wch:40},
-        {wch:30},
-        {wch:30},
-        {wch:10},
-        {wch:20},
-        {wch:10},
-        {wch:15},
-        {wch:40},
-        {wch:40},
-        {wch:20},
-        {wch:15},
-    ];
-    
-    ws['!cols'] = wscols;
-
-       /* generate workbook and add the worksheet */
-       const wb: XLSX.WorkBook = XLSX.utils.book_new();
-       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-       /* save to file */
-       XLSX.writeFile(wb, this.fileName);
-			
-    }
-
-    jsonReport1() {
-      this.request.getReport1Request().subscribe( (response: any) => {
-        var file = new Blob([JSON.stringify(response)], { type: 'application/json' })
-        const link = document.createElement("a")
-        link.href = URL.createObjectURL(file);
-        link.download = 'Отчёт1.txt'
-        link.click()
-        link.remove()
-      })
-    }
-
-    jsonReport2() {
-      this.request.getReport2Request().subscribe( (response: any) => {
-        var file = new Blob([JSON.stringify(response)], { type: 'application/json' })
-        const link = document.createElement("a")
-        link.href = URL.createObjectURL(file);
-        link.download = 'Отчёт2.txt'
-        link.click()
-        link.remove()
-      })
-    }
-
-    jsonReport3() {
-      this.request.getReport3Request().subscribe( (response: any) => {
-        var file = new Blob([JSON.stringify(response)], { type: 'application/json' })
-        const link = document.createElement("a")
-        link.href = URL.createObjectURL(file);
-        link.download = 'Отчёт3.txt'
-        link.click()
-        link.remove()
-      })
     }
 
 }

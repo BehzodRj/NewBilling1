@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RequestsService {
-  private url = 'http://45.94.219.6:12345'
+  private url = 'https://api.nets.tj'
   // http://45.94.219.6:12345
   // https://api.nets.tj
 
@@ -86,12 +86,12 @@ export class RequestsService {
     return this.http.get(this.url + '/api/account?accounts.id=' + id, {headers: header})
   }
 
-  getFilterAccountsRequest(id: any, fio: any, tarif_id: any, speed_cf: any, phone_number: any, ipaddress: any, acc_info: any, conf_firewall_id: any, passport: any, age: any, gender: any, overdraft: any, customr_type: any, comment: any, status: any, start_created: any, end_created: any, start_date: any, end_date: any, connect_by: any, contact_by: any, page_size: any) {
+  getFilterAccountsRequest(id: any, fio: any, tarif_id: any, speed_cf: any, phone_number: any, ipaddress: any, acc_info: any, conf_firewall_id: any, passport: any, age: any, gender: any, device_type_id: any, overdraft: any, customr_type: any, comment: any, status: any, start_created: any, end_created: any, start_date: any, end_date: any, connect_by: any, contact_by: any, page_size: any) {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
-    return this.http.get(this.url + `/api/account?accounts.id=${id}&accounts.fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&phone_number=*${phone_number}*&ipaddress=${ipaddress}&acc_info=${acc_info}&conf_firewall_id=${conf_firewall_id}&passport=*${passport}*&age=${age}&gender=${gender}&overdraft=${overdraft}&customr_type=${customr_type}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}&connect_user_id=${connect_by}&contact_user_id=${contact_by}&page_size=${page_size}`, {headers: header})
+    return this.http.get(this.url + `/api/account?accounts.id=${id}&accounts.fio=*${fio}*&tarif_id=${tarif_id}&speed_cf=${speed_cf}&phone_number=*${phone_number}*&ipaddress=${ipaddress}&acc_info=${acc_info}&conf_firewall_id=${conf_firewall_id}&passport=*${passport}*&age=${age}&gender=${gender}&device_type_id=${device_type_id}&overdraft=${overdraft}&accounts.customr_type=${customr_type}&comment=${comment}&status=${status}&accounts.created_at>=${start_created}&accounts.created_at<=${end_created}&end_date>=${start_date}&end_date<=${end_date}&connect_user_id=${connect_by}&contact_user_id=${contact_by}&page_size=${page_size}`, {headers: header})
   }
 
   postAccountsRequest(fio: string, tarif_id: number, price_cf: any, speed_cf: any, phone_number: string, end_date: any, ipaddress: string, acc_info: string, conf_firewall_id: number, passport: any, age: any, gender: any, device_type_id: any, overdraft: any, customr_type: any, comment: string, connect_by: any, contact_by: any, table_id: any, connect_type_id: any, promo_id: any) {
@@ -215,6 +215,14 @@ export class RequestsService {
     return this.http.get(this.url + '/api/report/7', {headers: header})
   }
 
+  getFilterReport1Request(date_from: any, date_to: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + `/api/report/7?date_from=${date_from}&date_to=${date_to}`, {headers: header})
+  }
+
   getReport2Request() {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -223,12 +231,28 @@ export class RequestsService {
     return this.http.get(this.url + '/api/report/10', {headers: header})
   }
 
+  getFilterReport2Request(date_from: any, date_to: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + `/api/report/10?date_from=${date_from}&date_to=${date_to}`, {headers: header})
+  }
+
   getReport3Request() {
     let header: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${localStorage.getItem('access_token')}`
     })
     return this.http.get(this.url + '/api/report/11', {headers: header})
+  }
+
+  getFilterReport3Request(date_from: any, date_to: any) {
+    let header: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    })
+    return this.http.get(this.url + `/api/report/11?date_from=${date_from}&date_to=${date_to}`, {headers: header})
   }
   // End of Reports
 

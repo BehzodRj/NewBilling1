@@ -52,7 +52,7 @@ export class ReportsActivePageComponent implements OnInit {
   filterTable() {
     const accountsFilterFormData = {...this.accountsFilterForm.value}
     this.isLoading = true
-    this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', '', '', '', '', accountsFilterFormData.status, '', '', '', '','','', '').subscribe(response => {
+    this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', accountsFilterFormData.status, '', '', '', '','','', '').subscribe(response => {
       this.reportsActiveData = response
       this.isLoading = false
       this.numAccounts = this.reportsActiveData.length

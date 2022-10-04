@@ -26,6 +26,8 @@ export class ReportsTarifsPageComponent implements OnInit {
 
     this.accountsFilterForm = new FormGroup({
       tarif_id: new FormControl('', Validators.required),
+      start_create: new FormControl('', Validators.required),
+      end_create: new FormControl('', Validators.required),
     })
     
     // this.request.getFilterAccountsRequest('', '', '', '', '', '', '', '', '', '', 'On', '', '', '', '').subscribe(response => {
@@ -53,7 +55,7 @@ export class ReportsTarifsPageComponent implements OnInit {
   filterTable() {
     const accountsFilterFormData = {...this.accountsFilterForm.value}
     this.isLoading = true
-    this.request.getFilterAccountsRequest('', '', accountsFilterFormData.tarif_id, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','','', '').subscribe(response => {
+    this.request.getFilterAccountsRequest('', '', accountsFilterFormData.tarif_id, '', '', '', '', '', '', '', '', '', '', '', '', '', accountsFilterFormData.start_create, accountsFilterFormData.end_create, '', '','','', '').subscribe(response => {
       this.reportsActiveData = response
       this.isLoading = false
       this.numAccounts = this.reportsActiveData.length

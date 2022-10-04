@@ -36,10 +36,10 @@
               <option>On</option>
               <option>Off</option>
             </select> -->
-            <!-- <input type="date" formControlName="start_create">
+            <input type="date" formControlName="start_create">
             <input type="date" formControlName="end_create">
-            <input type="date" formControlName="start_date">
-            <input type="date" formControlName="end_date"> -->
+            <!-- <input type="date" formControlName="start_date"> -->
+            <!-- <input type="date" formControlName="end_date"> -->
             <button (click)="filterTable()">ОК</button>
           </div>
 
@@ -60,6 +60,7 @@
               <th>Цена</th>
               <th>Скорость</th>
               <th>Телефон</th>
+              <th>Дата Создания</th>
               <th>Дата Окончания</th>
               <th>IP Адрес</th>
               <th>Адрес</th>
@@ -101,6 +102,10 @@
 
               <td><span class="table_span">Телефон</span>
                 <h1>{{ reportsActive.phone_number }}</h1>
+              </td>
+
+              <td><span class="table_span">Дата Создания</span>
+                <h1>{{ reportsActive.created_at | date: 'dd-MM-yyyy' }}</h1>
               </td>
 
               <td><span class="table_span">Дата Окончания</span>

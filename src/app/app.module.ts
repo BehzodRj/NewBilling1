@@ -35,6 +35,9 @@ import { HistoryChangePageComponent } from './history-change-page/history-change
 import { EquipmentPageComponent } from './equipment-page/equipment-page.component';
 import { PromotionPageComponent } from './promotion-page/promotion-page.component';
 import { IpGroupPageComponent } from './ip-group-page/ip-group-page.component';
+import { Report1PageComponent } from './report1-page/report1-page.component';
+import { Report2PageComponent } from './report2-page/report2-page.component';
+import { Report3PageComponent } from './report3-page/report3-page.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,9 @@ import { IpGroupPageComponent } from './ip-group-page/ip-group-page.component';
     EquipmentPageComponent,
     PromotionPageComponent,
     IpGroupPageComponent,
+    Report1PageComponent,
+    Report2PageComponent,
+    Report3PageComponent,
   ],
   imports: [
     BrowserModule,
